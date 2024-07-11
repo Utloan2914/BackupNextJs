@@ -29,9 +29,12 @@ const NavLinkButton = styled(Button)({
   textTransform: 'none',
   fontSize: '1rem',
   color: 'white',
-  backgroundColor: '#0033FF',
+  py: 2,
+  px: 4,
+  background: '#00008B',
+  rounded: 'md',
   '&:hover': {
-    backgroundColor: '#3f51b5', // Blue color on hover
+    backgroundColor: '#0033FF', // Blue color on hover
   },
 });
 
@@ -40,6 +43,9 @@ const SignInButton = styled(Button)({
   textTransform: 'none',
   color: 'white',
   fontSize: '1em',
+  py: 2,
+  px: 4,
+  rounded: 'md',
   '&:hover': {
     backgroundColor: '#0033FF',
   },
@@ -80,17 +86,17 @@ const Navbar = () => {
           <WelcomeText>Welcome, {userEmail}</WelcomeText>
           <NavbarLinks>
             <Link href="/home" passHref>
-              <NavLinkButton variant="contained" startIcon={<HomeIcon />}>
+              <NavLinkButton  startIcon={<HomeIcon />}>
                 Home
               </NavLinkButton>
             </Link>
             <Link href="/productAPI" passHref>
-              <NavLinkButton variant="contained" startIcon={<BuildIcon />}>
+              <NavLinkButton  startIcon={<BuildIcon />}>
                 CRUD product
               </NavLinkButton>
             </Link>
             <Link href="/sendEmail" passHref>
-              <NavLinkButton variant="contained" startIcon={<SendIcon />}>
+              <NavLinkButton  startIcon={<SendIcon />}>
                 Contact us
               </NavLinkButton>
             </Link>
