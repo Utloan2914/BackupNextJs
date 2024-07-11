@@ -150,7 +150,7 @@ export default function Product() {
           <div className="fixed inset-0 flex items-center justify-center z-50">
             <div className="absolute inset-0 bg-gray-900 opacity-50"></div>
             <div className="relative bg-white p-8 rounded shadow-lg w-1/3">
-              <h4 className="text-lg font-bold mb-4">Add New Product</h4>
+              <h4 className="text-lg text-black font-bold mb-4">Add Product</h4>
               <div className="flex flex-col gap-4">
                 <input
                   type="text"
@@ -176,7 +176,7 @@ export default function Product() {
                 />
                 <div className="flex justify-end gap-4">
                 <button
-                  className="border-3 border-gray-500 text-brown-500 bg-white hover:bg-gray-950 hover:text-black hover:border-2 hover:border-gray-600 px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-gray-500"
+                  className="border-3 border-gray-500 text-black bg-white hover:bg-gray-950 hover:text-black hover:border-2 hover:border-gray-600 px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-gray-500"
                   onClick={() => setShowAddForm(false)}
                 >
                   Cancel
@@ -195,7 +195,7 @@ export default function Product() {
         )}
         <Search searchTerm={searchTerm} onSearchTermChange={handleSearchTermChange} onSearch={handleSearch} onClear={handleClear} />
         <button
-          className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+          className="bg-green-500 hover:bg-green-600 text-white font-bold px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
           onClick={() => setShowAddForm(true)}
         >
           Add Product
@@ -214,7 +214,7 @@ export default function Product() {
             <div className="fixed inset-0 flex items-center justify-center z-50">
               <div className="absolute inset-0 bg-gray-900 opacity-50"></div>
               <div className="relative bg-white p-8 rounded shadow-lg w-1/3">
-                <h4 className="text-lg font-bold mb-4">Update Product</h4>
+                <h4 className="text-lg text-black font-bold mb-4">Update Product</h4>
                 <div className="flex flex-col gap-4">
                   <input
                     type="text"
@@ -240,7 +240,7 @@ export default function Product() {
                   />
                   <div className="flex justify-end gap-4">
                     <button
-                      className="border-3 border-gray-500 text-brown-500 bg-white hover:bg-gray-950 hover:text-black hover:border-2 hover:border-gray-600 px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-gray-500"
+                      className="border-3 border-gray-500 text-black bg-white hover:bg-gray-950 hover:text-black hover:border-2 hover:border-gray-600 px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-gray-500"
                       onClick={handleUpdateFormCancel}
                     >
                       Cancel
@@ -322,11 +322,11 @@ export default function Product() {
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="absolute inset-0 bg-gray-900 opacity-50"></div>
           <div className="relative bg-white p-8 rounded shadow-lg w-1/3">
-            <h4 className="text-lg font-bold mb-4">Confirm Delete</h4>
-            <p>Are you sure you want to delete this product?</p>
+            <h4 className="text-lg font-bold text-black mb-4">Confirm Delete</h4>
+            <p className="text-black">Are you sure you want to delete this product?</p>
             <div className="flex justify-end gap-4 mt-4">
               <button
-               className="border-3 border-gray-500 text-brown-500 bg-white hover:bg-gray-950 hover:text-black hover:border-2 hover:border-gray-600 px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-gray-500"
+               className="border-3 border-gray-500 text-black bg-white hover:bg-gray-950 hover:text-black hover:border-2 hover:border-gray-600 px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-gray-500"
                 onClick={() => setConfirmDeleteId(null)}
               >
                 Cancel

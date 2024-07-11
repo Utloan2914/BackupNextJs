@@ -20,7 +20,7 @@ const Search: React.FC<SearchProps> = ({ searchTerm, onSearchTermChange, onSearc
           onChange={onSearchTermChange}
         />
         <button
-          className="bg-indigo-600 text-white px-4 py-2 rounded mr-2 hover:bg-indigo-900"
+          className="bg-indigo-600 text-white px-4 py-2 rounded font-bold  mr-2 hover:bg-indigo-900"
           onClick={onSearch} 
         >
           Search
