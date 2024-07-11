@@ -26,7 +26,7 @@ const DropdownMenuItem = React.forwardRef<
   <DropdownMenuPrimitive.Item
     ref={ref}
     className={cn(
-      'cursor-pointer px-2 py-1 rounded-md text-black hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700', 
+      'cursor-pointer px-2 py-1 rounded-md text-black hover:bg-gray-100  dark:hover:bg-gray-500 dark:hover:text-white', 
       className
     )}
     {...props}

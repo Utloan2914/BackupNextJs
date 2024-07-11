@@ -174,7 +174,7 @@ export default function Product() {
                   onChange={(e) => setNewProduct({ ...newProduct, image: e.target.value })}
                   className="p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
                 />
-                <div className="flex justify-end gap-4">
+                <div className="flex justify-center gap-4">
                 <button
                   className="border-3 border-gray-500 text-black bg-white hover:bg-gray-950 hover:text-black hover:border-2 hover:border-gray-600 px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-gray-500"
                   onClick={() => setShowAddForm(false)}
@@ -238,7 +238,7 @@ export default function Product() {
                     onChange={(e) => setUpdateProductData({ ...updateProductData, image: e.target.value })}
                     className="p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
-                  <div className="flex justify-end gap-4">
+                  <div className="flex justify-center gap-4">
                     <button
                       className="border-3 border-gray-500 text-black bg-white hover:bg-gray-950 hover:text-black hover:border-2 hover:border-gray-600 px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-gray-500"
                       onClick={handleUpdateFormCancel}
@@ -324,7 +324,7 @@ export default function Product() {
           <div className="relative bg-white p-8 rounded shadow-lg w-1/3">
             <h4 className="text-lg font-bold text-black mb-4">Confirm Delete</h4>
             <p className="text-black">Are you sure you want to delete this product?</p>
-            <div className="flex justify-end gap-4 mt-4">
+            <div className="flex justify-center gap-4 mt-4">
               <button
                className="border-3 border-gray-500 text-black bg-white hover:bg-gray-950 hover:text-black hover:border-2 hover:border-gray-600 px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-gray-500"
                 onClick={() => setConfirmDeleteId(null)}
