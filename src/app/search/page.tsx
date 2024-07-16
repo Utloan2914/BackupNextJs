@@ -20,14 +20,14 @@ const Search: React.FC<SearchProps> = ({ searchTerm, onSearchTermChange, onSearc
           onChange={onSearchTermChange}
         />
         <button
-          className="bg-indigo-600 text-white px-4 py-2 rounded font-bold  mr-2 hover:bg-indigo-900"
+          className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded font-bold  mr-2 "
           onClick={onSearch} 
         >
           Search
         </button>
       </div>
       <button
-        className="bg-blue-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+        className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
         onClick={onClear}
       >
         Clear

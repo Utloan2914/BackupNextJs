@@ -4,9 +4,11 @@ import { styled } from '@mui/material/styles';
 import Badge from '@mui/material/Badge';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
-import { Menu, MenuItem, IconButton } from '@mui/material';
+import { Menu, MenuItem, IconButton, ListItemIcon, ListItemText } from '@mui/material';
 import Link from 'next/link';
-import Logout from '@/app/logout/page';
+import LogoutIcon from '@mui/icons-material/Logout';
+import PersonIcon from '@mui/icons-material/Person';
+
 const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
     backgroundColor: '#44b700',
@@ -49,12 +51,13 @@ interface BadgeAvatarsProps {
 const BadgeAvatars: React.FC<BadgeAvatarsProps> = ({ imageUrl }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
+
   useEffect(() => {
     const storedImageUrl = localStorage.getItem('urlImage');
     if (storedImageUrl) {
       setAvatarUrl(storedImageUrl);
     } else {
-      setAvatarUrl(imageUrl); 
+      setAvatarUrl(imageUrl);
     }
   }, [imageUrl]);
 
@@ -80,24 +83,44 @@ const BadgeAvatars: React.FC<BadgeAvatarsProps> = ({ imageUrl }) => {
         </StyledBadge>
       </IconButton>
       <Menu
-  anchorEl={anchorEl}
-  open={open}
-  onClose={handleClose}
-  anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-  transformOrigin={{ vertical: 'top', horizontal: 'left' }}
-  PaperProps={{
-    style: {
-      width: '180px',
-    },
-  }}
->
-        <Link href="/viewProfile" passHref> 
-          <MenuItem onClick={handleClose}>View Profile</MenuItem>
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+        transformOrigin={{ vertical: 'top', horizontal: 'left' }}
+        PaperProps={{
+          style: {
+            width: '180px',
+          },
+        }}
+      >
+        <Link href="/viewProfile" passHref>
+          <MenuItem onClick={handleClose}>
+            <ListItemIcon>
+              <PersonIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText primaryTypographyProps={{ variant: 'body1', style: { fontSize: 20, color: 'black' } }} primary="View Profile" />
+          </MenuItem>
         </Link>
-        <Link href="/editProfile" passHref> 
-          <MenuItem onClick={handleClose}>Edit Profile</MenuItem>
+
+        <Link href="/editProfile" passHref>
+          <MenuItem onClick={handleClose}>
+            <ListItemIcon>
+              <PersonIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText primaryTypographyProps={{ style: { fontSize: 20 } }} primary="Edit Profile" />
+          </MenuItem>
         </Link>
-        <Logout />
+        
+        <Link href="/login" passHref>
+        <MenuItem onClick={handleClose}>
+          <ListItemIcon>
+            <LogoutIcon fontSize="small" />
+          </ListItemIcon>
+          <ListItemText primaryTypographyProps={{ style: { fontSize: 20 } }} primary="Logout" />
+        </MenuItem>
+        </Link>
+        
       </Menu>
     </Stack>
   );

@@ -79,13 +79,13 @@ const EditProfile: React.FC<EditProfileProps> = ({ formDataProp, onUpdateProfile
   }
 
   return (
-    <div className="w-full pt-10 min-h-screen flex justify-center items-start dark:bg-gray-900">
-      <div className="bg-white dark:bg-gray-800 w-full max-w-4xl p-8 rounded-2xl shadow-lg">
+    <div className="pt-10  flex justify-center items-start dark:bg-gray-900" style={{ width: '30%' }}>
+      <div className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg">
         <div className="flex justify-between items-center mb-6">
           <h2 className=" title text-2xl font-bold text-center  w-full">Edit Profile</h2>
           <button
             onClick={() => router.push('/viewProfile')}
-            className="text-red-500 hover:text-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50"
+            className="text-black focus:outline-none focus:ring-2 focus:ring-opacity-50"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -104,11 +104,11 @@ const EditProfile: React.FC<EditProfileProps> = ({ formDataProp, onUpdateProfile
           </button>
         </div>
         {error && <div className="bg-red-500 text-white p-2 rounded mb-4">{error}</div>}
-        {success && <div className="bg-green-500 text-white p-2 rounded mb-4">{success}</div>}
+        {success && <div className=" text-white p-2 rounded mb-4">{success}</div>}
         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Left Part */}
           <div className="flex flex-col">
-            <dt className="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Name</dt>
+            <dt className="mb-1 text-black md:text-lg dark:text-gray-400">Name</dt>
             <input
               type="text"
               name="name"
@@ -120,7 +120,7 @@ const EditProfile: React.FC<EditProfileProps> = ({ formDataProp, onUpdateProfile
             />
           </div>
           <div className="flex flex-col">
-            <dt className="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Email</dt>
+            <dt className="mb-1 text-black md:text-lg dark:text-gray-400">Email</dt>
             <input
               type="email"
               name="email"
@@ -132,7 +132,7 @@ const EditProfile: React.FC<EditProfileProps> = ({ formDataProp, onUpdateProfile
             />
           </div>
           <div className="flex flex-col">
-            <dt className="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Password</dt>
+            <dt className="mb-1 text-black md:text-lg dark:text-gray-400">Password</dt>
             <input
               type="password"
               name="password"
@@ -144,7 +144,7 @@ const EditProfile: React.FC<EditProfileProps> = ({ formDataProp, onUpdateProfile
             />
           </div>
           <div className="flex flex-col">
-            <dt className="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Phone</dt>
+            <dt className="mb-1 text-black md:text-lg dark:text-gray-400">Phone</dt>
             <input
               type="text"
               name="phone"
@@ -157,7 +157,7 @@ const EditProfile: React.FC<EditProfileProps> = ({ formDataProp, onUpdateProfile
           </div>
           {/* Right Part */}
           <div className="flex flex-col">
-            <dt className="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Address</dt>
+            <dt className="mb-1 text-black md:text-lg dark:text-gray-400">Address</dt>
             <input
               type="text"
               name="address"
@@ -169,7 +169,7 @@ const EditProfile: React.FC<EditProfileProps> = ({ formDataProp, onUpdateProfile
             />
           </div>
           <div className="flex flex-col">
-            <dt className="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Choose Image</dt>
+            <dt className="mb-1 text-black md:text-lg dark:text-gray-400">Choose Image</dt>
             <input
               type="file"
               accept="image/*"
@@ -182,7 +182,7 @@ const EditProfile: React.FC<EditProfileProps> = ({ formDataProp, onUpdateProfile
               <img
                 src={formData.urlImage || '/image/defaultImage.png'}
                 alt="User Image"
-                className="w-40 h-40 rounded-full object-cover border border-gray-300"
+                className="w-40 h-40 object-cover border border-gray-300" style={{ borderRadius: '10px', border: '2px solid' }}
               />
             </div>
           </div>

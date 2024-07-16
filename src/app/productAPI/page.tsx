@@ -8,9 +8,11 @@ import Search from '@/app/search/page';
 import ErrorSearch from '@/app/search/notfound/page';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import CloseIcon from '@mui/icons-material/Close';
 
 export default function Product() {
   const [products, setProducts] = useState<any[]>([]);
+  const [filteredProducts, setFilteredProducts] = useState<any[]>([]);
   const [newProduct, setNewProduct] = useState({ title: '', description: '', image: '' });
   const [updateProductData, setUpdateProductData] = useState({ id: '', title: '', description: '', image: '' });
   const [error, setError] = useState('');
@@ -46,6 +48,7 @@ export default function Product() {
     try {
       const data = await getProducts();
       setProducts(data);
+      setFilteredProducts(data);
       setError('');
     } catch (err) {
       setError('Error fetching products');
@@ -55,8 +58,8 @@ export default function Product() {
   const handleCreate = async () => {
     try {
       const newProd = await createProduct(newProduct);
-      setNewProduct({ title: '', description: '', image: '' });
       setProducts([newProd, ...products]);
+      setFilteredProducts([newProd, ...products]);
       setCurrentPage(1);
       setShowAddForm(false);
       setSuccessMessage('Product added successfully!');
@@ -71,7 +74,6 @@ export default function Product() {
     try {
       const { id, title, description, image } = updateProductData;
       await updateProduct(id, { title, description, image });
-      setUpdateProductData({ id: '', title: '', description: '', image: '' });
       fetchProducts();
       setShowUpdateForm(false);
       setSuccessMessage('Product updated successfully!');
@@ -113,43 +115,59 @@ export default function Product() {
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
 
-  const filteredProducts = products.filter(product =>
-    product.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
-
-  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
-
   const handleSearchTermChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
     setCurrentPage(1);
   };
 
   const handleSearch = () => {
-    const filteredProducts = products.filter(product =>
+    const filtered = products.filter(product =>
       product.title.toLowerCase().includes(searchTerm.toLowerCase())
     );
-    if (filteredProducts.length === 0) {
-      setNoResults(true);
-    } else {
-      setNoResults(false);
-    }
+    setFilteredProducts(filtered);
+    setNoResults(filtered.length === 0);
   };
 
   const handleClear = () => {
     setSearchTerm('');
+    fetchProducts();
     setNoResults(false);
   };
 
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+
+  const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setNewProduct({ ...newProduct, image: reader.result as string });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const closeAddForm = () => {
+    setShowAddForm(false);
+    setNewProduct({ title: '', description: '', image: '' }); // Reset state on close
+  };
+
   return (
-    <Container fluid className="mx-auto mt-10 px-4 w-9/12 relative">
+    <Container fluid className="mx-auto mt-10 px-4 relative">
       <h2 className="text-center text-3xl font-bold mb-4">Product List</h2>
       <div className="flex justify-between items-center mb-4">
         {showAddForm && (
           <div className="fixed inset-0 flex items-center justify-center z-50">
             <div className="absolute inset-0 bg-gray-900 opacity-50"></div>
-            <div className="relative bg-white p-8 rounded shadow-lg w-1/3">
+            <div className="relative bg-white p-8 rounded shadow-lg w-90">
+              <button
+                className="absolute top-2 right-2 text-black hover:text-gray-600 focus:outline-none"
+                onClick={closeAddForm}
+              >
+                <CloseIcon />
+              </button>
               <h4 className="text-lg text-black font-bold mb-4">Add Product</h4>
               <div className="flex flex-col gap-4">
                 <input
@@ -157,7 +175,7 @@ export default function Product() {
                   placeholder="Title"
                   value={newProduct.title}
                   onChange={(e) => setNewProduct({ ...newProduct, title: e.target.value })}
-                  className="p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+                  className="p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                   ref={addTitleRef}
                 />
                 <input
@@ -165,29 +183,31 @@ export default function Product() {
                   placeholder="Description"
                   value={newProduct.description}
                   onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })}
-                  className="p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+                  className="p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <input
-                  type="text"
-                  placeholder="Image URL"
-                  value={newProduct.image}
-                  onChange={(e) => setNewProduct({ ...newProduct, image: e.target.value })}
-                  className="p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                  className="p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
+                {newProduct.image && (
+                  <div className="flex justify-center mt-4">
+                    <img
+                      src={newProduct.image}
+                      alt="Preview"
+                      style={{ margin: '10px', width: '200px', height: '200px', maxWidth: 'none' }}
+                      className="h-auto"
+                    />
+                  </div>
+                )}
                 <div className="flex justify-center gap-4">
-                <button
-                  className="border-3 border-gray-500 text-black bg-white hover:bg-gray-950 hover:text-black hover:border-2 hover:border-gray-600 px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-gray-500"
-                  onClick={() => setShowAddForm(false)}
-                >
-                  Cancel
-                </button>
-                <button
-                  className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
-                  onClick={handleCreate}
-                >
-                  Add Product
-                </button>
-
+                  <button
+                    className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:bg-blue-500"
+                    onClick={handleCreate}
+                  >
+                    Add Product
+                  </button>
                 </div>
               </div>
             </div>
@@ -195,14 +215,14 @@ export default function Product() {
         )}
         <Search searchTerm={searchTerm} onSearchTermChange={handleSearchTermChange} onSearch={handleSearch} onClear={handleClear} />
         <button
-          className="bg-green-500 hover:bg-green-600 text-white font-bold px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+          className="bg-blue-500 hover:bg-blue-600 text-white font-bold px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
           onClick={() => setShowAddForm(true)}
         >
           Add Product
         </button>
       </div>
       {successMessage && (
-        <div className="bg-green-200 text-green-800 border border-green-300 px-4 py-3 rounded relative mb-4" role="alert">
+        <div className="bg-blue-500 hover:bg-blue-600 text-black px-4 py-3 rounded relative mb-4" role="alert">
           <span className="block sm:inline">{successMessage}</span>
         </div>
       )}
@@ -213,12 +233,18 @@ export default function Product() {
           {showUpdateForm && (
             <div className="fixed inset-0 flex items-center justify-center z-50">
               <div className="absolute inset-0 bg-gray-900 opacity-50"></div>
-              <div className="relative bg-white p-8 rounded shadow-lg w-1/3">
+              <div className="relative bg-white p-8 rounded shadow-lg w-90">
+                <button
+                  className="absolute top-2 right-2 text-black hover:text-gray-600 focus:outline-none"
+                  onClick={handleUpdateFormCancel}
+                >
+                  <CloseIcon />
+                </button>
                 <h4 className="text-lg text-black font-bold mb-4">Update Product</h4>
                 <div className="flex flex-col gap-4">
                   <input
                     type="text"
-                    placeholder="New Title"
+                    placeholder="Title"
                     value={updateProductData.title}
                     onChange={(e) => setUpdateProductData({ ...updateProductData, title: e.target.value })}
                     className="p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -226,121 +252,126 @@ export default function Product() {
                   />
                   <input
                     type="text"
-                    placeholder="New Description"
+                    placeholder="Description"
                     value={updateProductData.description}
                     onChange={(e) => setUpdateProductData({ ...updateProductData, description: e.target.value })}
                     className="p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                   <input
-                    type="text"
-                    placeholder="New Image URL"
-                    value={updateProductData.image}
-                    onChange={(e) => setUpdateProductData({ ...updateProductData, image: e.target.value })}
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (file) {
+                        const reader = new FileReader();
+                        reader.onloadend = () => {
+                          setUpdateProductData({ ...updateProductData, image: reader.result as string });
+                        };
+                        reader.readAsDataURL(file);
+                      }
+                    }}
                     className="p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
+                  {updateProductData.image && (
+                    <img
+                      src={updateProductData.image}
+                      alt="Preview"
+                      className="mx-auto w-40 h-40 object-contain mt-4"
+                      style={{ maxWidth: 'none' }}
+                    />
+                  )}
                   <div className="flex justify-center gap-4">
                     <button
-                      className="border-3 border-gray-500 text-black bg-white hover:bg-gray-950 hover:text-black hover:border-2 hover:border-gray-600 px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-gray-500"
-                      onClick={handleUpdateFormCancel}
+                      className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:bg-blue-500"
+                      onClick={handleUpdate}
                     >
-                      Cancel
+                      Update Product
                     </button>
-                <button
-                  className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  onClick={handleUpdate}
-                >
-                  Update Product
-                </button>
-
                   </div>
                 </div>
               </div>
             </div>
           )}
-          <table className="w-full border-collapse mb-4">
-            <thead>
-              <tr>
-                <th className="border py-2 px-4">Image</th>
-                <th className="border py-2 px-4">Title</th>
-                <th className="border py-2 px-4">Description</th>
-                <th className="border py-2 px-4">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {currentProducts.map((product) => (
-                <tr key={product.id}>
-                  <td className="border py-2 px-4">
-                    <img 
-                      src={product.image} 
-                      alt={product.title} 
-                      className="object-cover" 
-                      style={{ width: '300px', height: '200px', objectFit: 'cover' }} 
-                    />
-                  </td>
-                  <td className="border py-2 px-4">{product.title}</td>
-                  <td className="border py-2 px-4">{product.description}</td>
-                  
-                  <td className="border py-2 px-4">
-                    <div className="flex justify-between gap-4">
-                    <button
-                      className="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded mr-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      onClick={() => handleUpdateFormOpen(product)}
-                    >
-                      <EditIcon />
-                    </button>
-
-                    <button
-                      className="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded focus:outline-none focus:ring-2 focus:ring-red-500"
-                      onClick={() => setConfirmDeleteId(product.id)}
-                    >
-                      <DeleteIcon />
-                    </button>
-
-                    </div>
-                  </td>
+          <div className="overflow-x-auto">
+            <table className="w-full  text-black bg-white border border-gray-300">
+              <thead>
+                <tr>
+                  <th className="py-2 px-4 border-b">Image</th>
+                  <th className="py-2 px-4 border-b">Name product</th>
+                  <th className="py-2 px-4 border-b">Description</th>
+                  <th className="py-2 px-4 border-b">Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-          <Stack spacing={2}>
-            <Pagination
-              count={Math.ceil(filteredProducts.length / productsPerPage)}
-              page={currentPage}
-              onChange={(event, value) => paginate(value)}
-              color="primary"
-              size="large"
-            />
-          </Stack>
+              </thead>
+              <tbody>
+                {currentProducts.map((product) => (
+                  <tr key={product.id}>
+                    <td className="py-2 px-4 border-b">
+                      {product.image && <img 
+                        src={product.image} 
+                        alt={product.title} 
+                        style={{ margin: '10px', width: '200px', height: '200px', maxWidth: 'none' }} 
+                        className="object-cover rounded"
+                      />}
+                    </td>
+                    <td className="py-2 px-4 border-b">{product.title}</td>
+                    <td className="py-2 px-4 border-b">{product.description}</td>
+                    <td className="py-2 px-4 border-b">
+                      <div className="flex space-x-2">
+                        <button
+                          className="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+                          onClick={() => handleUpdateFormOpen(product)}
+                        >
+                          <EditIcon />
+                        </button>
+                        <button
+                          className="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded focus:outline-none focus:ring-2 focus:ring-red-500"
+                          onClick={() => setConfirmDeleteId(product.id)}
+                        >
+                          <DeleteIcon />
+                        </button>
+                      </div>
+                      {confirmDeleteId === product.id && (
+                        <div className="fixed inset-0 flex items-center justify-center z-50">
+                          <div className="absolute inset-0 bg-gray-900 opacity-50"></div>
+                          <div className="relative bg-white p-8 rounded shadow-lg w-90">
+                            <button
+                              className="absolute top-2 right-2 text-black hover:text-gray-600 focus:outline-none"
+                              onClick={() => setConfirmDeleteId(null)}
+                            >
+                              <CloseIcon />
+                            </button>
+                            <h4 className="text-lg text-black font-bold mb-4">Confirm Delete</h4>
+                            <p className="mb-4  text-black">Are you sure you want to delete this product?</p>
+                            <div className="flex justify-center gap-4">
+                              <button
+                                className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-red-500"
+                                onClick={() => handleDelete(product.id)}
+                              >
+                                Delete
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="flex justify-center mt-4">
+            <Stack spacing={2}>
+              <Pagination
+                count={Math.ceil(filteredProducts.length / productsPerPage)}
+                page={currentPage}
+                onChange={(e, page) => paginate(page)}
+                color="primary"
+              />
+            </Stack>
+          </div>
         </>
       )}
-      {error && (
-        <div className="bg-red-200 text-red-800 border border-red-300 px-4 py-3 rounded relative mt-4" role="alert">
-          <span className="block sm:inline">{error}</span>
-        </div>
-      )}
-      {confirmDeleteId && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="absolute inset-0 bg-gray-900 opacity-50"></div>
-          <div className="relative bg-white p-8 rounded shadow-lg w-1/3">
-            <h4 className="text-lg font-bold text-black mb-4">Confirm Delete</h4>
-            <p className="text-black">Are you sure you want to delete this product?</p>
-            <div className="flex justify-center gap-4 mt-4">
-              <button
-               className="border-3 border-gray-500 text-black bg-white hover:bg-gray-950 hover:text-black hover:border-2 hover:border-gray-600 px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-gray-500"
-                onClick={() => setConfirmDeleteId(null)}
-              >
-                Cancel
-              </button>
-              <button
-                className="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded focus:outline-none focus:ring-2 focus:ring-red-500"
-                onClick={() => handleDelete(confirmDeleteId)}
-              >
-                Delete
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      {error && <p className="text-red-500 text-center mt-4">{error}</p>}
     </Container>
   );
 }
