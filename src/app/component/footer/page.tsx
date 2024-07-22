@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <footer style={{ marginTop:'120px', marginBottom:'0px', backgroundColor: '#5f5ff7', color: 'white' }} className="p-8">
+    <footer style={{  marginBottom:'0px', backgroundColor: '#5f5ff7', color: 'white' }} className="p-8">
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
         <div className="mb-4 md:mb-0">
           <h3 className="text-2xl text-white font-bold">SapotaCorp</h3>

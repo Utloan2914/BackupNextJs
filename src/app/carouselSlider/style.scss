@@ -6,11 +6,19 @@
 
 /* Custom styles for gallery container */
 .custom-gallery-container {
-  margin-top: 100px; /* Adjust margin top if needed */
-  margin-bottom: 100px; /* Adjust margin bottom if needed */
+  width: 100%; // Make sure it takes the full width of its parent
+  max-width: 100%; // Ensure it does not exceed the viewport width
+  overflow: hidden; // Hide overflow to prevent scrolling
+  position: relative; // Positioning context for child elements
 }
 
-/* Styles for gallery items */
+@media (min-width: 1200px) {
+  .css-1oqqzyl-MuiContainer-root {
+      max-width: none !important; /* Ghi đè max-width */
+  }
+}
+
+
 .image-gallery-thumbnail {
   width: 200px; /* Adjust size if needed */
   margin: 5px;
@@ -18,15 +26,25 @@
 
 .image-gallery-item {
   text-align: center;
+  width: 100%; // Ensure images take full width
+  
+  img {
+    width: 100%; // Make images responsive
+    height: auto; // Maintain aspect ratio
+  }
 }
 
 .image-gallery-item img {
-  width: 400px; /* Adjust size as needed */
-  height: 400px; /* Adjust size as needed */
-  margin: 0 auto;
-  object-fit: cover;
-  border-radius: 5px; /* Add border radius for rounded corners */
+  width: 100%;
+  height: 900px;
+  object-fit: cover; 
+  border-radius: 5px;
+  transition: transform 0.2s ease-in-out;
 }
+
+// .image-gallery-item img:hover {
+//   transform: scale(1.1); /* Tăng kích thước hình ảnh khi hover để làm rõ hơn */
+// }
 
 /* Styles for captions */
 .lightGallery-captions {

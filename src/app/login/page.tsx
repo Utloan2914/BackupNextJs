@@ -72,7 +72,7 @@ function Login() {
     };
 
     return (
-        <Card fluid className='text-black m-5 mt-9' style={{ borderRadius: '25px', maxWidth: '2000px', width:'40%' ,height: '410px' }}>
+        <Card fluid className='text-black ' style={{ borderRadius: '25px', maxWidth: '2000px', width:'40%' ,height: '410px', marginTop:'160px'  }}>
             <CardBody>
                 <Row>
                     <Col md='10' lg='6' className='order-2 order-lg-1 d-flex flex-column align-items-center'>
@@ -108,7 +108,7 @@ function Login() {
                         </Form>
                     </Col>
                     <Col md='10' lg='6' className='order-1 order-lg-2 d-flex align-items-center'>
-                        <CardImg src='https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp' fluid />
+                        <CardImg src='https://ohay.vn/blog/wp-content/uploads/2020/01/petmart1-min.jpg' fluid />
                     </Col>
                 </Row>
             </CardBody>

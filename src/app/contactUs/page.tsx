@@ -54,121 +54,98 @@ const SendEmail: React.FC = () => {
   };
 
   return (
-    <section className="mt-20 bg-white dark:bg-slate-800 border rounded-[10px] border-gray-300 dark:border-gray-700" id="contact">
-<div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20 rounded-[3px]">
+    <section style={{marginTop:"100px"}} className=" h-[calc(100vh-20vh)] w-full" id="contact">
 
-      <div className="mb-4">
-        <div className="mb-6 max-w-3xl text-center sm:text-center md:mx-auto md:mb-12">
-          <p className="text-base font-semibold uppercase tracking-wide text-black">
+      <div className="mx-auto mb-3 max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20 rounded-[3px]">
+        <div className="mb-3 max-w-3xl text-center sm:text-center md:mx-auto md:mb-12">
+          <h3 className="text-base font-semibold uppercase tracking-wide">
             Contact
-          </p>
-          <h2 className="font-heading mb-4 font-bold tracking-tight text-black text-3xl sm:text-5xl">
+          </h3>
+          <h2 className="font-heading mb-4 font-bold tracking-tight  text-4xl sm:text-5xl">
             Get in Touch
           </h2>
-          <p className="mx-auto mt-4 max-w-3xl text-xl text-black">
+          <h3 className="mx-auto mt-4 max-w-3xl text-xl  mb-8">
             We look forward to hearing from you
-          </p>
+          </h3>
         </div>
-      </div>
-      <div className="flex items-stretch justify-center">
-        <div className="grid md:grid-cols-2">
-          <div className="h-full pr-6">
-            <p className="mt-3 mb-12 text-lg text-black">
-              We welcome your inquiries and feedback.
-            </p>
+
+        <div className="flex items-stretch justify-center">
+          <div className="grid md:grid-cols-2">
+            <div className="h-full pr-3">
+              <p className="mt-3 mb-12 text-lg ">
+                We welcome your inquiries and feedback.
+              </p>
               <ul className="mb-6 md:mb-0">
                 <li className="flex">
-                  <div className="flex h-10 w-10 items-center justify-center rounded bg-blue-500 hover:bg-blue-600 transition">
+                  <div className="flex h-10 w-10 items-center justify-center rounded bg-blue-600 transition">
                     <HomeIcon className="text-white" />
                   </div>
                   <div className="ml-4 mb-4">
-                    <h3 className="mb-2 text-lg font-medium leading-6 text-black">Our Address</h3>
-                    <p className=" text-black">99 To Hien Thanh, Son Tra dictrict, Da Nang city</p>
-                    <p className=" text-black">Quang Nam, Viet Nam</p>
+                    <h3 className="mb-2 text-lg font-medium leading-6 ">Our Address</h3>
+                    <p className="">99 To Hien Thanh, Son Tra district, Da Nang city</p>
+                    <p className="">Quang Nam, Viet Nam</p>
                   </div>
                 </li>
                 <li className="flex">
-                  <div className="flex h-10 w-10 items-center justify-center rounded bg-blue-500 hover:bg-blue-600 transition">
+                  <div className="flex h-10 w-10 items-center justify-center rounded bg-blue-600 transition">
                     <PhoneIcon className="text-white" />
                   </div>
                   <div className="ml-4 mb-4">
-                    <h3 className="mb-2 text-lg font-medium leading-6 text-black">Contact</h3>
-                    <p className=" text-black">Mobile: +84 878138854</p>
-                    <p className=" text-black">Mail: loan@gmail.com</p>
+                    <h3 className="mb-2 text-lg font-medium leading-6 ">Contact</h3>
+                    <p className="">Mobile: +84 878138854</p>
+                    <p className="">Mail: loan@gmail.com</p>
                   </div>
                 </li>
                 <li className="flex">
-                  <div className="flex h-10 w-10 items-center justify-center rounded bg-blue-500 hover:bg-blue-600 transition">
+                  <div className="flex h-10 w-10 items-center justify-center rounded bg-blue-600 transition">
                     <EmailIcon className="text-white" />
                   </div>
                   <div className="ml-4 mb-4">
-                    <h3 className="mb-2 text-lg font-medium leading-6 text-black">Working Hours</h3>
-                    <p className=" text-black">Monday - Friday: 08:00 - 17:00</p>
-                    <p className=" text-black">Saturday & Sunday: 08:00 - 12:00</p>
+                    <h3 className="mb-2 text-lg font-medium leading-6 ">Working Hours</h3>
+                    <p className="">Monday - Friday: 08:00 - 17:00</p>
+                    <p className="">Saturday & Sunday: 08:00 - 12:00</p>
                   </div>
                 </li>
               </ul>
             </div>
-            <div className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 card h-fit max-w-6xl p-5 md:p-12 shadow-lg rounded-lg" id="form">
-              <h2 className="mb-6 text-3xl font-bold text-white text-center">Ready to Get Started?</h2>
-              <form ref={form} onSubmit={sendEmail} className="space-y-6 ">
-                <div className="space-y-4">
-                  <div >
-                    <TextField
-                      required
-                      id="name"
-                      name="name"
-                      label="Your Name"
-                      variant="outlined"
-                      multiline
-                      rows={1}
-                      fullWidth
-                      margin="normal"
-                      InputProps={{
-                        style: { borderRadius: '8px', backgroundColor: '#fff' }
-                      }}
-                    />
-                  </div>
-                  <div>
-                    <TextField
-                      required
-                      id="email"
-                      name="email"
-                      label="Your Email Address"
-                      variant="outlined"
-                      multiline
-                      rows={1}
-                      fullWidth
-                      margin="normal"
-                      InputProps={{
-                        style: { borderRadius: '8px', backgroundColor: '#fff' }
-                      }}
-                    />
-                  </div>
-                  <div>
-                    <TextField
-                      id="textarea"
-                      name="message"
-                      label="Write your message..."
-                      variant="outlined"
-                      multiline
-                      rows={5}
-                      fullWidth
-                      margin="normal"
-                      InputProps={{
-                        style: { borderRadius: '8px', backgroundColor: '#fff' }
-                      }}
-                    />
-                  </div>
-                </div>
+            <div className=" card h-fit max-w-6xl p-5 md:p-12 shadow-lg rounded-lg" id="form">
+              <h2 className="mb-6 text-3xl font-bold text-black text-center">Ready to Get Started?</h2>
+              <form ref={form} onSubmit={sendEmail} className="space-y-10 ">
+              <div className="mb-6">
+  <TextField
+    id="name"
+    label="Your Name"
+    variant="outlined"
+    fullWidth
+    name="name"
+    style={{ marginBottom: '15px' }}
+  />
+  <TextField
+    id="email"
+    label="Your Email Address"
+    variant="outlined"
+    fullWidth
+    name="email"
+    style={{ marginBottom: '15px' }}
+  />
+  <TextField
+    id="message"
+    label="Write Your Message..."
+    variant="outlined"
+    fullWidth
+    multiline
+    rows={3}
+    name="message"
+  />
+</div>
+
                 <div className="text-center">
                   <Button
                     type="submit"
                     variant="contained"
-                    color="primary"
-                    className="w-full py-3 rounded-md"
+                    className="w-full bg-blue-800 text-white px-6 py-3 font-xl rounded-md sm:mb-0"
                     disabled={loading}
-                    style={{ fontSize: '1.1rem', backgroundColor: '#1e40af', color: 'white' }}
+                    style={{ fontSize: '1.1rem' }}
                   >
                     {loading ? <CircularProgress size={24} style={{ color: 'white' }} /> : 'Send Message'}
                   </Button>

@@ -9,6 +9,10 @@ import ErrorSearch from '@/app/search/notfound/page';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import CloseIcon from '@mui/icons-material/Close';
+import PetsIcon from '@mui/icons-material/Pets';
+import { useRouter } from 'next/navigation';
+
+
 
 export default function Product() {
   const [products, setProducts] = useState<any[]>([]);
@@ -27,7 +31,7 @@ export default function Product() {
 
   const addTitleRef = useRef<HTMLInputElement>(null);
   const updateTitleRef = useRef<HTMLInputElement>(null);
-
+  const router = useRouter();
   useEffect(() => {
     fetchProducts();
   }, []);
@@ -155,7 +159,7 @@ export default function Product() {
   };
 
   return (
-    <Container fluid className="mx-auto mt-10 px-4 relative">
+    <Container fluid className="mx-auto  px-4 relative" style= {{marginTop:'160px'}}>
       <h2 className="text-center text-3xl font-bold mb-4">Product List</h2>
       <div className="flex justify-between items-center mb-4">
         {showAddForm && (
@@ -168,7 +172,7 @@ export default function Product() {
               >
                 <CloseIcon />
               </button>
-              <h4 className="text-lg text-black font-bold mb-4">Add Product</h4>
+              <h4 className="text-lg text-black font-bold mb-4">Add pet</h4>
               <div className="flex flex-col gap-4">
                 <input
                   type="text"
@@ -206,7 +210,7 @@ export default function Product() {
                     className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:bg-blue-500"
                     onClick={handleCreate}
                   >
-                    Add Product
+                    Add pet
                   </button>
                 </div>
               </div>
@@ -218,7 +222,7 @@ export default function Product() {
           className="bg-blue-500 hover:bg-blue-600 text-white font-bold px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
           onClick={() => setShowAddForm(true)}
         >
-          Add Product
+          Add pet
         </button>
       </div>
       {successMessage && (
@@ -240,7 +244,7 @@ export default function Product() {
                 >
                   <CloseIcon />
                 </button>
-                <h4 className="text-lg text-black font-bold mb-4">Update Product</h4>
+                <h4 className="text-lg text-black font-bold mb-4">Update pet information</h4>
                 <div className="flex flex-col gap-4">
                   <input
                     type="text"
@@ -285,7 +289,7 @@ export default function Product() {
                       className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:bg-blue-500"
                       onClick={handleUpdate}
                     >
-                      Update Product
+                      Update pet 
                     </button>
                   </div>
                 </div>
@@ -297,7 +301,7 @@ export default function Product() {
               <thead>
                 <tr>
                   <th className="py-2 px-4 border-b">Image</th>
-                  <th className="py-2 px-4 border-b">Name product</th>
+                  <th className="py-2 px-4 border-b">Name pet</th>
                   <th className="py-2 px-4 border-b">Description</th>
                   <th className="py-2 px-4 border-b">Actions</th>
                 </tr>
@@ -323,6 +327,13 @@ export default function Product() {
                         >
                           <EditIcon />
                         </button>
+                        <button
+                          className="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+                          onClick={() => router.push('/service')}
+                        >
+                          <PetsIcon />
+                        </button>
+
                         <button
                           className="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded focus:outline-none focus:ring-2 focus:ring-red-500"
                           onClick={() => setConfirmDeleteId(product.id)}
