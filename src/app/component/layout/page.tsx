@@ -4,7 +4,8 @@ import Navbar from '@/app/component/navbar/page'
 import Footer from '../footer/page';
 import ErrorPage from '../../error/page';
 import Product from '../../productAPI/page';
-import ServicePage from '@/app/service/page';
+// import ServicePage from '@/app/service/page';
+import Purchase from '@/app/purchasePetFood/page';
 import Test from '@/app/test/page';
 import Login from '../../login/page';
 import HomePage from '@/app/home/page'; 
@@ -48,13 +49,14 @@ const Layout = ({ children }: LayoutProps) => {
             {pathname === '/editProfile' && isAuthenticated && <EditProfile formDataProp={formData} onUpdateProfile={handleUpdateProfile} />}
             {pathname === '/productAPI' && <Product />}
             {pathname === '/login' && <Login />}
+            {pathname === '/purchase' && <Purchase />}
             {pathname === '/test' && <Test />}
             {pathname === '/register' && <Register />}
             {pathname === '/home' && <HomePage />}
             {pathname === '/sendEmail' && <SendEmail />}
-            {pathname === '/service' && <ServicePage />}
+            {/* {pathname === '/service' && <ServicePage />} */}
             {pathname === '/' && <div className="w-full h-full">{children}</div>}
-            {!['/', '/viewProfile', '/editProfile', '/productAPI', '/login', '/register','/home','/sendEmail', '/test', '/service'].includes(pathname) && <ErrorPage />}
+            {!['/', '/viewProfile', '/editProfile', '/productAPI', '/login', '/register','/home','/sendEmail', '/test', '/service','/purchase'].includes(pathname) && <ErrorPage />}
           </main>
         </Suspense>
       </div>

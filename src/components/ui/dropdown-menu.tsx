@@ -11,7 +11,7 @@ const DropdownMenuContent = React.forwardRef<
   <DropdownMenuPrimitive.Content
     ref={ref}
     className={cn(
-      'bg-white dark:bg-gray-800 border border-black dark:border-gray-700 rounded-md shadow-md p-2',
+      'bg-white dark:bg-gray-800 border border-black dark:border-gray-700 rounded-md shadow-md p-2 mr-8',
       className
     )}
     {...props}

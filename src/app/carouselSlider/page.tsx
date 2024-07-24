@@ -154,47 +154,44 @@ export const CarouselSlider: FC = () => {
       smallDescription: 'Adorable and fluffy!',
     },
     {
-      original: './img/meo11.jpg',
-      thumbnail: './img/meo11.jpg',
+      original: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXZRAtmG6JduuiDQBdlwQYIcDRza4Lb2lqlA&s',
+      thumbnail: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXZRAtmG6JduuiDQBdlwQYIcDRza4Lb2lqlA&s',
       description: 'Peanut',
       smallDescription: 'Adorable and fluffy!',
     },
     {
-      original: './img/meo12.jpg',
-      thumbnail: './img/meo12.jpg',
+      original: 'https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2021/11/20/975861/5-Giong-Cho-Long-Xu-.jpg',
+      thumbnail: 'https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2021/11/20/975861/5-Giong-Cho-Long-Xu-.jpg',
       description: 'Snowball',
       smallDescription: 'Adorable and fluffy!',
     },
   ];
 
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-4 mt-4 gap-y-11" style={{ columnGap: '2px', marginLeft: '100px' }}>
-      {images.map((image, index) => (
-        <div key={index} className="text-black max-w-sm rounded overflow-hidden shadow-lg bg-white" >
-          <img
-    className="w-full"
-    style={{
-      height: '400px',
-      objectFit: 'cover',
-      transform: 'scale(1.0)',
-      transition: 'transform 0.2s ease-in-out'
-    }}
-    src={image.original}
-    alt={image.description}
-  />
-  <div className="px-6 py-4 mb-0">
-            <div className="font-bold text-xl mb-2">{image.description}</div>
-            <p className="text-black">{image.smallDescription}</p>
-          </div>
-          <div className="px-6 pt-4 pb-2">
-            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
-            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
-            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
-          </div>
+      return (
+        <div className="grid grid-cols-1 md:grid-cols-4 mt-4 gap-y-11" style={{ columnGap: '2px', marginLeft: '100px' }}>
+          {images.map((image, index) => (
+            <div key={index} className="text-black max-w-sm rounded overflow-hidden shadow-lg bg-white">
+              <div className="overflow-hidden">
+                <img
+                  className="w-full h-96 object-cover transform transition-transform duration-200 ease-in-out hover:scale-110"
+                  src={image.original}
+                  alt={image.description}
+                />
+              </div>
+              <div className="px-6 py-4 mb-0">
+                <div className="font-bold text-xl mb-2">{image.description}</div>
+                <p className="text-black">{image.smallDescription}</p>
+              </div>
+              <div className="px-6 pt-4 pb-2">
+                <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
+                <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
+                <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
+              </div>
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
-  );
-};
-
-export default CarouselSlider;
+      );
+    };
+    
+    export default CarouselSlider;
+    

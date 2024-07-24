@@ -59,6 +59,7 @@ export default function Product() {
     }
   };
 
+  
   const handleCreate = async () => {
     try {
       const newProd = await createProduct(newProduct);
@@ -159,7 +160,7 @@ export default function Product() {
   };
 
   return (
-    <Container fluid className="mx-auto  px-4 relative" style= {{marginTop:'160px'}}>
+    <Container fluid className="mx-auto  px-4 relative" style= {{marginTop:'160px', marginBottom:'50px'}}>
       <h2 className="text-center text-3xl font-bold mb-4">Product List</h2>
       <div className="flex justify-between items-center mb-4">
         {showAddForm && (
@@ -329,10 +330,10 @@ export default function Product() {
                         </button>
                         <button
                           className="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
-                          onClick={() => router.push('/service')}
                         >
                           <PetsIcon />
                         </button>
+
 
                         <button
                           className="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded focus:outline-none focus:ring-2 focus:ring-red-500"
