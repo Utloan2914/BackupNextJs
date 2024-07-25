@@ -1,4 +1,3 @@
-
 'use client'
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
@@ -93,18 +92,26 @@ const Navbar = () => {
     if (storedImageUrl) {
       setUserImage(storedImageUrl);
     }
+    const storedCart = localStorage.getItem('cart');
+    if (storedCart) {
+      setCartCount(JSON.parse(storedCart).length);
+    }
   }, []);
 
   const handleAddToCart = (product: { id: number, name: string, status: string }) => {
     if (product.status !== "Out Of Stock") {
-      setCartCount(prevCount => prevCount + 1);
+      const storedCart = localStorage.getItem('cart');
+      let cart = storedCart ? JSON.parse(storedCart) : [];
+      cart.push(product);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      setCartCount(cart.length);
     }
   };
 
   return (
     <StyledNavbar>
       {isLoggedIn ? (
-        <>
+<>
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <WelcomeText>
               Welcome, {userEmail}
@@ -138,11 +145,13 @@ const Navbar = () => {
                 Contact us
               </NavLinkButton>
             </Link>
+            <Link href="/productCard" passHref style={{marginTop:"20px"}}>
             <Button>
               <Badge badgeContent={cartCount} color="primary">
                 <ShoppingCartIcon />
               </Badge>
             </Button>
+            </Link>
           </NavbarLinks>
         </>
       ) : (

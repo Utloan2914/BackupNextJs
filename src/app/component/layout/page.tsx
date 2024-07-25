@@ -6,6 +6,7 @@ import ErrorPage from '../../error/page';
 import Product from '../../productAPI/page';
 // import ServicePage from '@/app/service/page';
 import Purchase from '@/app/purchasePetFood/page';
+import ProductCard from '@/app/productCard/page';
 import Test from '@/app/test/page';
 import Login from '../../login/page';
 import HomePage from '@/app/home/page'; 
@@ -54,9 +55,10 @@ const Layout = ({ children }: LayoutProps) => {
             {pathname === '/register' && <Register />}
             {pathname === '/home' && <HomePage />}
             {pathname === '/sendEmail' && <SendEmail />}
+            {pathname === '/productCard' && <ProductCard />}
             {/* {pathname === '/service' && <ServicePage />} */}
             {pathname === '/' && <div className="w-full h-full">{children}</div>}
-            {!['/', '/viewProfile', '/editProfile', '/productAPI', '/login', '/register','/home','/sendEmail', '/test', '/service','/purchase'].includes(pathname) && <ErrorPage />}
+            {!['/', '/viewProfile', '/editProfile', '/productAPI', '/login', '/register','/home','/sendEmail', '/test', '/service','/purchase','/productCard'].includes(pathname) && <ErrorPage />}
           </main>
         </Suspense>
       </div>

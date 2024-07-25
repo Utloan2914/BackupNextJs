@@ -70,7 +70,7 @@ const allProducts: Product[] = [
         "id": 6,
         "title": "Pedigree Adult Beef & Vegetable Flavor 500g",
         "link": "https://channel.mediacdn.vn/thumb_w/640/428462621602512896/2023/7/10/photo-1-16889633943321951018013.jpg",
-        "imgSrc": "https://channel.mediacdn.vn/thumb_w/640/428462621602512896/2023/7/10/photo-1-16889633943321951018013.jpg",
+"imgSrc": "https://channel.mediacdn.vn/thumb_w/640/428462621602512896/2023/7/10/photo-1-16889633943321951018013.jpg",
         "price": "45,000 VND",
         "status": "In Stock",
         "text": "Pedigree Adult DRY FOOD with Chicken and Vegetables - 500g",
@@ -130,7 +130,7 @@ const allProducts: Product[] = [
         "id": 12,
         "title": "PEDIGREE Puppy Egg and Milk Flavor 2.7kg",
         "link": "https://salt.tikicdn.com/cache/w1200/ts/product/a3/b1/20/94c6093cd7517922bbd649ec2e959d72.png",
-        "imgSrc": "https://salt.tikicdn.com/cache/w1200/ts/product/a3/b1/20/94c6093cd7517922bbd649ec2e959d72.png",
+"imgSrc": "https://salt.tikicdn.com/cache/w1200/ts/product/a3/b1/20/94c6093cd7517922bbd649ec2e959d72.png",
         "price": "215,000 VND",
         "status": "In Stock",
         "text": "Pedigree Dry Food for Puppies with Chicken, Egg, and Milk - 3kg",
@@ -148,7 +148,7 @@ const allProducts: Product[] = [
       },
       {
         "id": 14,
-        "title": "Pedigree Adult Beef and Vegetable Flavor 500g",
+        "title": "Pedigree Adult Beef and Vegetable Flavor 500glllllllllllllll",
         "link": "https://channel.mediacdn.vn/thumb_w/640/428462621602512896/2023/7/10/photo-1-16889633943321951018013.jpg",
         "imgSrc": "https://channel.mediacdn.vn/thumb_w/640/428462621602512896/2023/7/10/photo-1-16889633943321951018013.jpg",
         "price": "45,000 VND",
@@ -190,7 +190,7 @@ const allProducts: Product[] = [
         "id": 18,
         "title": "PEDIGREE Puppy Egg and Milk Flavor 2.7kg",
         "link": "https://salt.tikicdn.com/cache/w1200/ts/product/a3/b1/20/94c6093cd7517922bbd649ec2e959d72.png",
-        "imgSrc": "https://salt.tikicdn.com/cache/w1200/ts/product/a3/b1/20/94c6093cd7517922bbd649ec2e959d72.png",
+"imgSrc": "https://salt.tikicdn.com/cache/w1200/ts/product/a3/b1/20/94c6093cd7517922bbd649ec2e959d72.png",
         "price": "215,000 VND",
         "status": "In Stock",
         "text": "Pedigree Dry Food for Puppies with Chicken, Egg, and Milk - 3kg",
@@ -250,7 +250,7 @@ const allProducts: Product[] = [
         "id": 24,
         "title": "PEDIGREE Puppy Egg and Milk Flavor 2.7kg",
         "link": "https://salt.tikicdn.com/cache/w1200/ts/product/a3/b1/20/94c6093cd7517922bbd649ec2e959d72.png",
-        "imgSrc": "https://salt.tikicdn.com/cache/w1200/ts/product/a3/b1/20/94c6093cd7517922bbd649ec2e959d72.png",
+"imgSrc": "https://salt.tikicdn.com/cache/w1200/ts/product/a3/b1/20/94c6093cd7517922bbd649ec2e959d72.png",
         "price": "215,000 VND",
         "status": "In Stock",
         "text": "Pedigree Dry Food for Puppies with Chicken, Egg, and Milk - 3kg",
@@ -275,9 +275,20 @@ const Purchase: React.FC = () => {
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
   const [cartCount, setCartCount] = useState<number>(0);
+  const [cart, setCart] = useState<Product[]>(() => {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      try {
+        const savedCart = localStorage.getItem('cart');
+        return savedCart ? JSON.parse(savedCart) : [];
+      } catch (error) {
+        console.error('Error parsing cart data from localStorage:', error);
+        return [];
+      }
+    }
+    return [];
+  });
 
   useEffect(() => {
-    // Hàm để cập nhật trạng thái sản phẩm
     const updateProductStatus = () => {
       setProducts(prevProducts =>
         prevProducts.map(product => {
@@ -290,18 +301,19 @@ const Purchase: React.FC = () => {
         })
       );
     };
-
-    // Thiết lập interval để thay đổi trạng thái sau mỗi 50 giây
     const intervalId = setInterval(updateProductStatus, 50000);
-
-    // Dọn dẹp interval khi component bị unmount
     return () => clearInterval(intervalId);
   }, []);
 
-  // Lọc sản phẩm theo category
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart]);
+
   const filteredProducts = products.filter(product => product.category === category);
 
   const handleAddToCart = (product: Product) => {
+    setCart(prevCart => [...prevCart, product]);
+    
     if (product.status === "Out Of Stock") {
       setToastMessage("Sản phẩm này đã hết hàng, vui lòng chọn sản phẩm khác");
       setShowToast(true);
@@ -312,6 +324,7 @@ const Purchase: React.FC = () => {
     } else {
       console.error('setCartCount is not a function');
     }
+    window.location.href = "/purchase"
   };
   
 
@@ -322,7 +335,7 @@ const Purchase: React.FC = () => {
       return;
     }
     // Logic để mua sản phẩm
-  };
+};
 
   return (
     <div>
@@ -390,7 +403,7 @@ const Purchase: React.FC = () => {
                         height: '40px'
                       }}>
                         {product.text}
-                      </Card.Text>
+</Card.Text>
                       <p className="text-danger font-bold">
                         {product.price}
                       </p>
