@@ -639,3 +639,78 @@
 // };
 
 // export default ServicePage;
+"use client"
+import React, { useState } from 'react';
+
+const ServicePage = () => {
+  const [quantity, setQuantity] = useState(1);
+  
+  const handleDecrease = () => {
+    if (quantity > 1) setQuantity(quantity - 1);
+  };
+
+  const handleIncrease = () => {
+    setQuantity(quantity + 1);
+  };
+
+  const handleDelete = () => {
+    // Xử lý xóa sản phẩm khỏi giỏ hàng
+    console.log('Xóa sản phẩm');
+  };
+
+  return (
+    <div className="flex items-center border-b py-4">
+      <input type="checkbox" className="mr-4" />
+      <img 
+        src="https://cdn.example.com/image-placeholder.jpg" 
+        alt="Dép Đức Quai Ngang Siêu Nhẹ, Êm Chân, Họa Tiết Gấu" 
+        className="w-20 h-20 object-cover mr-4" 
+      />
+      <div className="flex-1">
+        <div className="flex justify-between items-center">
+          <div>
+            <h2 className="text-lg font-bold">
+              Dép Đức Quai Ngang Siêu Nhẹ, Êm Chân, Họa Tiết Gấu
+            </h2>
+            <p className="text-sm text-red-600">Đổi ý miễn phí 15 ngày</p>
+          </div>
+          <div className="text-right">
+            <p className="line-through text-gray-400">69.000₫</p>
+            <p className="text-red-600 text-lg font-bold">45.000₫</p>
+          </div>
+        </div>
+        <div className="flex justify-between items-center mt-2">
+          <div className="text-gray-600">
+            <span>Phân Loại Hàng:</span> Gấu Đen, 36-37
+          </div>
+          <div className="flex items-center">
+            <button 
+              onClick={handleDecrease} 
+              className="px-2 py-1 border"
+            >-</button>
+            <input 
+              type="text" 
+              value={quantity} 
+              readOnly 
+              className="w-12 text-center border-t border-b"
+            />
+            <button 
+              onClick={handleIncrease} 
+              className="px-2 py-1 border"
+            >+</button>
+          </div>
+          <div className="text-red-600 font-bold">₫{45_000 * quantity}</div>
+          <button 
+            onClick={handleDelete} 
+            className="text-red-600 ml-4"
+          >Xóa</button>
+        </div>
+        <div className="text-right mt-2">
+          <a href="#" className="text-red-600">Tìm sản phẩm tương tự</a>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ServicePage;

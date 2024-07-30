@@ -328,11 +328,13 @@ export default function Product() {
                         >
                           <EditIcon />
                         </button>
+                       
                         <button
                           className="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
                         >
                           <PetsIcon />
                         </button>
+                
 
 
                         <button
@@ -378,6 +380,7 @@ export default function Product() {
                 page={currentPage}
                 onChange={(e, page) => paginate(page)}
                 color="primary"
+              
               />
             </Stack>
           </div>

@@ -1,3 +1,4 @@
+
 'use client'
 import React, { useEffect, useState } from 'react';
 import { styled } from '@mui/material/styles';
@@ -68,6 +69,10 @@ const BadgeAvatars: React.FC<BadgeAvatarsProps> = ({ imageUrl }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const handleLogout = () => {
+    localStorage.removeItem('formData'); 
+    window.location.href = "/login"
+  };
 
   const open = Boolean(anchorEl);
 
@@ -99,7 +104,7 @@ const BadgeAvatars: React.FC<BadgeAvatarsProps> = ({ imageUrl }) => {
             <ListItemIcon>
               <PersonIcon fontSize="small" />
             </ListItemIcon>
-            <ListItemText primaryTypographyProps={{ variant: 'body1', style: { fontSize: 20, color: 'black' } }} primary="View Profile" />
+<ListItemText primaryTypographyProps={{ variant: 'body1', style: { fontSize: 20, color: 'black' } }} primary="View Profile" />
           </MenuItem>
         </Link>
 
@@ -112,13 +117,14 @@ const BadgeAvatars: React.FC<BadgeAvatarsProps> = ({ imageUrl }) => {
           </MenuItem>
         </Link>
         
+        
         <Link href="/login" passHref>
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <LogoutIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primaryTypographyProps={{ style: { fontSize: 20 } }} primary="Logout" />
-        </MenuItem>
+          <MenuItem onClick={() => { handleLogout(); handleClose(); }}>
+            <ListItemIcon>
+              <LogoutIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText primaryTypographyProps={{ style: { fontSize: 20 } }} primary="Logout" />
+          </MenuItem>
         </Link>
         
       </Menu>

@@ -4,26 +4,26 @@
 
 @layer base {
   :root {
-    --background: 204 100% 97%;
-    --foreground: 204 100% 3.9%;
-    --card: 204 100% 100%;
-    --card-foreground: 204 100% 3.9%;
-    --popover: 204 100% 100%;
-    --popover-foreground: 204 100% 3.9%;
-    --primary: 204 100% 97%;
-    --primary-foreground: 204 100% 3.9%;
-    --secondary: 204 100% 97%;
-    --secondary-foreground: 204 100% 3.9%;
-    --muted: 204 100% 97%;
-    --muted-foreground: 204 100% 46.1%;
-    --accent: 204 100% 97%;
-    --accent-foreground: 204 100% 3.9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 204 100% 90%;
-    --input: 204 100% 90%;
-    --ring: 204 100% 97%;
-    --radius: 0.75rem;
+    --background: 200 100% 80%; /* Xanh nước biển nhạt */
+    --foreground: 200 100% 10%; /* Màu tối hơn để tương phản với nền */
+    --card: 200 100% 95%; /* Xanh nước biển nhạt cho thẻ */
+    --card-foreground: 200 100% 10%; /* Màu chữ trên thẻ */
+    --popover: 200 100% 95%; /* Xanh nước biển nhạt cho popover */
+    --popover-foreground: 200 100% 10%; /* Màu chữ trên popover */
+    --primary: 200 100% 95%; /* Xanh nước biển nhạt cho các phần chính */
+    --primary-foreground: 200 100% 10%; /* Màu chữ trên các phần chính */
+    --secondary: 200 100% 95%; /* Xanh nước biển nhạt cho các phần phụ */
+    --secondary-foreground: 200 100% 10%; /* Màu chữ trên các phần phụ */
+    --muted: 200 100% 95%; /* Xanh nước biển nhạt cho các phần bị làm mờ */
+    --muted-foreground: 200 100% 50%; /* Màu chữ cho các phần bị làm mờ */
+    --accent: 200 100% 95%; /* Xanh nước biển nhạt cho các phần nổi bật */
+    --accent-foreground: 200 100% 10%; /* Màu chữ trên các phần nổi bật */
+    --destructive: 0 84.2% 60.2%; /* Màu đỏ cho các phần hủy bỏ */
+    --destructive-foreground: 0 0% 98%; /* Màu chữ trên các phần hủy bỏ */
+    --border: 200 100% 85%; /* Xanh nước biển nhạt cho viền */
+    --input: 200 100% 85%; /* Xanh nước biển nhạt cho input */
+    --ring: 200 100% 95%; /* Xanh nước biển nhạt cho ring */
+    --radius: 0.75rem; /* Đường kính bo tròn */
   }
   
 

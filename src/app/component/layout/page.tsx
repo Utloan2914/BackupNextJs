@@ -4,7 +4,7 @@ import Navbar from '@/app/component/navbar/page'
 import Footer from '../footer/page';
 import ErrorPage from '../../error/page';
 import Product from '../../productAPI/page';
-// import ServicePage from '@/app/service/page';
+import PaymentInstructions from '@/app/payment/page';
 import Purchase from '@/app/purchasePetFood/page';
 import ProductCard from '@/app/productCard/page';
 import Test from '@/app/test/page';
@@ -56,9 +56,9 @@ const Layout = ({ children }: LayoutProps) => {
             {pathname === '/home' && <HomePage />}
             {pathname === '/sendEmail' && <SendEmail />}
             {pathname === '/productCard' && <ProductCard />}
-            {/* {pathname === '/service' && <ServicePage />} */}
+            {pathname === '/payment' && <PaymentInstructions />}
             {pathname === '/' && <div className="w-full h-full">{children}</div>}
-            {!['/', '/viewProfile', '/editProfile', '/productAPI', '/login', '/register','/home','/sendEmail', '/test', '/service','/purchase','/productCard'].includes(pathname) && <ErrorPage />}
+            {!['/', '/viewProfile', '/editProfile', '/productAPI', '/login', '/register','/home','/sendEmail', '/test', '/service','/purchase','/productCard', '/payment'].includes(pathname) && <ErrorPage />}
           </main>
         </Suspense>
       </div>

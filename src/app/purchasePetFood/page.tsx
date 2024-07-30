@@ -324,7 +324,7 @@ const Purchase: React.FC = () => {
     } else {
       console.error('setCartCount is not a function');
     }
-    window.location.href = "/purchase"
+    
   };
   
 
@@ -342,7 +342,7 @@ const Purchase: React.FC = () => {
       <Head>
         <title>{category}</title>
       </Head>
-      <div className="container-fluid ">
+    <div className="container-fluid" style={{marginTop:"150px"}}>
         <div className="row">
           <div className="col-md-2 h-100% mt-20">
             <nav className="navbar flex-column align-items-stretch p-3">

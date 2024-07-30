@@ -8,6 +8,7 @@ interface Product {
   title: string;
   price: string;
   imgSrc: string;
+  category: string;
 }
 
 interface CartProduct extends Product {
@@ -17,6 +18,18 @@ interface CartProduct extends Product {
 const ProductCart: React.FC = () => {
   const [cart, setCart] = useState<CartProduct[]>([]);
   const [isClient, setIsClient] = useState(false);
+  const [cartlocal, setCartlocal] = useState<Product[]>(() => {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      try {
+        const savedCart = localStorage.getItem('cart');
+        return savedCart ? JSON.parse(savedCart) : [];
+      } catch (error) {
+        console.error('Error parsing cart data from localStorage:', error);
+        return [];
+      }
+    }
+    return [];
+  });
 
   useEffect(() => {
     setIsClient(true);
@@ -28,13 +41,45 @@ const ProductCart: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (isClient) {
-      localStorage.setItem('cart', JSON.stringify(cart));
-    }
-  }, [cart, isClient]);
+    localStorage.setItem('cart', JSON.stringify(cartlocal));
+  }, [cartlocal]);
 
   const handleRemove = (id: number) => {
+    const cartString = localStorage.getItem('cart');
+    let cart: { id: number; quantity: number }[] = [];
+  
+    if (cartString) {
+      cart = JSON.parse(cartString);
+    }
+  
+    cart = cart.filter(item => item.id !== id);
+  
+    localStorage.setItem('cart', JSON.stringify(cart));
     setCart(prevCart => prevCart.filter(product => product.id !== id));
+  };
+
+  const handleRemoveFirstItem = (id: number) => {
+    const cartString = localStorage.getItem('cart');
+    let cart: { id: number; quantity: number }[] = [];
+    if (cartString) {
+        cart = JSON.parse(cartString);
+    }
+    const firstItemIndex = cart.findIndex(item => item.id === id);
+    if (firstItemIndex !== -1) {
+        cart.splice(firstItemIndex, 1);
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
+  };
+
+  const handleAddToCart = (product: Product) => {
+    const productsString = localStorage.getItem('cart');
+    let products: Product[] = [];
+
+    if (productsString) {
+      products = JSON.parse(productsString);
+    }
+
+    setCartlocal([...products, product]);
   };
 
   const handleQuantityChange = (id: number, change: number) => {
@@ -66,7 +111,7 @@ const ProductCart: React.FC = () => {
   const taxEstimate = (calculateSubtotal() * 0.08);
 
   return (
-    <div className="container mx-auto mt-32 px-4 mb-5">
+    <div className="container-build mt-44 mb-5" style={{ width: '80%' }}>
       <h2 className="text-2xl font-bold mb-4 text-center">Shopping Cart</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="col-span-2">
@@ -76,41 +121,56 @@ const ProductCart: React.FC = () => {
             <ListGroup>
               {isClient && cart.map(product => (
                 <ListGroup.Item key={product.id} className="mb-3 p-0 border-0">
-                  <Card className="shadow-sm w-full">
-                    <Card.Body className="d-flex">
-                      <div>
-                        <Card.Img
-                          variant="top"
-                          src={product.imgSrc}
-                          alt={product.title}
-                          style={{ width: '200px', height: '200px', objectFit: 'cover', maxWidth: 'none' }}
-                        />
-                      </div>
-                      <div className="ms-3 flex-grow-1 mt-20 justify-center">
-                        <Card.Title className="line-clamp-2 mt-2">{product.title}</Card.Title>
-                        <p className="text-danger font-bold">{product.price}</p>
-                      </div>
-                      <div className="d-flex align-items-center ms-3">
-                        <button
-                          className="bg-gray-200 hover:bg-gray-400 text-black font-bold px-3 py-1 rounded-l"
-                          onClick={() => handleQuantityChange(product.id, -1)}
+                  <Card className="shadow-sm w-full" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', maxWidth: '100%' }}>
+                    <Card.Img
+                      variant="top"
+                      src={product.imgSrc}
+                      alt={product.title}
+                      style={{ width: '100px', height: '100px', objectFit: 'cover' , margin:'20px'}}
+                    />
+                    <Card.Body className="d-flex align-items-center w-100">
+                    <div className="ms-3 flex-grow-1">
+  <Card.Title className="line-clamp-2">{product.title}</Card.Title>
+  <p className="text-muted mb-2">Category: {product.category}</p>
+  <p className="mb-2">
+    Discounted price, 20% off, now only: <span className="text-danger">{product.price}</span>
+  </p>
+</div>
+
+                      <p className="text-danger font-bold mb-0 mr-7">
+                          {product.price}
+                        </p>
+                      <div className="d-flex align-items-center mr-6">
+                          <button
+                            className="bg-gray-200 hover:bg-gray-400 text-black font-bold px-3 py-1 rounded-l"
+                            onClick={() => {
+                              handleQuantityChange(product.id, -1);
+                              handleRemoveFirstItem(product.id)
+                            }}
+                          >
+                            -
+                          </button>
+                          <span className="bg-white text-black px-3 py-1 border">{product.quantity}</span>
+                          <button
+                            className="bg-gray-200  hover:bg-gray-400 text-black font-bold  px-3 py-1 rounded-r"
+                            onClick={() => {
+                              handleQuantityChange(product.id, 1);
+                              handleAddToCart(product);
+                            }}
+                          >
+                            +
+                          </button>
+                        </div>
+                     
+
+                      <div className="d-flex flex-column align-items-end">
+                        <Button
+                          onClick={() => handleRemove(product.id)}
+                          className="text-blue-700 font-bold border-0 bg-transparent hover:text-red-500"
                         >
-                          -
-                        </button>
-                        <span className="bg-white text-black px-3 py-1 border">{product.quantity}</span>
-                        <button
-                          className="bg-gray-200  hover:bg-gray-400 text-black font-bold  px-3 py-1 rounded-r"
-                          onClick={() => handleQuantityChange(product.id, 1)}
-                        >
-                          +
-                        </button>
+                          Remove
+                        </Button>
                       </div>
-                      <Button
-                        onClick={() => handleRemove(product.id)}
-                        className="text-blue-700 font-bold border-0 bg-transparent hover:text-red-500"
-                      >
-                        Remove
-                      </Button>
                     </Card.Body>
                   </Card>
                 </ListGroup.Item>
