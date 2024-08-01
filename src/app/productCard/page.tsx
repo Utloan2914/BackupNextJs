@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button, ListGroup, Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import { useRouter } from "next/navigation";
 interface Product {
   id: number;
   title: string;
@@ -16,6 +16,7 @@ interface CartProduct extends Product {
 }
 
 const ProductCart: React.FC = () => {
+  const router = useRouter();
   const [cart, setCart] = useState<CartProduct[]>([]);
   const [isClient, setIsClient] = useState(false);
   const [cartlocal, setCartlocal] = useState<Product[]>(() => {
@@ -89,7 +90,11 @@ const ProductCart: React.FC = () => {
       ).filter(product => product.quantity > 0)
     );
   };
-
+  const handleCheckout = () => {
+    const totalAmount = calculateSubtotal() + shippingEstimate;
+    router.push('/payment?total=${totalAmount}');
+  };
+  
   const consolidateCart = (products: Product[]): CartProduct[] => {
     const consolidated: CartProduct[] = [];
     products.forEach(product => {
@@ -107,12 +112,18 @@ const ProductCart: React.FC = () => {
     return cart.reduce((total, product) => total + parseFloat(product.price) * product.quantity, 0);
   };
 
-  const shippingEstimate = 5.00;
-  const taxEstimate = (calculateSubtotal() * 0.08);
+  const shippingEstimate = 5;
+
+  const formatCurrency = (amount: number): string => {
+    return amount.toLocaleString('en-US', {
+      minimumFractionDigits: 3,
+      maximumFractionDigits: 3,
+    });
+  };
 
   return (
     <div className="container-build mt-44 mb-5" style={{ width: '80%' }}>
-      <h2 className="text-2xl font-bold mb-4 text-center">Shopping Cart</h2>
+  <h2 className="text-center text-3xl font-bold mb-4">Shopping Cart</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="col-span-2">
           {isClient && cart.length === 0 ? (
@@ -126,7 +137,7 @@ const ProductCart: React.FC = () => {
                       variant="top"
                       src={product.imgSrc}
                       alt={product.title}
-                      style={{ width: '100px', height: '100px', objectFit: 'cover' , margin:'20px'}}
+                      style={{ width: '70px', height: '70px', objectFit: 'cover' , margin:'20px'}}
                     />
                     <Card.Body className="d-flex align-items-center w-100">
                     <div className="ms-3 flex-grow-1">
@@ -183,23 +194,23 @@ const ProductCart: React.FC = () => {
             <h3 className="text-xl font-bold mb-3">Order summary</h3>
             <div className="d-flex justify-content-between mb-2">
               <span>Subtotal</span>
-              <span>${calculateSubtotal().toFixed(2)}</span>
+              <span>{formatCurrency(calculateSubtotal())} VND</span>
             </div>
             <div className="d-flex justify-content-between mb-2">
-              <span>Shipping estimate</span>
-              <span>${shippingEstimate.toFixed(2)}</span>
-            </div>
-            <div className="d-flex justify-content-between mb-4">
-              <span>Tax estimate</span>
-              <span>${taxEstimate.toFixed(2)}</span>
+              <span>Shipping Charges</span>
+              <span>{formatCurrency(shippingEstimate)} VND</span>
             </div>
             <div className="d-flex justify-content-between font-bold text-lg">
-              <span>Order total</span>
-              <span>${(calculateSubtotal() + shippingEstimate + taxEstimate).toFixed(2)}</span>
+              <span>Total order amount</span>
+              <span>{formatCurrency(calculateSubtotal() + shippingEstimate )} VND</span>
             </div>
-            <Button variant="primary" className="mt-4 w-full" onClick={() => alert('Proceed to Checkout')}>
-              Checkout
-            </Button>
+            <Button
+  variant="primary"
+  className="mt-4 w-full"
+  onClick={handleCheckout}
+>
+  Checkout
+</Button>
           </Card>
         </div>
       </div>

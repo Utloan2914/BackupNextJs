@@ -1,338 +1,302 @@
-// 'use client'
-// import React, { useState } from 'react';
+'use client';
+import React, { useState, useEffect } from 'react';
+import { Button, ListGroup, Card } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { useRouter } from 'next/navigation';
 
-// const PaymentInstructions = () => {
-//   const [selectedFile, setSelectedFile] = useState<string | null>(null);
+interface Product {
+  id: number;
+  title: string;
+  price: string;
+  imgSrc: string;
+  category: string;
+}
 
-//   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-//     const file = event.target.files?.[0];
-//     if (file) {
-//       setSelectedFile(URL.createObjectURL(file));
-//     }
-//   };
-
-//   return (
-//     <section className="body-font h-screen bg-gray-100 pt-10 text-gray-600">
-//       <div className="container mx-auto mt-10 flex max-w-3xl flex-wrap justify-center rounded-lg bg-white px-5 py-24">
-//         <div className="flex flex-col md:flex-row w-full">
-//           {/* Steps Section */}
-//           <div className="md:w-1/2 flex flex-col justify-between">
-//             <div className="mb-12">
-//               <div className="relative flex pb-12">
-//                 <div className="absolute inset-0 flex h-full w-10 items-center justify-center">
-//                   <div className="pointer-events-none h-full w-1 bg-gray-200"></div>
-//                 </div>
-//                 <div className="relative z-10 inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-blue-500 text-white">
-//                   <svg
-//                     fill="none"
-//                     stroke="currentColor"
-//                     strokeLinecap="round"
-//                     strokeLinejoin="round"
-//                     strokeWidth="2"
-//                     className="h-5 w-5"
-//                     viewBox="0 0 24 24"
-//                   >
-//                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-//                   </svg>
-//                 </div>
-//                 <div className="flex-grow pl-4">
-//                   <h2 className="title-font mb-1 text-sm font-medium tracking-wider text-gray-900">
-//                     STEP 1
-//                   </h2>
-//                   <p className="font-laonoto leading-relaxed">
-//                     Make a payment by scanning the <br />
-//                     <b>QR CODE</b> or transfer funds using the account number.
-//                   </p>
-//                 </div>
-//               </div>
-//               <div className="relative flex pb-12">
-//                 <div className="absolute inset-0 flex h-full w-10 items-center justify-center">
-//                   <div className="pointer-events-none h-full w-1 bg-gray-200"></div>
-//                 </div>
-//                 <div className="relative z-10 inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-blue-500 text-white">
-//                   <svg
-//                     fill="none"
-//                     stroke="currentColor"
-//                     strokeLinecap="round"
-//                     strokeLinejoin="round"
-//                     strokeWidth="2"
-//                     className="h-5 w-5"
-//                     viewBox="0 0 24 24"
-//                   >
-//                     <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-//                   </svg>
-//                 </div>
-//                 <div className="flex-grow pl-4">
-//                   <h2 className="title-font mb-1 text-sm font-medium tracking-wider text-gray-900">
-//                     STEP 2
-//                   </h2>
-//                   <p className="font-laonoto leading-relaxed">
-//                     Notify us of your payment by uploading a <b>receipt image</b> or <b>proof of payment</b>.
-//                   </p>
-//                 </div>
-//               </div>
-//               <div className="relative flex pb-12">
-//                 <div className="relative z-10 inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-blue-500 text-white">
-//                   <svg
-//                     fill="none"
-//                     stroke="currentColor"
-//                     strokeLinecap="round"
-//                     strokeLinejoin="round"
-//                     strokeWidth="2"
-//                     className="h-5 w-5"
-//                     viewBox="0 0 24 24"
-//                   >
-//                     <circle cx="12" cy="5" r="3"></circle>
-//                     <path d="M12 22V8M5 12H2a10 10 0 0020 0h-3"></path>
-//                   </svg>
-//                 </div>
-//                 <div className="flex-grow pl-4">
-//                   <h2 className="title-font mb-1 text-sm font-medium tracking-wider text-gray-900">
-//                     STEP 3
-//                   </h2>
-//                   <p className="font-laonoto leading-relaxed">
-//                     Once you complete the payment, please wait for our staff to verify. You can check the payment status on the <span><b>Payments</b></span> page.
-//                   </p>
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-
-//           {/* QR Code and File Upload Section */}
-//           <div className="md:w-1/2 flex flex-col items-center md:items-start">
-//             <img
-//               className="mx-auto mt-12 h-52 w-52 rounded-lg border p-2"
-//               src="https://cdn.vn.alongwalk.info/wp-content/uploads/2023/03/22182033/image-mien-phi-190-hinh-anh-hoa-hong-vang-da-lat-dep-nhat-ruc-ro-noi-bat-167945883259586.jpg"
-//               alt="QR Code for Payment"
-//               width={208}
-//               height={208}
-//             />
-//             <div>
-//               <h1 className="font-laonoto mt-4 text-center text-xl font-bold">
-//                 Scan QR Code for Payment
-//               </h1>
-//               <p className="mt-2 text-center font-semibold text-gray-600">
-//                 YOTHIN BOUBPHA
-//               </p>
-//               <p className="mt-1 text-center font-medium text-red-500">
-//                 040-12-00-01166166-001
-//               </p>
-//             </div>
-
-//             <div className="mt-8 w-full flex flex-col items-center">
-//               <div className="m-4 w-full max-w-xs">
-//                 <div className="flex w-full items-center justify-center">
-//                   <label className="flex h-14 w-full cursor-pointer flex-col border-4 border-dashed border-gray-200 hover:border-gray-300 hover:bg-gray-100">
-//                     <div className="mt-4 flex items-center justify-center space-x-1">
-//                       <svg
-//                         xmlns="http://www.w3.org/2000/svg"
-//                         fill="none"
-//                         viewBox="0 0 24 24"
-//                         strokeWidth="1.5"
-//                         stroke="currentColor"
-//                         className="h-6 w-6 text-gray-400"
-//                       >
-//                         <path
-//                           strokeLinecap="round"
-//                           strokeLinejoin="round"
-//                           d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"
-//                         />
-//                       </svg>
-//                       <p className="font-laonoto text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
-//                         Upload Receipt Image
-//                       </p>
-//                     </div>
-//                     <input
-//                       type="file"
-//                       className="opacity-0"
-//                       onChange={handleFileChange}
-//                     />
-//                   </label>
-//                 </div>
-//                 {selectedFile && (
-//                   <div className="mt-4">
-//                     <img
-//                       src={selectedFile}
-//                       alt="Selected File Preview"
-//                       className="mx-auto h-32 w-32 rounded-lg border"
-//                     />
-//                   </div>
-//                 )}
-//               </div>
-//               <button className="mx-auto block rounded-md border bg-blue-500 px-6 py-2 text-white outline-none">
-//                 Submit Payment Receipt
-//               </button>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </section>
-//   );
-// };
-
-// export default PaymentInstructions;
-
-// pages/checkout.js
-import React from 'react';
+interface CartProduct extends Product {
+  quantity: number;
+}
 
 const PaymentInstructions = () => {
+  const [selectedFile, setSelectedFile] = useState<string | null>(null);
+  const router = useRouter();
+  const [cart, setCart] = useState<CartProduct[]>([]);
+  const [isClient, setIsClient] = useState(false);
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
+  const [cartlocal, setCartlocal] = useState<Product[]>(() => {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      try {
+        const savedCart = localStorage.getItem('cart');
+        return savedCart ? JSON.parse(savedCart) : [];
+      } catch (error) {
+        console.error('Error parsing cart data from localStorage:', error);
+        return [];
+      }
+    }
+    return [];
+  });
+
+  useEffect(() => {
+    setIsClient(true);
+    const savedCart = localStorage.getItem('cart');
+    if (savedCart) {
+      const parsedCart: Product[] = JSON.parse(savedCart);
+      setCart(consolidateCart(parsedCart));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cartlocal));
+  }, [cartlocal]);
+
+  const consolidateCart = (products: Product[]): CartProduct[] => {
+    const consolidated: CartProduct[] = [];
+    products.forEach(product => {
+      const existingProduct = consolidated.find(item => item.id === product.id);
+      if (existingProduct) {
+        existingProduct.quantity += 1;
+      } else {
+        consolidated.push({ ...product, quantity: 1 });
+      }
+    });
+    return consolidated;
+  };
+
+  const calculateSubtotal = (): number => {
+    return cart.reduce((total, product) => total + parseFloat(product.price) * product.quantity, 0);
+  };
+
+  const shippingEstimate = 5;
+
+  const formatCurrency = (amount: number): string => {
+    return amount.toLocaleString('en-US', {
+      minimumFractionDigits: 3,
+      maximumFractionDigits: 3,
+    });
+  };
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      setSelectedFile(URL.createObjectURL(file));
+    }
+  };
+
+  const handleSubmit = () => {
+    // Xóa giỏ hàng và cập nhật trạng thái thanh toán thành công
+    localStorage.removeItem('cart');
+    setCart([]);
+    setPaymentSuccess(true);
+  };
+
   return (
-    <div className="mb-36 mt-48">
-      <div className="container mx-auto">
-        <div className="flex justify-between">
-          <div className="w-2/3 bg-white p-6 rounded-lg ">
-            <h2 className="text-2xl font-bold mb-6">Check out</h2>
-            <form>
-              <div className="mb-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2">Email</label>
-                <input
-                  type="email"
-                  className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none "
-                />
-                <div className="mt-2">
-                  <input type="checkbox" />
-                  <label className="ml-2 text-gray-700">Email me with news and offers.</label>
-                </div>
-              </div>
-              <h3 className="text-xl font-semibold mb-4">Shipping Details</h3>
-              <div className="mb-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2">First Name</label>
-                <input
-                  type="text"
-                  className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none "
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2">Last Name</label>
-                <input
-                  type="text"
-                  className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none "
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2">Address</label>
-                <input
-                  type="text"
-                  className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none "
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2">Address (Line 02)</label>
-                <input
-                  type="text"
-                  className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none "
-                />
-              </div>
-              <div className="flex mb-4">
-                <div className="w-1/2 pr-2">
-                  <label className="block text-gray-700 text-sm font-bold mb-2">City</label>
-                  <input
-                    type="text"
-                    className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none "
-                  />
-                </div>
-                <div className="w-1/2 pl-2">
-                  <label className="block text-gray-700 text-sm font-bold mb-2">Region (optional)</label>
-                  <input
-                    type="text"
-                    className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none "
-                  />
-                </div>
-              </div>
-              <div className="flex mb-4">
-                <div className="w-1/2 pr-2">
-                  <label className="block text-gray-700 text-sm font-bold mb-2">Country</label>
-                  <input
-                    type="text"
-                    className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none "
-                  />
-                </div>
-                <div className="w-1/2 pl-2">
-                  <label className="block text-gray-700 text-sm font-bold mb-2">Zip Code</label>
-                  <input
-                    type="text"
-                    className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none "
-                  />
-                </div>
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2">Phone Number</label>
-                <input
-                  type="tel"
-                  className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none "
-                />
-              </div>
-              <div className="mt-2">
-                <input type="checkbox" />
-                <label className="ml-2 text-gray-700">Save this information for next time.</label>
-              </div>
-              <button
-                type="submit"
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none  mt-6"
-              >
-                Proceed to payment
-              </button>
-            </form>
+    <section className="mt-52 mb-40 w-9/10 mx-auto" style={{ display: "flex" }}>
+      {paymentSuccess ? (
+    <div className="text-center w-full p-6 bg-green-100 border border-green-300 rounded-lg">
+    <h2 className="text-3xl font-bold mb-4 text-green-800">Thanh toán thành công!</h2>
+    <p className="text-lg mb-4">Cảm ơn bạn đã thanh toán. Đơn hàng của bạn đã được xử lý.</p>
+    
+    <div className="mb-4">
+      <p className="text-md font-semibold">Mã đơn hàng: <span className="text-gray-700">#123456</span></p>
+      <p className="text-md font-semibold">Tổng số tiền: <span>{formatCurrency(calculateSubtotal() + shippingEstimate)} VND</span></p>
+    </div>
+    
+    <p className="text-md mb-4">Bạn sẽ nhận được một email xác nhận và thông tin theo dõi đơn hàng trong vòng 24 giờ tới.</p>
+    
+    <div className="flex justify-center gap-4">
+      <a href="/orders" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Xem đơn hàng của tôi</a>
+      <a href="/" className="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400">Quay về trang chủ</a>
+    </div>
+  </div>
+  
+      ) : (
+        <>
+          {/* Đơn hàng đã mua */}
+          <div className="md:w-2/3 bg-white p-4 rounded-lg mr-12">
+            <h2 className="text-center text-3xl font-bold mb-4">Purchased order</h2>
+            {cart.length === 0 ? (
+              // Hiển thị thông báo khi giỏ hàng trống
+              <p className="text-center">Bạn chưa mua đơn hàng nào.</p>
+            ) : (
+              <>
+                <ListGroup>
+                  {isClient && cart.map(product => (
+                    <ListGroup.Item key={product.id} className="mb-3 border-0">
+                      <Card className="w-full d-flex flex-row align-items-center">
+                        <Card.Img
+                          variant="top"
+                          src={product.imgSrc}
+                          alt={product.title}
+                          style={{ width: '50px', height: '50px', objectFit: 'cover', margin: '10px' }}
+                        />
+                        <Card.Body className="d-flex align-items-center w-100">
+                          <div className="ms-3 flex-grow-1">
+                            <Card.Title className="line-clamp-2">{product.title}</Card.Title>
+                          </div>
+                          <p className="text-danger font-bold mb-0 mr-7">
+                            {product.price}
+                          </p>
+                        </Card.Body>
+                      </Card>
+                    </ListGroup.Item>
+                  ))}
+                </ListGroup>
+                <Card className="p-2 w-full">
+                  <div className="d-flex justify-content-between font-bold text-lg">
+                    <span>Total order amount</span>
+                    <span>{formatCurrency(calculateSubtotal() + shippingEstimate)} VND</span>
+                  </div>
+                </Card>
+              </>
+            )}
           </div>
-          <div className="w-1/3 ml-6">
-            <div className="bg-white p-6 rounded-lg ">
-              <h2 className="text-2xl font-bold mb-6">Order Summary</h2>
-              <div className="mb-4">
-                <div className="flex justify-between items-center">
-                  <img src="/path-to-image" alt="Slim Fit Checkered Trousers" className="w-16 h-16"/>
-                  <div className="ml-4">
-                    <p className="text-gray-700">Slim Fit Checkered Trousers</p>
-                    <p className="text-gray-500">Black</p>
-                    <p className="text-gray-500">Small</p>
+
+          <div className="container mx-auto mt-14 flex flex-wrap justify-center rounded-lg bg-white px-5 py-10 w-full" style={{ height: '800px' }}>
+            <h2 className="text-center text-3xl font-bold mb-4 w-full text-black">Scan QR Code for Payment</h2>
+            <div className="flex flex-col md:flex-row w-full">
+              <div className="md:w-1/2 flex mr-28 mt-6 flex-col justify-between w-full">
+                <div className="mb-12">
+                  <div className="relative flex pb-12 w-full">
+                    <div className="absolute inset-0 flex h-full w-10 items-center justify-center">
+                      <div className="pointer-events-none h-full w-1 bg-gray-200"></div>
+                    </div>
+                    <div className="relative z-10 inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-blue-500 text-black">
+                      <svg
+                        fill="none"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        className="h-5 w-5"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                      </svg>
+                    </div>
+                    <div className="flex-grow pl-4">
+                      <h2 className="title-font mb-1 text-sm font-medium tracking-wider text-black">
+                        STEP 1
+                      </h2>
+                      <p className="font-laonoto leading-relaxed text-black">
+                        Make a payment by scanning the <br />
+                        <b>QR CODE</b> or transfer funds using the account number.
+                      </p>
+                    </div>
                   </div>
-                  <p className="text-gray-700">$20</p>
+                  <div className="relative flex pb-12 w-full">
+                    <div className="absolute inset-0 flex h-full w-10 items-center justify-center">
+                      <div className="pointer-events-none h-full w-1 bg-gray-200"></div>
+                    </div>
+                    <div className="relative z-10 inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-blue-500 text-black">
+                      <svg
+                        fill="none"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        className="h-5 w-5"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                      </svg>
+                    </div>
+                    <div className="flex-grow pl-4">
+                      <h2 className="title-font mb-1 text-sm font-medium tracking-wider text-black">
+                        STEP 2
+                      </h2>
+                      <p className="font-laonoto leading-relaxed text-black">
+                        Notify us of your payment by uploading a <b>receipt image</b> or <b>proof of payment</b>.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="relative flex pb-12 w-full">
+                    <div className="relative z-10 inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-blue-500 text-black">
+                      <svg
+                        fill="none"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        className="h-5 w-5"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle cx="12" cy="5" r="3"></circle>
+                        <path d="M12 22V8M5 12H2a10 10 0 0020 0h-3"></path>
+                      </svg>
+                    </div>
+                    <div className="flex-grow pl-4">
+                      <h2 className="title-font mb-1 text-sm font-medium tracking-wider text-black">
+                        STEP 3
+                      </h2>
+                      <p className="font-laonoto leading-relaxed text-black">
+                        Once you complete the payment, please wait for our staff to verify. You can check the payment status on the <span><b>Payments</b></span> page.
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className="mb-4">
-                <div className="flex justify-between items-center">
-                  <img src="/path-to-image" alt="Relax Fit Shirt" className="w-16 h-16"/>
-                  <div className="ml-4">
-                    <p className="text-gray-700">Relax Fit Shirt</p>
-                    <p className="text-gray-500">Blue</p>
-                    <p className="text-gray-500">Medium</p>
+
+              {/* QR Code and File Upload Section */}
+              <div className="md:w-1/2 flex flex-col items-center">
+                <img
+                  className="mx-auto h-40 w-40 md:h-52 md:w-52 rounded-lg border p-2"
+                  src="./img/image.png"
+                  alt="QR Code for Payment"
+                />
+                <div className="mt-4 text-center">
+                  <p className="text-sm font-semibold text-black">ADMIN Loan</p>
+                  <p className="text-sm font-medium text-black">Number account: 1008 7686 3333</p>
+                </div>
+
+                <div className="mt-8 w-full flex flex-col items-center">
+                  <div className="w-full">
+                    <label className="flex h-14 w-full cursor-pointer flex-col border-4 border-dashed border-gray-200 hover:border-gray-300 hover:bg-gray-100">
+                      <div className="flex items-center justify-center space-x-1">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth="1.5"
+                          stroke="currentColor"
+                          className="h-6 w-6 text-gray-400"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"
+                          />
+                        </svg>
+                        <p className="text-sm tracking-wider text-black">Upload Receipt Image</p>
+                      </div>
+                      <input
+                        type="file"
+                        className="opacity-0"
+                        onChange={handleFileChange}
+                      />
+                    </label>
                   </div>
-                  <p className="text-gray-700">$20</p>
-                </div>
-              </div>
-              <div className="mb-4">
-                <div className="flex justify-between items-center">
-                  <img src="/path-to-image" alt="Jacket" className="w-16 h-16"/>
-                  <div className="ml-4">
-                    <p className="text-gray-700">Jacket</p>
-                    <p className="text-gray-500">Badge</p>
-                    <p className="text-gray-500">Large</p>
-                  </div>
-                  <p className="text-gray-700">$20</p>
-                </div>
-              </div>
-              <div className="mt-4">
-                <div className="flex justify-between text-gray-700">
-                  <p>Total Items</p>
-                  <p>04</p>
-                </div>
-                <div className="flex justify-between text-gray-700">
-                  <p>Total Charges</p>
-                  <p>$80</p>
-                </div>
-                <div className="flex justify-between text-gray-700">
-                  <p>Shipping Charges</p>
-                  <p>$90</p>
-                </div>
-                <div className="flex justify-between text-xl font-bold text-gray-700 mt-4">
-                  <p>Total</p>
-                  <p>$170</p>
+                  {selectedFile && (
+                    <div className="mt-4">
+                      <img
+                        src={selectedFile}
+                        alt="Selected File Preview"
+                        className="mx-auto rounded-lg border"
+                        style={{ width: '208px', height: '208px' }}
+                      />
+                    </div>
+                  )}
+                  <button
+                    className="mt-4 rounded-md border bg-blue-500 px-6 py-2 text-black outline-none"
+                    onClick={handleSubmit}
+                  >
+                    Submit Payment Receipt
+                  </button>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
+        </>
+      )}
+    </section>
   );
 };
 

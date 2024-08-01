@@ -118,11 +118,11 @@ const Navbar = () => {
 
   return (
     <StyledNavbar>
-      <Link href="/home" passHref>
-        <Logo autoPlay muted loop>
-          <source src="https://cdn.create.vista.com/video-producer-script/3539069e-3803-4ff2-b7c7-058fdd6a8454.mp4" type="video/mp4" />
-        </Logo>
-      </Link>
+     <Link href="/home" passHref>
+    <Logo autoPlay muted loop >
+      <source src="https://cdn.create.vista.com/video-producer-script/3539069e-3803-4ff2-b7c7-058fdd6a8454.mp4" type="video/mp4" />
+    </Logo>
+  </Link>
       {isLoggedIn ? (
         <>
           <NavbarLinks>

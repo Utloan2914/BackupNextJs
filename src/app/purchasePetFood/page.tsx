@@ -21,7 +21,7 @@ const allProducts: Product[] = [
         "title": "Origi-7 Organic Soft DRY FOOD with Lamb",
         "link": "https://pateforpet.com/admin/uploads/images/pate-dong-hop-cho-meo.jpg",
         "imgSrc": "https://pateforpet.com/admin/uploads/images/pate-dong-hop-cho-meo.jpg",
-        "price": "250,000 VND",
+        "price": "212.450 VND",
         "status": "Out Of Stock",
         "text": "Origi-7 Organic Soft DRY FOOD for Dogs of All Ages 1.5kg - 2kg",
         "category": "PATE"
@@ -31,7 +31,7 @@ const allProducts: Product[] = [
         "title": "Pedigree Adult Beef & Vegetable Flavor 500g",
         "link": "https://bizweb.dktcdn.net/thumb/1024x1024/100/092/840/products/ca-ngu-ga.png?v=1669104445513",
         "imgSrc": "https://bizweb.dktcdn.net/thumb/1024x1024/100/092/840/products/ca-ngu-ga.png?v=1669104445513",
-        "price": "45,000 VND",
+        "price": "56.000 VND",
         "status": "In Stock",
         "text": "Pedigree Adult DRY FOOD with Chicken and Vegetables - 500g",
         "category": "PATE"
@@ -41,7 +41,7 @@ const allProducts: Product[] = [
         "title": "ME-O Kitten Ocean Fish - 400g",
         "link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReAxadEluqjeFXQmeqObV3OQyDtJ8rdIyiiQ&s",
         "imgSrc": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReAxadEluqjeFXQmeqObV3OQyDtJ8rdIyiiQ&s",
-        "price": "45,000 VND",
+        "price": "56.000 VND",
         "status": "In Stock",
         "text": "ME-O Kitten DRY FOOD",
         "category": "PATE"
@@ -51,7 +51,7 @@ const allProducts: Product[] = [
         "title": "PEDIGREE Puppy Egg & Milk Flavor 2.7kg",
         "link": "https://petshopdanang.vn/wp-content/uploads/2023/01/pate-cho-cho-con-smart-heart-130g-1.jpg",
         "imgSrc": "https://petshopdanang.vn/wp-content/uploads/2023/01/pate-cho-cho-con-smart-heart-130g-1.jpg",
-        "price": "215,000 VND",
+        "price": "210.000 VND",
         "status": "In Stock",
         "text": "Pedigree Puppy DRY FOOD with Chicken, Egg, and Milk - 3kg",
         "category": "PATE"
@@ -61,7 +61,7 @@ const allProducts: Product[] = [
         "title": "Origi-7 Organic Soft DRY FOOD with Lamb",
         "link": "https://bizweb.dktcdn.net/100/307/433/products/pate-cho-tellme.jpg?v=1625575851187",
         "imgSrc": "https://bizweb.dktcdn.net/100/307/433/products/pate-cho-tellme.jpg?v=1625575851187",
-        "price": "250,000 VND",
+        "price": "212.450 VND",
         "status": "Out Of Stock",
         "text": "Origi-7 Organic Soft DRY FOOD for Dogs of All Ages 1.5kg - 2kg",
         "category": "PATE"
@@ -71,7 +71,7 @@ const allProducts: Product[] = [
         "title": "Pedigree Adult Beef & Vegetable Flavor 500g",
         "link": "https://channel.mediacdn.vn/thumb_w/640/428462621602512896/2023/7/10/photo-1-16889633943321951018013.jpg",
 "imgSrc": "https://channel.mediacdn.vn/thumb_w/640/428462621602512896/2023/7/10/photo-1-16889633943321951018013.jpg",
-        "price": "45,000 VND",
+        "price": "56.000 VND",
         "status": "In Stock",
         "text": "Pedigree Adult DRY FOOD with Chicken and Vegetables - 500g",
         "category": "DRY FOOD"
@@ -81,7 +81,7 @@ const allProducts: Product[] = [
         "title": "ME-O Kitten Ocean Fish - 400g",
         "link": "https://channel.mediacdn.vn/thumb_w/640/428462621602512896/2023/7/10/photo-1-16889633943321951018013.jpg",
         "imgSrc": "https://sieupet.com/sites/default/files/pictures/images/thuc-an-kho-cho-cho.gif",
-        "price": "45,000 VND",
+        "price": "56.000 VND",
         "status": "In Stock",
         "text": "ME-O Kitten DRY FOOD",
         "category": "DRY FOOD"
@@ -91,7 +91,7 @@ const allProducts: Product[] = [
         "title": "PEDIGREE Puppy Egg & Milk Flavor 2.7kg",
         "link": "https://salt.tikicdn.com/cache/w1200/ts/product/a3/b1/20/94c6093cd7517922bbd649ec2e959d72.png",
         "imgSrc": "https://salt.tikicdn.com/cache/w1200/ts/product/a3/b1/20/94c6093cd7517922bbd649ec2e959d72.png",
-        "price": "215,000 VND",
+        "price": "210.000 VND",
         "status": "In Stock",
         "text": "Pedigree Puppy DRY FOOD with Chicken, Egg, and Milk - 3kg",
         "category": "DRY FOOD"
@@ -101,7 +101,7 @@ const allProducts: Product[] = [
         "title": "Origi-7 Organic Soft DRY FOOD with Lamb",
         "link": "https://channel.mediacdn.vn/thumb_w/640/428462621602512896/2023/7/10/photo-1-16889633943321951018013.jpg",
         "imgSrc": "https://channel.mediacdn.vn/thumb_w/640/428462621602512896/2023/7/10/photo-1-16889633943321951018013.jpg",
-        "price": "250,000 VND",
+        "price": "212.450 VND",
         "status": "Out Of Stock",
         "text": "Origi-7 Organic Soft DRY FOOD for Dogs of All Ages 1.5kg - 2kg",
         "category": "DRY FOOD"
@@ -111,7 +111,7 @@ const allProducts: Product[] = [
         "title": "Pedigree Adult Beef & Vegetable Flavor 500g",
         "link": "https://channel.mediacdn.vn/thumb_w/640/428462621602512896/2023/7/10/photo-1-16889633943321951018013.jpg",
         "imgSrc": "https://channel.mediacdn.vn/thumb_w/640/428462621602512896/2023/7/10/photo-1-16889633943321951018013.jpg",
-        "price": "45,000 VND",
+        "price": "56.000 VND",
         "status": "In Stock",
         "text": "Pedigree Adult DRY FOOD with Chicken and Vegetables - 500g",
         "category": "DRY FOOD"
@@ -121,7 +121,7 @@ const allProducts: Product[] = [
         "title": "ME-O Kitten Ocean Fish - 400g",
         "link": "https://channel.mediacdn.vn/thumb_w/640/428462621602512896/2023/7/10/photo-1-16889633943321951018013.jpg",
         "imgSrc": "https://sieupet.com/sites/default/files/pictures/images/thuc-an-kho-cho-cho.gif",
-        "price": "45,000 VND",
+        "price": "56.000 VND",
         "status": "In Stock",
         "text": "Me-o Kitten Dry Food",
         "category": "DRY FOOD"
@@ -131,7 +131,7 @@ const allProducts: Product[] = [
         "title": "PEDIGREE Puppy Egg and Milk Flavor 2.7kg",
         "link": "https://salt.tikicdn.com/cache/w1200/ts/product/a3/b1/20/94c6093cd7517922bbd649ec2e959d72.png",
 "imgSrc": "https://salt.tikicdn.com/cache/w1200/ts/product/a3/b1/20/94c6093cd7517922bbd649ec2e959d72.png",
-        "price": "215,000 VND",
+        "price": "210.000 VND",
         "status": "In Stock",
         "text": "Pedigree Dry Food for Puppies with Chicken, Egg, and Milk - 3kg",
         "category": "DRY FOOD"
@@ -141,7 +141,7 @@ const allProducts: Product[] = [
         "title": "Origi-7 Organic Soft Dry Food with Lamb",
         "link": "https://channel.mediacdn.vn/thumb_w/640/428462621602512896/2023/7/10/photo-1-16889633943321951018013.jpg",
         "imgSrc": "https://channel.mediacdn.vn/thumb_w/640/428462621602512896/2023/7/10/photo-1-16889633943321951018013.jpg",
-        "price": "250,000 VND",
+        "price": "212.450 VND",
         "status": "Out Of Stock",
         "text": "Origi-7 Organic Soft Dry Food for Dogs of All Ages 1.5kg - 2kg",
         "category": "DRY FOOD"
@@ -151,7 +151,7 @@ const allProducts: Product[] = [
         "title": "Pedigree Adult Beef and Vegetable Flavor 500glllllllllllllll",
         "link": "https://channel.mediacdn.vn/thumb_w/640/428462621602512896/2023/7/10/photo-1-16889633943321951018013.jpg",
         "imgSrc": "https://channel.mediacdn.vn/thumb_w/640/428462621602512896/2023/7/10/photo-1-16889633943321951018013.jpg",
-        "price": "45,000 VND",
+        "price": "56.000 VND",
         "status": "In Stock",
         "text": "Pedigree Adult Dry Food with Chicken and Vegetables - 500g",
         "category": "DRY FOOD"
@@ -161,7 +161,7 @@ const allProducts: Product[] = [
         "title": "ME-O Kitten Ocean Fish - 400g",
         "link": "https://channel.mediacdn.vn/thumb_w/640/428462621602512896/2023/7/10/photo-1-16889633943321951018013.jpg",
         "imgSrc": "https://sieupet.com/sites/default/files/pictures/images/thuc-an-kho-cho-cho.gif",
-        "price": "45,000 VND",
+        "price": "56.000 VND",
         "status": "In Stock",
         "text": "Me-o Kitten Dry Food",
         "category": "TOYS"
@@ -171,7 +171,7 @@ const allProducts: Product[] = [
         "title": "PEDIGREE Puppy Egg and Milk Flavor 2.7kg",
         "link": "https://salt.tikicdn.com/cache/w1200/ts/product/a3/b1/20/94c6093cd7517922bbd649ec2e959d72.png",
         "imgSrc": "https://salt.tikicdn.com/cache/w1200/ts/product/a3/b1/20/94c6093cd7517922bbd649ec2e959d72.png",
-        "price": "215,000 VND",
+        "price": "210.000 VND",
         "status": "In Stock",
         "text": "Pedigree Dry Food for Puppies with Chicken, Egg, and Milk - 3kg",
         "category": "TOYS"
@@ -181,7 +181,7 @@ const allProducts: Product[] = [
         "title": "PEDIGREE Puppy Egg and Milk Flavor 2.7kg",
         "link": "https://salt.tikicdn.com/cache/w1200/ts/product/a3/b1/20/94c6093cd7517922bbd649ec2e959d72.png",
         "imgSrc": "https://salt.tikicdn.com/cache/w1200/ts/product/a3/b1/20/94c6093cd7517922bbd649ec2e959d72.png",
-        "price": "215,000 VND",
+        "price": "210.000 VND",
         "status": "In Stock",
         "text": "Pedigree Dry Food for Puppies with Chicken, Egg, and Milk - 3kg",
         "category": "TOYS"
@@ -191,7 +191,7 @@ const allProducts: Product[] = [
         "title": "PEDIGREE Puppy Egg and Milk Flavor 2.7kg",
         "link": "https://salt.tikicdn.com/cache/w1200/ts/product/a3/b1/20/94c6093cd7517922bbd649ec2e959d72.png",
 "imgSrc": "https://salt.tikicdn.com/cache/w1200/ts/product/a3/b1/20/94c6093cd7517922bbd649ec2e959d72.png",
-        "price": "215,000 VND",
+        "price": "210.000 VND",
         "status": "In Stock",
         "text": "Pedigree Dry Food for Puppies with Chicken, Egg, and Milk - 3kg",
         "category": "TOYS"
@@ -201,7 +201,7 @@ const allProducts: Product[] = [
         "title": "PEDIGREE Puppy Egg and Milk Flavor 2.7kg",
         "link": "https://salt.tikicdn.com/cache/w1200/ts/product/a3/b1/20/94c6093cd7517922bbd649ec2e959d72.png",
         "imgSrc": "https://salt.tikicdn.com/cache/w1200/ts/product/a3/b1/20/94c6093cd7517922bbd649ec2e959d72.png",
-        "price": "215,000 VND",
+        "price": "210.000 VND",
         "status": "In Stock",
         "text": "Pedigree Dry Food for Puppies with Chicken, Egg, and Milk - 3kg",
         "category": "TOYS"
@@ -211,7 +211,7 @@ const allProducts: Product[] = [
         "title": "PEDIGREE Puppy Egg and Milk Flavor 2.7kg",
         "link": "https://salt.tikicdn.com/cache/w1200/ts/product/a3/b1/20/94c6093cd7517922bbd649ec2e959d72.png",
         "imgSrc": "https://salt.tikicdn.com/cache/w1200/ts/product/a3/b1/20/94c6093cd7517922bbd649ec2e959d72.png",
-        "price": "215,000 VND",
+        "price": "210.000 VND",
         "status": "In Stock",
         "text": "Pedigree Dry Food for Puppies with Chicken, Egg, and Milk - 3kg",
         "category": "TOYS"
@@ -221,7 +221,7 @@ const allProducts: Product[] = [
         "title": "PEDIGREE Puppy Egg and Milk Flavor 2.7kg",
         "link": "https://salt.tikicdn.com/cache/w1200/ts/product/a3/b1/20/94c6093cd7517922bbd649ec2e959d72.png",
         "imgSrc": "https://salt.tikicdn.com/cache/w1200/ts/product/a3/b1/20/94c6093cd7517922bbd649ec2e959d72.png",
-        "price": "215,000 VND",
+        "price": "210.000 VND",
         "status": "In Stock",
         "text": "Pedigree Dry Food for Puppies with Chicken, Egg, and Milk - 3kg",
         "category": "ACCESSORIES"
@@ -231,7 +231,7 @@ const allProducts: Product[] = [
         "title": "PEDIGREE Puppy Egg and Milk Flavor 2.7kg",
         "link": "https://salt.tikicdn.com/cache/w1200/ts/product/a3/b1/20/94c6093cd7517922bbd649ec2e959d72.png",
         "imgSrc": "https://salt.tikicdn.com/cache/w1200/ts/product/a3/b1/20/94c6093cd7517922bbd649ec2e959d72.png",
-        "price": "215,000 VND",
+        "price": "210.000 VND",
         "status": "In Stock",
         "text": "Pedigree Dry Food for Puppies with Chicken, Egg, and Milk - 3kg",
         "category": "ACCESSORIES"
@@ -241,7 +241,7 @@ const allProducts: Product[] = [
         "title": "PEDIGREE Puppy Egg and Milk Flavor 2.7kg",
         "link": "https://salt.tikicdn.com/cache/w1200/ts/product/a3/b1/20/94c6093cd7517922bbd649ec2e959d72.png",
         "imgSrc": "https://salt.tikicdn.com/cache/w1200/ts/product/a3/b1/20/94c6093cd7517922bbd649ec2e959d72.png",
-        "price": "215,000 VND",
+        "price": "210.000 VND",
         "status": "In Stock",
         "text": "Pedigree Dry Food for Puppies with Chicken, Egg, and Milk - 3kg",
         "category": "ACCESSORIES"
@@ -251,7 +251,7 @@ const allProducts: Product[] = [
         "title": "PEDIGREE Puppy Egg and Milk Flavor 2.7kg",
         "link": "https://salt.tikicdn.com/cache/w1200/ts/product/a3/b1/20/94c6093cd7517922bbd649ec2e959d72.png",
 "imgSrc": "https://salt.tikicdn.com/cache/w1200/ts/product/a3/b1/20/94c6093cd7517922bbd649ec2e959d72.png",
-        "price": "215,000 VND",
+        "price": "210.000 VND",
         "status": "In Stock",
         "text": "Pedigree Dry Food for Puppies with Chicken, Egg, and Milk - 3kg",
         "category": "ACCESSORIES"
@@ -261,7 +261,7 @@ const allProducts: Product[] = [
         "title": "PEDIGREE Puppy Egg and Milk Flavor 2.7kg",
         "link": "https://salt.tikicdn.com/cache/w1200/ts/product/a3/b1/20/94c6093cd7517922bbd649ec2e959d72.png",
         "imgSrc": "https://salt.tikicdn.com/cache/w1200/ts/product/a3/b1/20/94c6093cd7517922bbd649ec2e959d72.png",
-        "price": "215,000 VND",
+        "price": "210.000 VND",
         "status": "In Stock",
         "text": "Pedigree Dry Food for Puppies with Chicken, Egg, and Milk - 3kg",
         "category": "ACCESSORIES"

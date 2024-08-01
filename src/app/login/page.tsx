@@ -72,7 +72,7 @@ function Login() {
     };
 
     return (
-        <Card fluid className='text-black ' style={{ borderRadius: '25px', maxWidth: '2000px', width:'40%' ,height: '410px', marginTop:'160px'  }}>
+        <Card fluid className='text-black ' style={{ borderRadius: '25px', maxWidth: '2000px', width:'40%' ,height: '410px', marginTop:'210px' , marginBottom:'150px' }}>
             <CardBody>
                 <Row>
                     <Col md='10' lg='6' className='order-2 order-lg-1 d-flex flex-column align-items-center'>
