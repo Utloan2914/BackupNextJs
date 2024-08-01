@@ -127,9 +127,18 @@ const ProductCart: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="col-span-2">
           {isClient && cart.length === 0 ? (
-            <p className="text-center">Your cart is empty.</p>
+              <div className="text-center w-full items-center ml-72" style={{ marginTop: '20px' }}>
+              <h2 style={{  fontSize:'25px',fontWeight: 'bold', marginBottom:'20px' }}>There are no products in the cart yet.</h2>
+              <button
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                onClick={() => window.location.href = '/purchase'}
+              >
+              Return to the store
+              </button>
+            </div>
           ) : (
-            <ListGroup>
+            <div className="d-flex ml-24">
+            <ListGroup className="flex-grow-1 me-3" style={{ minWidth: '1000px' }}>
               {isClient && cart.map(product => (
                 <ListGroup.Item key={product.id} className="mb-3 p-0 border-0">
                   <Card className="shadow-sm w-full" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', maxWidth: '100%' }}>
@@ -137,43 +146,40 @@ const ProductCart: React.FC = () => {
                       variant="top"
                       src={product.imgSrc}
                       alt={product.title}
-                      style={{ width: '70px', height: '70px', objectFit: 'cover' , margin:'20px'}}
+                      style={{ width: '70px', height: '70px', objectFit: 'cover', margin: '20px' }}
                     />
                     <Card.Body className="d-flex align-items-center w-100">
-                    <div className="ms-3 flex-grow-1">
-  <Card.Title className="line-clamp-2">{product.title}</Card.Title>
-  <p className="text-muted mb-2">Category: {product.category}</p>
-  <p className="mb-2">
-    Discounted price, 20% off, now only: <span className="text-danger">{product.price}</span>
-  </p>
-</div>
-
-                      <p className="text-danger font-bold mb-0 mr-7">
-                          {product.price}
+                      <div className="ms-3 flex-grow-1">
+                        <Card.Title className="line-clamp-2">{product.title}</Card.Title>
+                        <p className="text-muted mb-2">Category: {product.category}</p>
+                        <p className="mb-2">
+                          Discounted price, 20% off, now only: <span className="text-danger">{product.price}</span>
                         </p>
+                      </div>
+                      <p className="text-danger font-bold mb-0 mr-7">
+                        {product.price}
+                      </p>
                       <div className="d-flex align-items-center mr-6">
-                          <button
-                            className="bg-gray-200 hover:bg-gray-400 text-black font-bold px-3 py-1 rounded-l"
-                            onClick={() => {
-                              handleQuantityChange(product.id, -1);
-                              handleRemoveFirstItem(product.id)
-                            }}
-                          >
-                            -
-                          </button>
-                          <span className="bg-white text-black px-3 py-1 border">{product.quantity}</span>
-                          <button
-                            className="bg-gray-200  hover:bg-gray-400 text-black font-bold  px-3 py-1 rounded-r"
-                            onClick={() => {
-                              handleQuantityChange(product.id, 1);
-                              handleAddToCart(product);
-                            }}
-                          >
-                            +
-                          </button>
-                        </div>
-                     
-
+                        <button
+                          className="bg-gray-200 hover:bg-gray-400 text-black font-bold px-3 py-1 rounded-l"
+                          onClick={() => {
+                            handleQuantityChange(product.id, -1);
+                            handleRemoveFirstItem(product.id)
+                          }}
+                        >
+                          -
+                        </button>
+                        <span className="bg-white text-black px-3 py-1 border">{product.quantity}</span>
+                        <button
+                          className="bg-gray-200 hover:bg-gray-400 text-black font-bold px-3 py-1 rounded-r"
+                          onClick={() => {
+                            handleQuantityChange(product.id, 1);
+                            handleAddToCart(product);
+                          }}
+                        >
+                          +
+                        </button>
+                      </div>
                       <div className="d-flex flex-column align-items-end">
                         <Button
                           onClick={() => handleRemove(product.id)}
@@ -187,32 +193,35 @@ const ProductCart: React.FC = () => {
                 </ListGroup.Item>
               ))}
             </ListGroup>
+            <div className="flex-shrink-0" style={{ minWidth: '500px' }}>
+              <Card className="shadow-sm p-4 w-full">
+                <h3 className="text-xl font-bold mb-3">Order summary</h3>
+                <div className="d-flex justify-content-between mb-2">
+                  <span>Subtotal</span>
+                  <span>{formatCurrency(calculateSubtotal())} VND</span>
+                </div>
+                <div className="d-flex justify-content-between mb-2">
+                  <span>Shipping Charges</span>
+                  <span>{formatCurrency(shippingEstimate)} VND</span>
+                </div>
+                <div className="d-flex justify-content-between font-bold text-lg">
+                  <span>Total order amount</span>
+                  <span>{formatCurrency(calculateSubtotal() + shippingEstimate)} VND</span>
+                </div>
+                <Button
+                  variant="primary"
+                  className="mt-4 w-full"
+                  onClick={handleCheckout}
+                >
+                  Checkout
+                </Button>
+              </Card>
+            </div>
+          </div>
+          
           )}
         </div>
-        <div>
-          <Card className="shadow-sm p-4 w-full">
-            <h3 className="text-xl font-bold mb-3">Order summary</h3>
-            <div className="d-flex justify-content-between mb-2">
-              <span>Subtotal</span>
-              <span>{formatCurrency(calculateSubtotal())} VND</span>
-            </div>
-            <div className="d-flex justify-content-between mb-2">
-              <span>Shipping Charges</span>
-              <span>{formatCurrency(shippingEstimate)} VND</span>
-            </div>
-            <div className="d-flex justify-content-between font-bold text-lg">
-              <span>Total order amount</span>
-              <span>{formatCurrency(calculateSubtotal() + shippingEstimate )} VND</span>
-            </div>
-            <Button
-  variant="primary"
-  className="mt-4 w-full"
-  onClick={handleCheckout}
->
-  Checkout
-</Button>
-          </Card>
-        </div>
+      
       </div>
     </div>
   );

@@ -136,11 +136,7 @@ const Navbar = () => {
                 Management Pet
               </NavLinkButton>
             </Link>
-            <Link href="/service" passHref>
-              <NavLinkButton>
-                Service
-              </NavLinkButton>
-            </Link>
+            
             <Link href="/purchase" passHref>
               <NavLinkButton>
                 Purchase
