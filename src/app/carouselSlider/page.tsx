@@ -180,7 +180,7 @@ export const CarouselSlider: FC = () => {
               </div>
               <div className="px-6 py-4 mb-0">
                 <div className="font-bold text-xl mb-2">{image.description}</div>
-                <p className="text-black">{image.smallDescription}</p>
+                <p className="text-black text-xl">{image.smallDescription}</p>
               </div>
               <div className="px-6 pt-4 pb-2">
                 <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>

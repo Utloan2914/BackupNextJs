@@ -14,20 +14,20 @@ const Search: React.FC<SearchProps> = ({ searchTerm, onSearchTermChange, onSearc
       <div className="flex rounded-md overflow-hidden w-full">
         <input
           type="text"
-          className="w-full rounded-l-md rounded-r-none px-3 py-2 text-sm border-gray-300 border-2 focus:border-indigo-500 focus:ring-indigo-500 focus:ring-1 focus:outline-none"
+          className="w-full text-xl rounded-l-md rounded-r-none px-3 py-2 text-sm border-gray-300 border-2 focus:border-indigo-500 focus:ring-indigo-500 focus:ring-1 focus:outline-none"
           value={searchTerm}
           placeholder='Search product...'
           onChange={onSearchTermChange}
         />
         <button
-          className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded font-bold  mr-2 "
+          className="bg-blue-500 text-xl hover:bg-blue-600 text-white px-4 py-2 rounded font-bold  mr-2 "
           onClick={onSearch} 
         >
           Search
         </button>
       </div>
       <button
-        className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+        className="bg-blue-500 text-xl hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
         onClick={onClear}
       >
         Clear

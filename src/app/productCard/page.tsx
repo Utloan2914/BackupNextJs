@@ -152,7 +152,7 @@ const ProductCart: React.FC = () => {
                       <div className="ms-3 flex-grow-1">
                         <Card.Title className="line-clamp-2">{product.title}</Card.Title>
                         <p className="text-muted mb-2">Category: {product.category}</p>
-                        <p className="mb-2">
+                        <p className="mb-2 text-black">
                           Discounted price, 20% off, now only: <span className="text-danger">{product.price}</span>
                         </p>
                       </div>

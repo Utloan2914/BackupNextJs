@@ -12,17 +12,15 @@ const StyledNavbar = styled('div')({
   position: 'fixed',
   top: 0,
   width: '100%',
-  height: '150px',
+  height: '100px',
   marginBottom: '80px',
   zIndex: 1000,
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
   padding: '10px 50px',
-  backgroundColor: '#135ac5',
-  boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+  backgroundColor: '#062b63',
   '@media (max-width: 768px)': {
-    flexDirection: 'column',
     alignItems: 'flex-start',
   },
 });
@@ -34,7 +32,7 @@ const NavbarLinks = styled('div')({
   flex: 1,
   gap: '20px',
   '@media (max-width: 768px)': {
-    flexDirection: 'column',
+    
     alignItems: 'flex-start',
   },
 });
@@ -45,12 +43,12 @@ const NavLinkButton = styled(Button)({
   color: 'white',
   fontWeight: 'bold',
   borderRadius:'0px',
-  padding: '8px 16px',
+  padding: '8px 10px',
   backgroundColor: 'transparent',
   textDecoration: 'none',
   borderBottom: '1px solid transparent',
   '&:hover': {
-    borderBottom: '2px solid black',
+    borderBottom: '3px solid white',
   },
 });
 
@@ -68,9 +66,9 @@ const SignInButton = styled(Button)({
   },
 });
 
-const Logo = styled('video')({
+const Logo= styled('div')({
   width: '200px',
-  height: '120px',
+  height: '100%',
   borderRadius: '5px',
   objectFit: 'cover', // Ensures the video fits within the bounds of the logo area
 });
@@ -119,32 +117,37 @@ const Navbar = () => {
   return (
     <StyledNavbar>
      <Link href="/home" passHref>
-    <Logo autoPlay muted loop >
-      <source src="https://cdn.create.vista.com/video-producer-script/3539069e-3803-4ff2-b7c7-058fdd6a8454.mp4" type="video/mp4" />
+     <Logo>
+      <img
+        src="./img/logo.png"
+        alt="Pet Shop Logo"
+        style={{ width: '50%', height: '80%', objectFit: 'cover' }} 
+      />
     </Logo>
+
   </Link>
       {isLoggedIn ? (
         <>
           <NavbarLinks>
             <Link href="/home" passHref>
               <NavLinkButton>
-                Home
+                HOME
               </NavLinkButton>
             </Link>
             <Link href="/productAPI" passHref>
               <NavLinkButton>
-                Management Pet
+                MANAGEMENT PET
               </NavLinkButton>
             </Link>
             
             <Link href="/purchase" passHref>
               <NavLinkButton>
-                Purchase
+                PURCHASE
               </NavLinkButton>
             </Link>
             <Link href="/sendEmail" passHref>
               <NavLinkButton>
-                Contact us
+                CONTACT US
               </NavLinkButton>
             </Link>
             <Link href="/productCard" passHref>
@@ -155,7 +158,7 @@ const Navbar = () => {
       color: 'white',
       transition: 'color 0.3s',
       '&:hover': {
-        color: '#000', // Black on hover
+        color: '#edb03f', 
       },
     }}
   />
@@ -172,12 +175,12 @@ const Navbar = () => {
         <RightSection>
           <Link href="/register" passHref>
             <NavLinkButton variant="contained">
-              Sign up
+              SIGN UP
             </NavLinkButton>
           </Link>
           <Link href="/login" passHref>
             <SignInButton variant="contained">
-              Sign in
+              SIGN IN
             </SignInButton>
           </Link>
         </RightSection>

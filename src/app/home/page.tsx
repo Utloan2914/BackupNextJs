@@ -97,7 +97,7 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 const HomePage = () => {
   return (
     <>
-      <div style={{ marginTop: "102px" }} className="min-h-screen w-full mt-15 mb-5">
+      <div style={{ marginTop: "100px" }} className="min-h-screen w-full mt-15 mb-5">
         <div className="relative">
           <Carousel
             showArrows={true}
@@ -109,7 +109,7 @@ const HomePage = () => {
           >
             <div>
               <img 
-              style={{height:"700px"}}
+              style={{height:"500px"}}
                 src="https://media.istockphoto.com/id/1445196818/vi/anh/nh%C3%B3m-th%C3%BA-c%C6%B0ng-d%E1%BB%85-th%C6%B0%C6%A1ng-tr%C3%AAn-n%E1%BB%81n-tr%E1%BA%AFng-thi%E1%BA%BFt-k%E1%BA%BF-banner.jpg?s=612x612&w=0&k=20&c=myhE61nTrpPOv0ywv6-NXIaLXjfLPQB629P_RDAcXU4=" 
                 alt="Monspet"
                 className="w-full  object-cover" 
@@ -117,7 +117,7 @@ const HomePage = () => {
             </div>
             <div>
               <img 
-              style={{height:"700px"}}
+              style={{height:"500px"}}
                 src="https://product.hstatic.net/200000731893/product/cham-soc-meo_8b9638608af64d62956ff622d3117d54.png" 
                 alt="PetCare Hub" 
                 className="w-full  object-cover" 
@@ -125,7 +125,7 @@ const HomePage = () => {
             </div>
             <div>
               <img 
-              style={{height:"700px"}}
+              style={{height:"500px"}}
                 src="https://media-cdn-v2.laodong.vn/storage/newsportal/2023/1/18/1139516/Anh-3--Bai-So-Thich-.jpg?w=800&h=496&crop=auto&scale=both" 
                 alt="PetCare Hub" 
                 className="w-full  object-cover" 
@@ -133,7 +133,7 @@ const HomePage = () => {
             </div>
             <div>
               <img 
-              style={{height:"700px"}}
+              style={{height:"500px"}}
                 src="https://mediabcb.mediatech.vn/upload/image/201812/medium/58951_cham%20soc.jpg" 
                 alt="PetCare Hub" 
                 className="w-full object-cover" 
@@ -179,8 +179,8 @@ const HomePage = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M4 18h4l2-2H4v-2z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold">Grooming</h3>
-              <p className="text-blue-gray-700 mt-2">Professional grooming services for your pets</p>
+              <h3 className="text-xl font-bold">Grooming</h3>
+              <p className="text-blue-gray-700 text-xl mt-2">Professional grooming services for your pets</p>
             </div>
             <div className="flex flex-col items-center">
               <div className="bg-green-500 text-white rounded-full w-16 h-16 flex items-center justify-center mb-4">
@@ -188,8 +188,8 @@ const HomePage = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold">Pet Care</h3>
-              <p className="text-blue-gray-700 mt-2">Comprehensive care services for your pets</p>
+              <h3 className="text-xl font-bold">Pet Care</h3>
+              <p className="text-blue-gray-700 text-xl mt-2">Comprehensive care services for your pets</p>
             </div>
             <div className="flex flex-col items-center">
               <div className="bg-yellow-500 text-white rounded-full w-16 h-16 flex items-center justify-center mb-4">
@@ -197,8 +197,8 @@ const HomePage = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold">Hourly/Daily Care</h3>
-              <p className="text-blue-gray-700 mt-2">Hourly or daily pet sitting services</p>
+              <h3 className="text-xl font-bold">Hourly/Daily Care</h3>
+              <p className="text-blue-gray-700 mt-2 text-xl">Hourly or daily pet sitting services</p>
             </div>
           </div>
           <div>

@@ -9,7 +9,6 @@ import ErrorSearch from '@/app/search/notfound/page';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import CloseIcon from '@mui/icons-material/Close';
-import PetsIcon from '@mui/icons-material/Pets';
 import { useRouter } from 'next/navigation';
 
 
@@ -173,14 +172,14 @@ export default function Product() {
               >
                 <CloseIcon />
               </button>
-              <h4 className="text-lg text-black font-bold mb-4">Add pet</h4>
+              <h4 className=" text-black font-bold mb-4 text-xl">Add pet</h4>
               <div className="flex flex-col gap-4">
                 <input
                   type="text"
                   placeholder="Title"
                   value={newProduct.title}
                   onChange={(e) => setNewProduct({ ...newProduct, title: e.target.value })}
-                  className="p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="text-xl p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                   ref={addTitleRef}
                 />
                 <input
@@ -188,13 +187,13 @@ export default function Product() {
                   placeholder="Description"
                   value={newProduct.description}
                   onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })}
-                  className="p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="text-xl p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <input
                   type="file"
                   accept="image/*"
                   onChange={handleImageUpload}
-                  className="p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="text-xl p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 {newProduct.image && (
                   <div className="flex justify-center mt-4">
@@ -208,7 +207,7 @@ export default function Product() {
                 )}
                 <div className="flex justify-center gap-4">
                   <button
-                    className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:bg-blue-500"
+                    className="bg-blue-500 text-xl  hover:bg-blue-600 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:bg-blue-500"
                     onClick={handleCreate}
                   >
                     Add pet
@@ -220,14 +219,14 @@ export default function Product() {
         )}
         <Search searchTerm={searchTerm} onSearchTermChange={handleSearchTermChange} onSearch={handleSearch} onClear={handleClear} />
         <button
-          className="bg-blue-500 hover:bg-blue-600 text-white font-bold px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+          className="bg-blue-500 text-xl hover:bg-blue-600 text-white font-bold px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
           onClick={() => setShowAddForm(true)}
         >
           Add pet
         </button>
       </div>
       {successMessage && (
-        <div className="bg-blue-500 hover:bg-blue-600 text-black px-4 py-3 rounded relative mb-4" role="alert">
+        <div className="bg-blue-500 text-xl hover:bg-blue-600 text-black px-4 py-3 rounded relative mb-4" role="alert">
           <span className="block sm:inline">{successMessage}</span>
         </div>
       )}
@@ -245,14 +244,14 @@ export default function Product() {
                 >
                   <CloseIcon />
                 </button>
-                <h4 className="text-lg text-black font-bold mb-4">Update pet information</h4>
+                <h4 className="text-xl  text-black font-bold mb-4">Update pet information</h4>
                 <div className="flex flex-col gap-4">
                   <input
                     type="text"
                     placeholder="Title"
                     value={updateProductData.title}
                     onChange={(e) => setUpdateProductData({ ...updateProductData, title: e.target.value })}
-                    className="p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="text-xl p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                     ref={updateTitleRef}
                   />
                   <input
@@ -260,7 +259,7 @@ export default function Product() {
                     placeholder="Description"
                     value={updateProductData.description}
                     onChange={(e) => setUpdateProductData({ ...updateProductData, description: e.target.value })}
-                    className="p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="text-xl p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                   <input
                     type="file"
@@ -275,7 +274,7 @@ export default function Product() {
                         reader.readAsDataURL(file);
                       }
                     }}
-                    className="p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="text-xl p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                   {updateProductData.image && (
                     <img
@@ -287,7 +286,7 @@ export default function Product() {
                   )}
                   <div className="flex justify-center gap-4">
                     <button
-                      className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:bg-blue-500"
+                      className="text-xl bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:bg-blue-500"
                       onClick={handleUpdate}
                     >
                       Update pet 
@@ -301,10 +300,10 @@ export default function Product() {
             <table className="w-full  text-black bg-white border border-gray-300">
               <thead>
                 <tr>
-                  <th className="py-2 px-4 border-b">Image</th>
-                  <th className="py-2 px-4 border-b">Name pet</th>
-                  <th className="py-2 px-4 border-b">Description</th>
-                  <th className="py-2 px-4 border-b">Actions</th>
+                  <th className="py-2 text-xl px-4 border-b">Image</th>
+                  <th className="py-2 text-xl px-4 border-b">Name pet</th>
+                  <th className="py-2 text-xl px-4 border-b">Description</th>
+                  <th className="py-2 text-xl px-4 border-b">Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -314,13 +313,13 @@ export default function Product() {
                       {product.image && <img 
                         src={product.image} 
                         alt={product.title} 
-                        style={{ margin: '10px', width: '200px', height: '200px', maxWidth: 'none' }} 
+                        style={{ margin: '10px', width: '100px', height: '80px', maxWidth: 'none' }} 
                         className="object-cover rounded"
                       />}
                     </td>
-                    <td className="py-2 px-4 border-b">{product.title}</td>
-                    <td className="py-2 px-4 border-b">{product.description}</td>
-                    <td className="py-2 px-4 border-b">
+                    <td className="py-2 text-xl px-4 border-b">{product.title}</td>
+                    <td className="py-2 text-xl px-4 border-b">{product.description}</td>
+                    <td className="py-2 text-xl px-4 border-b">
                       <div className="flex space-x-2">
                         <button
                           className="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
@@ -329,11 +328,7 @@ export default function Product() {
                           <EditIcon />
                         </button>
                        
-                        <button
-                          className="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
-                        >
-                          <PetsIcon />
-                        </button>
+                       
                 
 
 
@@ -355,10 +350,10 @@ export default function Product() {
                               <CloseIcon />
                             </button>
                             <h4 className="text-lg text-black font-bold mb-4">Confirm Delete</h4>
-                            <p className="mb-4  text-black">Are you sure you want to delete this product?</p>
+                            <p className="mb-4  text-black text-xl">Are you sure you want to delete this product?</p>
                             <div className="flex justify-center gap-4">
                               <button
-                                className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-red-500"
+                                className="text-xl bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-red-500"
                                 onClick={() => handleDelete(product.id)}
                               >
                                 Delete
