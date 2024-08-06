@@ -92,7 +92,7 @@ const ProductCart: React.FC = () => {
   };
   const handleCheckout = () => {
     const totalAmount = calculateSubtotal() + shippingEstimate;
-    router.push('/payment?total=${totalAmount}');
+    router.push('/payment');
   };
   
   const consolidateCart = (products: Product[]): CartProduct[] => {

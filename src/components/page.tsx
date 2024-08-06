@@ -18,18 +18,17 @@ export function ModeToggle() {
   const handleThemeChange = (newTheme: React.SetStateAction<string>) => {
     setTheme(newTheme);
   };
-  
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-      <Button variant="sun" size="icon">
+        <Button variant="sun" size="icon">
           <Sun className={`h-[1.2rem] w-[1.2rem] rotate-0 scale-100 text-white transition-all ${theme === 'dark' ? 'dark:-rotate-90 dark:scale-0' : ''}`} />
           <Moon className={`absolute h-[1.2rem] w-[1.2rem] rotate-90 text-white scale-0 transition-all ${theme === 'dark' ? 'dark:rotate-0 dark:scale-100 ' : ''}`} />
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
+      <DropdownMenuContent align="end" className="z-50">
         <DropdownMenuItem onClick={() => handleThemeChange("light")}>
           Light
         </DropdownMenuItem>
