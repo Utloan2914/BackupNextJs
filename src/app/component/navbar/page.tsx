@@ -77,7 +77,7 @@ const RightSection = styled('div')({
   display: 'flex',
   alignItems: 'center',
   gap: '20px',
-  marginLeft:'50px',
+  
 });
 
 const Navbar = () => {
@@ -167,7 +167,7 @@ const Navbar = () => {
             </Link>
           </NavbarLinks>
           <RightSection>
-            <ModeToggle />
+           
             {userImage && <BadgeAvatars imageUrl={userImage} />}
           </RightSection>
         </>
@@ -185,6 +185,7 @@ const Navbar = () => {
           </Link>
         </RightSection>
       )}
+       <ModeToggle />
     </StyledNavbar>
   );
 };

@@ -172,7 +172,7 @@ export default function Product() {
               >
                 <CloseIcon />
               </button>
-              <h4 className=" text-black font-bold mb-4 text-xl">Add pet</h4>
+              <h4 className=" text-black font-bold mb-4 text-2xl">Add pet</h4>
               <div className="flex flex-col gap-4">
                 <input
                   type="text"
@@ -244,7 +244,7 @@ export default function Product() {
                 >
                   <CloseIcon />
                 </button>
-                <h4 className="text-xl  text-black font-bold mb-4">Update pet information</h4>
+                <h4 className="text-2xl  text-black font-bold mb-4">Update pet information</h4>
                 <div className="flex flex-col gap-4">
                   <input
                     type="text"
@@ -300,20 +300,20 @@ export default function Product() {
             <table className="w-full  text-black bg-white border border-gray-300">
               <thead>
                 <tr>
-                  <th className="py-2 text-xl px-4 border-b">Image</th>
-                  <th className="py-2 text-xl px-4 border-b">Name pet</th>
-                  <th className="py-2 text-xl px-4 border-b">Description</th>
-                  <th className="py-2 text-xl px-4 border-b">Actions</th>
+                  <th className="py-2 px-11 text-2xl  border-b">Image</th>
+                  <th className="py-2 text-2xl px-4 border-b">Name pet</th>
+                  <th className="py-2 text-2xl px-4 border-b">Description</th>
+                  <th className="py-2 text-2xl px-4 border-b">Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {currentProducts.map((product) => (
                   <tr key={product.id}>
-                    <td className="py-2 px-4 border-b">
+                    <td className="py-1 px-9 border-b">
                       {product.image && <img 
                         src={product.image} 
                         alt={product.title} 
-                        style={{ margin: '10px', width: '100px', height: '80px', maxWidth: 'none' }} 
+                        style={{ margin: '10px', width: '80px', height: '50px', maxWidth: 'none' }} 
                         className="object-cover rounded"
                       />}
                     </td>
@@ -327,11 +327,6 @@ export default function Product() {
                         >
                           <EditIcon />
                         </button>
-                       
-                       
-                
-
-
                         <button
                           className="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded focus:outline-none focus:ring-2 focus:ring-red-500"
                           onClick={() => setConfirmDeleteId(product.id)}
@@ -349,7 +344,7 @@ export default function Product() {
                             >
                               <CloseIcon />
                             </button>
-                            <h4 className="text-lg text-black font-bold mb-4">Confirm Delete</h4>
+                            <h4 className="text-2xl text-black font-bold mb-4">Confirm Delete</h4>
                             <p className="mb-4  text-black text-xl">Are you sure you want to delete this product?</p>
                             <div className="flex justify-center gap-4">
                               <button
@@ -368,17 +363,28 @@ export default function Product() {
               </tbody>
             </table>
           </div>
-          <div className="flex justify-center mt-4">
-            <Stack spacing={2}>
-              <Pagination
-                count={Math.ceil(filteredProducts.length / productsPerPage)}
-                page={currentPage}
-                onChange={(e, page) => paginate(page)}
-                color="primary"
-              
-              />
-            </Stack>
-          </div>
+          <div className="flex text-white justify-center mt-4">
+      <Stack spacing={2}>
+        <Pagination
+          count={Math.ceil(filteredProducts.length / productsPerPage)}
+          page={currentPage}
+          onChange={(e, page) => paginate(page)}
+          sx={{
+            '& .MuiPaginationItem-root': {
+              color: 'white',
+              backgroundColor: 'primary.main',
+              '&:hover': {
+                backgroundColor: 'primary.dark',
+              },
+              '&.Mui-selected': {
+                backgroundColor: 'primary.main',
+                color: 'white',
+              },
+            },
+          }}
+        />
+      </Stack>
+    </div>
         </>
       )}
       {error && <p className="text-red-500 text-center mt-4">{error}</p>}

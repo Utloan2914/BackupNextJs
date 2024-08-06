@@ -307,7 +307,6 @@
 
 // export default PaymentInstructions;
 
-
 'use client';
 import React, { useState, useEffect } from 'react';
 import { Button, ListGroup, Card } from 'react-bootstrap';
@@ -327,7 +326,6 @@ interface CartProduct extends Product {
 }
 
 const PaymentInstructions = () => {
-  const [selectedFile, setSelectedFile] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [cart, setCart] = useState<CartProduct[]>([]);
   const [isClient, setIsClient] = useState(false);
@@ -387,19 +385,7 @@ const PaymentInstructions = () => {
     });
   };
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      setSelectedFile(URL.createObjectURL(file));
-      setError(null); // Reset error when a file is selected
-    }
-  };
-
   const handleSubmit = () => {
-    if (!selectedFile) {
-      setError('Please upload a receipt image.');
-      return;
-    }
     localStorage.removeItem('cart');
     setCart([]);
     setPaymentSuccess(true);
@@ -407,61 +393,56 @@ const PaymentInstructions = () => {
 
   return (
     <section className="mt-52 mb-40 w-8/10 mx-auto" style={{ display: "flex" }}>
-    <div className="flex flex-col mt-14 mr-2 md:flex-row" style={{ width: '900px' }}>
-  {/* Phần thông báo thành công */}
-  {paymentSuccess ? (
-    <div className="bg-white p-4 rounded-lg h-auto w-full md:w-[900px]">
-      <h2 className="text-3xl font-bold mb-4 text-center text-black">Payment success!</h2>
-      <p className="text-lg mb-4 text-center text-black">Thank you for your payment. Your order has been processed.</p>
-      <div className="flex justify-center gap-4">
-        <a href="/purchase" className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Return to the store</a>
-      </div>
-    </div>
-  ) : (
-    // Đơn hàng đã mua
-    <div className="flex-1 bg-white p-4 rounded-lg h-auto w-full md:w-2/3">
-      <h2 className="text-center text-3xl mt-6 font-bold text-black mb-4">Purchased order</h2>
-      {cart.length === 0 ? (
-        // Hiển thị thông báo khi giỏ hàng trống
-        <p className="text-center">You have not purchased any orders yet.</p>
-      ) : (
-        <>
-          <ListGroup className="overflow-auto max-h-[400px]">
-            {isClient && cart.map(product => (
-              <ListGroup.Item key={product.id} className="mb-3 border-0">
-                <Card className="w-full d-flex flex-row align-items-center">
-                  <Card.Img
-                    variant="top"
-                    src={product.imgSrc}
-                    alt={product.title}
-                    style={{ width: '50px', height: '50px', objectFit: 'cover', margin: '10px' }}
-                  />
-                  <Card.Body className="d-flex align-items-center w-100">
-                    <div className="ms-3 flex-grow-1">
-                      <Card.Title className="line-clamp-2">{product.title}</Card.Title>
-                    </div>
-                    <p className="text-danger font-bold mb-0 mr-7">
-                      {product.price}
-                    </p>
-                  </Card.Body>
-                </Card>
-              </ListGroup.Item>
-            ))}
-          </ListGroup>
-          <Card className="p-2 mr-4 ml-4 mt-5">
-            <div className="d-flex justify-content-between font-bold " style={{fontSize:'20px'}}>
-              <span>Total order amount</span>
-              <span>{formatCurrency(calculateSubtotal() + shippingEstimate)} VND</span>
+      <div className="flex flex-col mt-14 mr-2 md:flex-row" style={{ width: '900px' }}>
+        {paymentSuccess ? (
+          <div className="bg-white p-4 rounded-lg h-auto w-full md:w-[900px]">
+            <h2 className="text-3xl font-bold mb-4 text-center text-black">Payment success!</h2>
+            <p className="text-lg mb-4 text-center text-black">Thank you for your payment. Your order has been processed.</p>
+            <div className="flex justify-center gap-4">
+              <a href="/purchase" className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Return to the store</a>
             </div>
-          </Card>
-        </>
-      )}
-    </div>
-  )}
-</div>
+          </div>
+        ) : (
+          <div className="flex-1 bg-white p-4 rounded-lg h-auto w-full md:w-2/3">
+            <h2 className="text-center text-3xl mt-6 font-bold text-black mb-4">Purchased order</h2>
+            {cart.length === 0 ? (
+              <p className="text-center">You have not purchased any orders yet.</p>
+            ) : (
+              <>
+                <ListGroup className="overflow-auto max-h-[400px]">
+                  {isClient && cart.map(product => (
+                    <ListGroup.Item key={product.id} className="mb-3 border-0">
+                      <Card className="w-full d-flex flex-row align-items-center">
+                        <Card.Img
+                          variant="top"
+                          src={product.imgSrc}
+                          alt={product.title}
+                          style={{ width: '50px', height: '50px', objectFit: 'cover', margin: '10px' }}
+                        />
+                        <Card.Body className="d-flex align-items-center w-100">
+                          <div className="ms-3 flex-grow-1">
+                            <Card.Title className="line-clamp-2">{product.title}</Card.Title>
+                          </div>
+                          <p className="text-danger font-bold mb-0 mr-7">
+                            {product.price}
+                          </p>
+                        </Card.Body>
+                      </Card>
+                    </ListGroup.Item>
+                  ))}
+                </ListGroup>
+                <Card className="p-2 mr-4 ml-4 mt-5">
+                  <div className="d-flex justify-content-between font-bold " style={{fontSize:'20px'}}>
+                    <span>Total order amount</span>
+                    <span>{formatCurrency(calculateSubtotal() + shippingEstimate)} VND</span>
+                  </div>
+                </Card>
+              </>
+            )}
+          </div>
+        )}
+      </div>
 
-
-      {/* QR Code and File Upload Section */}
       <div className="container mx-auto mt-14 flex flex-wrap justify-center rounded-lg bg-white px-5 py-10 " style={{ height: 'auto' , width:'900px'}}>
         <h2 className="text-center text-3xl font-bold mb-4 w-full text-black">Scan QR Code for Payment</h2>
         <div className="flex flex-col md:flex-row w-full">
@@ -546,8 +527,7 @@ const PaymentInstructions = () => {
               </div>
             </div>
           </div>
-  
-          {/* QR Code and File Upload Section */}
+
           <div className="md:w-1/2 flex flex-col items-center">
             <img
               className="mx-auto h-40 w-40 md:h-52 md:w-52 rounded-lg border p-2"
@@ -559,47 +539,8 @@ const PaymentInstructions = () => {
               <p className="text-sm font-medium text-black">Bank: Viettinbank</p>
               <p className="text-sm font-medium text-black">Number account: 1008 7686 3333</p>
             </div>
-  
+
             <div className="mt-8 w-full flex flex-col items-center">
-              <div className="w-full">
-                <label className="flex h-14 w-full cursor-pointer flex-col border-4 border-dashed border-gray-200 hover:border-gray-300 hover:bg-gray-100">
-                  <div className="flex  mt-2 items-center justify-center space-x-1">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="currentColor"
-                      className="h-6 w-6 text-gray-400"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"
-                      />
-                    </svg>
-                    <p className="text-sm tracking-wider text-black">Upload Receipt Image</p>
-                  </div>
-                  <input
-                    type="file"
-                    className="opacity-0"
-                    onChange={handleFileChange}
-                  />
-                </label>
-              </div>
-              {selectedFile && (
-                <div className="mt-4">
-                  <img
-                    src={selectedFile}
-                    alt="Selected File Preview"
-                    className="mx-auto rounded-lg border"
-                    style={{ width: '208px', height: '208px' }}
-                  />
-                </div>
-              )}
-                {error && (
-              <div className="text-red-500 mt-2 text-center">{error}</div>
-            )}
               <button
                 className="mt-4 rounded-md border bg-[#0033FF] hover:bg-[#0022CC] px-6 py-2 text-white outline-none"
                 style={{fontSize:'20px'}}
@@ -613,8 +554,6 @@ const PaymentInstructions = () => {
       </div>
     </section>
   );
-  
-  
 };
 
 export default PaymentInstructions;
