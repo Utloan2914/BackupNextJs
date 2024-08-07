@@ -159,7 +159,7 @@ export default function Product() {
   };
 
   return (
-    <Container fluid className="mx-auto  px-4 relative" style= {{marginTop:'160px', marginBottom:'50px'}}>
+    <Container fluid className="mx-auto  px-4 relative" style= {{marginTop:'70px', marginBottom:'50px'}}>
       <h2 className="text-center text-3xl font-bold mb-4">Product List</h2>
       <div className="flex justify-between items-center mb-4">
         {showAddForm && (

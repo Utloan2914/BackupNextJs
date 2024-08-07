@@ -1,31 +1,32 @@
 import React from 'react';
 import { styled } from '@mui/system';
+import 'animate.css';
 
-const Logo= styled('div')({
+const Logo = styled('div')({
   width: '200px',
   height: '120px',
   borderRadius: '5px',
-  objectFit: 'cover', // Ensures the video fits within the bounds of the logo area
+  objectFit: 'cover',
 });
 
 const Footer = () => {
   return (
     <div>
-      <section className="py-6" style={{ backgroundColor: '#062b63'}}>
-        <div className="container mx-auto flex flex-wrap justify-between">
-        <div className="w-full md:w-1/3 p-4">
-  <div className="mb-4" style={{ marginBottom: '50px' }}>
-    <Logo>
-      <img 
-        src="./img/logo.png"
-        alt="Pet Shop Logo"
-      />
-    </Logo>
-  </div>
-  <p className="text-white italic text-xl" style={{ marginTop: '80px' }}>
-    PET SHOP is a vast and completely free information portal about issues surrounding pets and animals.
-  </p>
-</div>
+      <section className="py-6" style={{ backgroundColor: '#062b63' }}>
+        <div className="container mx-auto flex flex-wrap justify-between animate__animated animate__fadeInUp">
+          <div className="w-full md:w-1/3 p-4">
+            <div className="mb-4" style={{ marginBottom: '50px' }}>
+              <Logo>
+                <img
+                  src="./img/logo.png"
+                  alt="Pet Shop Logo"
+                />
+              </Logo>
+            </div>
+            <p className="text-white italic text-xl" style={{ marginTop: '80px' }}>
+              PET SHOP is a vast and completely free information portal about issues surrounding pets and animals.
+            </p>
+          </div>
 
           <div className="w-full md:w-1/3 p-4">
             <h3 className="text-lg mb-4 text-white text-xl">Page List</h3>

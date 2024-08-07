@@ -122,8 +122,8 @@ const ProductCart: React.FC = () => {
   };
 
   return (
-    <div className="container-build mt-44 mb-5" style={{ width: '80%' }}>
-  <h2 className="text-center text-3xl font-bold mb-4">Shopping Cart</h2>
+    <div className="container-build mt-20 mb-5" style={{ width: '80%' }}>
+  <h2 className="text-center text-3xl font-bold mb-11">Shopping Cart</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="col-span-2">
           {isClient && cart.length === 0 ? (

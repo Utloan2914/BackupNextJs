@@ -107,16 +107,6 @@ const BadgeAvatars: React.FC<BadgeAvatarsProps> = ({ imageUrl }) => {
 <ListItemText primaryTypographyProps={{ variant: 'body1', style: { fontSize: 20, color: 'black' } }} primary="View Profile" />
           </MenuItem>
         </Link>
-
-        <Link href="/editProfile" passHref>
-          <MenuItem onClick={handleClose}>
-            <ListItemIcon>
-              <PersonIcon fontSize="small" />
-            </ListItemIcon>
-            <ListItemText primaryTypographyProps={{ style: { fontSize: 20 } }} primary="Edit Profile" />
-          </MenuItem>
-        </Link>
-        
         
         <Link href="/login" passHref>
           <MenuItem onClick={() => { handleLogout(); handleClose(); }}>

@@ -54,7 +54,7 @@ const SendEmail: React.FC = () => {
   };
 
   return (
-    <section style={{marginTop:"100px", marginBottom:"100px"}} className=" h-[calc(100vh-20vh)] w-full" id="contact">
+    <section style={{marginTop:"50px", marginBottom:"100px"}} className=" h-[calc(100vh-20vh)] w-full" id="contact">
 
       <div className="mx-auto mb-3 max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20 rounded-[3px]">
         <div className="mb-3 max-w-3xl text-center sm:text-center md:mx-auto md:mb-12">

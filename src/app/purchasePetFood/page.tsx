@@ -363,7 +363,7 @@ return (
     <Head >
       <title>{category}</title>
     </Head>
-    <div className="container-fluid" style={{ marginTop: "130px" }}>
+    <div className="container-fluid" style={{ marginTop: "30px" }}>
       <div className="row">
         <div className="col-md-2 h-100" style={{width:'16%', marginTop:'95px'}}>
           <nav className="navbar flex-column align-items-stretch p-3">
@@ -371,7 +371,7 @@ return (
               PRODUCT PORTFOLIO
             </h3>
             <ul className="nav nav-pills flex-column">
-  <li className="nav-item h-20">
+  <li className="nav-item h-12">
     <a 
       className={`nav-link font-bold  text-xl flex items-center h-full cursor-pointer ${category === 'PATE' ? 'bg-blue-500 text-white hover:text-black' : 'hover:bg-white hover:text-black'}`} 
       onClick={() => setCategory('PATE')}
@@ -379,7 +379,7 @@ return (
       PATE
     </a>
   </li>
-  <li className="nav-item h-20">
+  <li className="nav-item h-12">
     <a 
       className={`nav-link font-bold  text-xl  flex items-center h-full cursor-pointer ${category === 'DRY FOOD' ? 'bg-blue-500 text-white hover:text-black' : 'hover:bg-white hover:text-black'}`} 
       onClick={() => setCategory('DRY FOOD')}
@@ -387,7 +387,7 @@ return (
       DRY FOOD
     </a>
   </li>
-  <li className="nav-item h-20">
+  <li className="nav-item h-12">
     <a 
       className={`nav-link flex font-bold  text-xl  items-center h-full cursor-pointer ${category === 'TOYS' ? 'bg-blue-500 text-white hover:text-black' : 'hover:bg-white hover:text-black'}`} 
       onClick={() => setCategory('TOYS')}
@@ -395,7 +395,7 @@ return (
       TOYS
     </a>
   </li>
-  <li className="nav-item h-20">
+  <li className="nav-item h-12">
     <a 
       className={`nav-link flex items-center font-bold  text-xl h-full cursor-pointer ${category === 'ACCESSORIES' ? 'bg-blue-500 text-white hover:text-black' : 'hover:bg-white hover:text-black'}`} 
       onClick={() => setCategory('ACCESSORIES')}
@@ -416,7 +416,7 @@ return (
             {filteredProducts.map((product) => (
               <Col key={product.id} md={3} className="mb-4 mt-14" style={{ height: 'auto' }}>
                 <Card style={{ height: '100%' }}>
-                  <Card.Img variant="top" src={product.imgSrc} style={{ height: '400px', width: '100%', objectFit: 'cover' }} />
+                  <Card.Img variant="top" src={product.imgSrc} style={{ height: '200px', width: '100%', objectFit: 'cover' }} />
                   <Card.Body>
                     <Card.Title className="text-xl" style={{ color: '#272727', lineHeight: '20px', overflow: 'hidden', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', display: '-webkit-box',  fontWeight: 'bold', marginTop: '5px', height: '40px' }}>
                       {product.title}
@@ -557,7 +557,7 @@ return (
   
             <div className="mt-8 w-full flex flex-col items-center">
               <button className="mt-4 rounded-md border bg-[#0033FF] hover:bg-[#0022CC] px-6 py-2 text-white outline-none" style={{ fontSize: '20px' }} onClick={handleSubmit}>
-                Submit Payment Receipt
+                Submit payment receipt
               </button>
             </div>
           </div>

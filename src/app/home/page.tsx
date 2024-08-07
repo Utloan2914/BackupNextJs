@@ -97,7 +97,7 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 const HomePage = () => {
   return (
     <>
-      <div style={{ marginTop: "100px" }} className="min-h-screen w-full mt-15 mb-5">
+      <div className="min-h-screen w-full mt-15 mb-5">
         <div className="relative">
           <Carousel
             showArrows={true}
