@@ -1,6 +1,5 @@
 
-
-// 'use client'
+// 'use client';
 // import React, { useState, useEffect } from 'react';
 // import Link from 'next/link';
 // import Button from '@mui/material/Button';
@@ -10,7 +9,6 @@
 // import BadgeAvatars from '@/app/profile/page';
 // import { ModeToggle } from '@/components/page';
 
-// // Styled components
 // const StyledNavbar = styled('div')({
 //   top: 0,
 //   width: '100%',
@@ -81,19 +79,24 @@
 //   justifyContent: 'flex-end',
 // });
 
-// const LanguageSelector = styled('div')({
-//   display: 'flex',
-//   alignItems: 'center',
-//   gap: '10px',
+// const LanguageSelector = styled('select')({
+//   backgroundColor: 'transparent',
 //   color: 'white',
+//   fontSize: '16px',
+//   border: 'none',
+//   outline: 'none',
 // });
 
-// const Navbar = () => {
+// interface NavbarProps {
+//   language: string;
+//   onLanguageChange: (newLanguage: string) => void;
+// }
+
+// const Navbar = ({ language, onLanguageChange }: NavbarProps) => {
 //   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 //   const [userImage, setUserImage] = useState<string | null>(null);
 //   const [cartCount, setCartCount] = useState<number>(0);
 //   const [refreshCount, setRefreshCount] = useState<number>(0);
-//   const [language, setLanguage] = useState<string>('eng');
 
 //   useEffect(() => {
 //     const fetchData = () => {
@@ -124,9 +127,7 @@
 //   }, [refreshCount]);
 
 //   const handleLanguageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-//     setLanguage(event.target.value);
-//     // Here you would typically also handle changing the language of the app
-//     // For example, you could call an API or update context/state related to language
+//     onLanguageChange(event.target.value);
 //   };
 
 //   return (
@@ -145,22 +146,22 @@
 //           <NavbarLinks>
 //             <Link href="/home" passHref>
 //               <NavLinkButton>
-//                 HOME
+//                 {language === 'en' ? 'HOME' : 'TRANG CHỦ'}
 //               </NavLinkButton>
 //             </Link>
 //             <Link href="/productAPI" passHref>
 //               <NavLinkButton>
-//                 MANAGEMENT PET
+//                 {language === 'en' ? 'MANAGEMENT PET' : 'QUẢN LÝ THÚ CƯNG'}
 //               </NavLinkButton>
 //             </Link>
 //             <Link href="/purchase" passHref>
 //               <NavLinkButton>
-//                 PURCHASE
+//                 {language === 'en' ? 'PURCHASE' : 'MUA HÀNG'}
 //               </NavLinkButton>
 //             </Link>
 //             <Link href="/sendEmail" passHref>
 //               <NavLinkButton>
-//                 CONTACT US
+//                 {language === 'en' ? 'CONTACT US' : 'LIÊN HỆ'}
 //               </NavLinkButton>
 //             </Link>
 //             <Link href="/productCard" passHref>
@@ -171,7 +172,7 @@
 //                       color: 'white',
 //                       transition: 'color 0.3s',
 //                       '&:hover': {
-//                         color: '#edb03f', 
+//                         color: '#edb03f',
 //                       },
 //                     }}
 //                   />
@@ -182,44 +183,43 @@
 //           <RightSection>
 //             <ModeToggle /> 
 //             {userImage && <BadgeAvatars imageUrl={userImage} />}
+//             <LanguageSelector value={language} onChange={handleLanguageChange}>
+//               <option value="en">English</option>
+//               <option value="vi">Tiếng Việt</option>
+//             </LanguageSelector>
 //           </RightSection>
 //         </>
 //       ) : (
 //         <div>
 //           <Link href="/register" passHref>
 //             <NavLinkButton variant="contained">
-//               SIGN UP
+//               {language === 'en' ? 'SIGN UP' : 'ĐĂNG KÝ'}
 //             </NavLinkButton>
 //           </Link>
 //           <Link href="/login" passHref>
 //             <SignInButton variant="contained">
-//               SIGN IN
+//               {language === 'en' ? 'SIGN IN' : 'ĐĂNG NHẬP'}
 //             </SignInButton>
 //           </Link>
 //         </div>
 //       )}
-//       <LanguageSelector>
-//         <img className="lang-flag" src={`/assets/images/${language}.png`} alt="icon" loading="lazy"/>
-//         <select name="lang-switch" value={language} onChange={handleLanguageChange} aria-label="Language Selector">
-//           <option value="eng">English</option>
-//           <option value="vie">Tiếng Việt</option>
-//         </select>
-//       </LanguageSelector>
 //     </StyledNavbar>
 //   );
 // };
 
 // export default Navbar;
 
+
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, {  createContext,useState, useEffect } from 'react';
 import Link from 'next/link';
 import Button from '@mui/material/Button';
 import Badge from '@mui/material/Badge';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { ShoppingCartIcon } from 'lucide-react';
 import { styled } from '@mui/material/styles';
 import BadgeAvatars from '@/app/profile/page';
 import { ModeToggle } from '@/components/page';
+import { useLanguage } from '@/context/languageContext';
 
 const StyledNavbar = styled('div')({
   top: 0,
@@ -299,17 +299,18 @@ const LanguageSelector = styled('select')({
   outline: 'none',
 });
 
+
 interface NavbarProps {
   language: string;
   onLanguageChange: (newLanguage: string) => void;
 }
 
-const Navbar = ({ language, onLanguageChange }: NavbarProps) => {
+const Navbar = ({  onLanguageChange }: NavbarProps) => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [userImage, setUserImage] = useState<string | null>(null);
   const [cartCount, setCartCount] = useState<number>(0);
   const [refreshCount, setRefreshCount] = useState<number>(0);
-
+  const { language, setLanguage } = useLanguage(); 
   useEffect(() => {
     const fetchData = () => {
       const formData = localStorage.getItem('formData');
@@ -339,7 +340,7 @@ const Navbar = ({ language, onLanguageChange }: NavbarProps) => {
   }, [refreshCount]);
 
   const handleLanguageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    onLanguageChange(event.target.value);
+    setLanguage(event.target.value);
   };
 
   return (
@@ -379,15 +380,7 @@ const Navbar = ({ language, onLanguageChange }: NavbarProps) => {
             <Link href="/productCard" passHref>
               <Button>
                 <Badge badgeContent={cartCount} color="primary">
-                  <ShoppingCartIcon
-                    sx={{
-                      color: 'white',
-                      transition: 'color 0.3s',
-                      '&:hover': {
-                        color: '#edb03f',
-                      },
-                    }}
-                  />
+                <ShoppingCartIcon className="text-white transition-colors duration-300 hover:text-yellow-400" />
                 </Badge>
               </Button>
             </Link>
@@ -395,7 +388,7 @@ const Navbar = ({ language, onLanguageChange }: NavbarProps) => {
           <RightSection>
             <ModeToggle /> 
             {userImage && <BadgeAvatars imageUrl={userImage} />}
-            <LanguageSelector value={language} onChange={handleLanguageChange}>
+            <LanguageSelector   className='bg-white text-black hover:bg-gray-200' value={language} onChange={handleLanguageChange}>
               <option value="en">English</option>
               <option value="vi">Tiếng Việt</option>
             </LanguageSelector>

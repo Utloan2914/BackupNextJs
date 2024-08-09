@@ -1,6 +1,7 @@
+
 // 'use client';
 // import React, { Suspense, ReactNode, useState } from 'react';
-// import Navbar from '@/app/component/navbar/page'
+// import Navbar from '@/app/component/navbar/page';
 // import Footer from '../footer/page';
 // import ErrorPage from '../../error/page';
 // import Product from '../../productAPI/page';
@@ -14,7 +15,7 @@
 // import Register from '../../register/page';
 // import ViewProfile from '@/app/profile/viewProfile/page';
 // import EditProfile from '@/app/profile/editProfile/page';
-// import { usePathname } from 'next/navigation'; //hook của Next.js để lấy đường dẫn hiện tại
+// import { usePathname } from 'next/navigation'; 
 // import { FormData } from '../formData/page';
 
 // interface LayoutProps {
@@ -31,18 +32,23 @@
 //     phone: '',
 //     address: '',
 //     urlImage: '',
-//     dateOfBirth:'',
-//     description:'',
+//     dateOfBirth: '',
+//     description: '',
 //   });
+//   const [language, setLanguage] = useState<string>('en'); // Default to English
 //   const isAuthenticated = true;
 
 //   const handleUpdateProfile = (updatedData: FormData) => {
 //     setFormData(updatedData);
 //   };
 
+//   const handleLanguageChange = (newLanguage: string) => {
+//     setLanguage(newLanguage);
+//   };
+
 //   return (
 //     <div className="min-h-screen flex flex-col">
-//       <Navbar />
+//       <Navbar language={language} onLanguageChange={handleLanguageChange} />
 //       <div className="flex-grow">
 //         <Suspense fallback={<div className="flex justify-center items-center h-screen">Loading...</div>}>
 //           <main className="flex flex-col items-center justify-center">
@@ -58,7 +64,7 @@
 //             {pathname === '/productCard' && <ProductCard />}
 //             {pathname === '/payment' && <PaymentInstructions />}
 //             {pathname === '/' && <div className="w-full h-full">{children}</div>}
-//             {!['/', '/viewProfile', '/editProfile', '/productAPI', '/login', '/register','/home','/sendEmail', '/test', '/service','/purchase','/productCard', '/payment'].includes(pathname) && <ErrorPage />}
+//             {!['/', '/viewProfile', '/editProfile', '/productAPI', '/login', '/register', '/home', '/sendEmail', '/test', '/service', '/purchase', '/productCard', '/payment'].includes(pathname) && <ErrorPage />}
 //           </main>
 //         </Suspense>
 //       </div>
@@ -70,8 +76,10 @@
 // export default Layout;
 
 
+
 'use client';
-import React, { Suspense, ReactNode, useState } from 'react';
+import React, {  createContext, useContext, Suspense, ReactNode, useState } from 'react';
+
 import Navbar from '@/app/component/navbar/page';
 import Footer from '../footer/page';
 import ErrorPage from '../../error/page';
@@ -88,7 +96,7 @@ import ViewProfile from '@/app/profile/viewProfile/page';
 import EditProfile from '@/app/profile/editProfile/page';
 import { usePathname } from 'next/navigation'; 
 import { FormData } from '../formData/page';
-
+import { LanguageProvider } from '@/context/languageContext';
 interface LayoutProps {
   children: ReactNode;
 }
@@ -118,11 +126,13 @@ const Layout = ({ children }: LayoutProps) => {
   };
 
   return (
+    <LanguageProvider>
     <div className="min-h-screen flex flex-col">
       <Navbar language={language} onLanguageChange={handleLanguageChange} />
       <div className="flex-grow">
         <Suspense fallback={<div className="flex justify-center items-center h-screen">Loading...</div>}>
           <main className="flex flex-col items-center justify-center">
+        
             {pathname === '/viewProfile' && isAuthenticated && <ViewProfile formDataProp={formData} />}
             {pathname === '/editProfile' && isAuthenticated && <EditProfile formDataProp={formData} onUpdateProfile={handleUpdateProfile} />}
             {pathname === '/productAPI' && <Product />}
@@ -136,12 +146,15 @@ const Layout = ({ children }: LayoutProps) => {
             {pathname === '/payment' && <PaymentInstructions />}
             {pathname === '/' && <div className="w-full h-full">{children}</div>}
             {!['/', '/viewProfile', '/editProfile', '/productAPI', '/login', '/register', '/home', '/sendEmail', '/test', '/service', '/purchase', '/productCard', '/payment'].includes(pathname) && <ErrorPage />}
+            
           </main>
         </Suspense>
       </div>
       <Footer />
     </div>
+    </LanguageProvider>
   );
+  
 };
 
 export default Layout;

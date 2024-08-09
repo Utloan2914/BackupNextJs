@@ -133,7 +133,7 @@ const Register: React.FC = () => {
     };
 
     return (
-        <Card className='text-black' style={{ borderRadius: '25px', maxWidth: '2000px', width: '30%', marginTop:'180px', marginBottom:'50px'}}>
+        <Card className='text-black' style={{ borderRadius: '25px', maxWidth: '2000px', width: '30%', marginTop:'80px', marginBottom:'80px'}}>
             <CardBody>
                 <Row className='justify-content-center'>
                     <Col md='10' className='d-flex flex-column align-items-center' style={{ width: '100%' }}>
