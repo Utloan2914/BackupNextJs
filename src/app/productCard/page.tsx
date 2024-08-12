@@ -1,8 +1,11 @@
 'use client'
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Button, ListGroup, Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useRouter } from "next/navigation";
+
+// Giả định bạn đã có LanguageContext
+import { useLanguage } from '@/context/languageContext';
 interface Product {
   id: number;
   title: string;
@@ -17,6 +20,7 @@ interface CartProduct extends Product {
 
 const ProductCart: React.FC = () => {
   const router = useRouter();
+  const { language } = useLanguage(); 
   const [cart, setCart] = useState<CartProduct[]>([]);
   const [isClient, setIsClient] = useState(false);
   const [cartlocal, setCartlocal] = useState<Product[]>(() => {
@@ -123,17 +127,19 @@ const ProductCart: React.FC = () => {
 
   return (
     <div className="container-build mt-20 mb-5" style={{ width: '80%' }}>
-  <h2 className="text-center text-3xl font-bold mb-11">Shopping Cart</h2>
+  <h2 className="text-center text-3xl font-bold mb-11"> {language === 'en' ? 'Shopping Cart' : 'Giỏ hàng'}</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="col-span-2">
           {isClient && cart.length === 0 ? (
               <div className="text-center w-full items-center ml-72" style={{ marginTop: '20px' }}>
-              <h2 style={{  fontSize:'25px',fontWeight: 'bold', marginBottom:'20px' }}>There are no products in the cart yet.</h2>
+              <h2 style={{  fontSize:'25px',fontWeight: 'bold', marginBottom:'20px' }}>
+                {language === 'en' ? 'There are no products in the cart yet.' : 'Chưa có sản phẩm nào trong giỏ hàng.'}
+              </h2>
               <button
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                 onClick={() => window.location.href = '/purchase'}
               >
-              Return to the store
+              {language === 'en' ? 'Return to the store' : 'Quay lại cửa hàng'}
               </button>
             </div>
           ) : (
@@ -153,7 +159,7 @@ const ProductCart: React.FC = () => {
                         <Card.Title className="line-clamp-2">{product.title}</Card.Title>
                         <p className="text-muted mb-2">Category: {product.category}</p>
                         <p className="mb-2 text-black">
-                          Discounted price, 20% off, now only: <span className="text-danger">{product.price}</span>
+                          {language === 'en' ? 'Discounted price, 20% off, now only:' : 'Giá giảm, giảm 20%, chỉ còn:'} <span className="text-danger">{product.price}</span>
                         </p>
                       </div>
                       <p className="text-danger font-bold mb-0 mr-7">
@@ -185,7 +191,7 @@ const ProductCart: React.FC = () => {
                           onClick={() => handleRemove(product.id)}
                           className="text-blue-700 font-bold border-0 bg-transparent hover:text-red-500"
                         >
-                          Remove
+                          {language === 'en' ? 'Remove' : 'Xóa'}
                         </Button>
                       </div>
                     </Card.Body>
@@ -195,33 +201,32 @@ const ProductCart: React.FC = () => {
             </ListGroup>
             <div className="flex-shrink-0" style={{ minWidth: '500px' }}>
               <Card className="shadow-sm p-4 w-full">
-                <h3 className="text-xl font-bold mb-3">Order summary</h3>
+                <h3 className="text-xl font-bold mb-3">{language === 'en' ? 'Order summary' : 'Tóm tắt đơn hàng'}</h3>
                 <div className="d-flex justify-content-between mb-2">
-                  <span>Subtotal</span>
+                  <span>{language === 'en' ? 'Subtotal' : 'Tổng phụ'}</span>
                   <span>{formatCurrency(calculateSubtotal())} VND</span>
                 </div>
                 <div className="d-flex justify-content-between mb-2">
-                  <span>Shipping Charges</span>
+                  <span>{language === 'en' ? 'Shipping Charges' : 'Phí vận chuyển'}</span>
                   <span>{formatCurrency(shippingEstimate)} VND</span>
                 </div>
                 <div className="d-flex justify-content-between font-bold text-lg">
-                  <span>Total order amount</span>
+                  <span>{language === 'en' ? 'Total order amount' : 'Tổng số tiền đơn hàng'}</span>
                   <span>{formatCurrency(calculateSubtotal() + shippingEstimate)} VND</span>
                 </div>
                 <Button
                   variant="primary"
-                  className="mt-4 w-full"
+                  className="w-full mt-4"
                   onClick={handleCheckout}
+                  disabled={cart.length === 0}
                 >
-                  Checkout
+                  {language === 'en' ? 'Checkout' : 'Thanh toán'}
                 </Button>
               </Card>
             </div>
           </div>
-          
           )}
         </div>
-      
       </div>
     </div>
   );

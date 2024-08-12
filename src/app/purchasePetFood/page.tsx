@@ -4,6 +4,7 @@ import Head from 'next/head';
 import { Card, Button, Row, Col, Toast } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useRouter }from 'next/navigation';
+import { useLanguage } from '@/context/languageContext';
 interface Product {
   id: number;
   title: string;
@@ -277,6 +278,7 @@ const [isClient, setIsClient] = useState(false);
 const [paymentSuccess, setPaymentSuccess] = useState(false);
   const [category, setCategory] = useState<string>("PATE");
   const [products, setProducts] = useState<Product[]>(allProducts);
+  const { language } = useLanguage(); 
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
   const [cartCount, setCartCount] = useState<number>(0);
@@ -368,39 +370,39 @@ return (
         <div className="col-md-2 h-100" style={{width:'16%', marginTop:'95px'}}>
           <nav className="navbar flex-column align-items-stretch p-3">
             <h3 className="text-2xl" style={{ fontWeight: 'bold', marginBottom: '10px' }}>
-              PRODUCT PORTFOLIO
+            {language === 'en' ? 'PRODUCT PORTFOLIO' : 'DANH MỤC SẢN PHẨM'} 
             </h3>
-            <ul className="nav nav-pills flex-column">
+         <ul className="nav nav-pills flex-column">
   <li className="nav-item h-12">
     <a 
-      className={`nav-link font-bold  text-xl flex items-center h-full cursor-pointer ${category === 'PATE' ? 'bg-blue-500 text-white hover:text-black' : 'hover:bg-white hover:text-black'}`} 
+      className={`nav-link font-bold text-xl flex items-center h-full cursor-pointer ${category === 'PATE' ? 'bg-orange-400 text-black hover:bg-white hover:text-black' : 'hover:bg-white hover:text-black'}`} 
       onClick={() => setCategory('PATE')}
     >
-      PATE
+      {language === 'en' ? 'PATE' : 'PATE'}  
     </a>
   </li>
   <li className="nav-item h-12">
     <a 
-      className={`nav-link font-bold  text-xl  flex items-center h-full cursor-pointer ${category === 'DRY FOOD' ? 'bg-blue-500 text-white hover:text-black' : 'hover:bg-white hover:text-black'}`} 
+      className={`nav-link font-bold text-xl flex items-center h-full cursor-pointer ${category === 'DRY FOOD' ? 'bg-orange-400 text-black hover:bg-white hover:text-black' : 'hover:bg-white hover:text-black'}`} 
       onClick={() => setCategory('DRY FOOD')}
     >
-      DRY FOOD
+       {language === 'en' ? 'DRY FOOD' : 'THỰC PHẨM KHÔ'}  
     </a>
   </li>
   <li className="nav-item h-12">
     <a 
-      className={`nav-link flex font-bold  text-xl  items-center h-full cursor-pointer ${category === 'TOYS' ? 'bg-blue-500 text-white hover:text-black' : 'hover:bg-white hover:text-black'}`} 
+      className={`nav-link flex font-bold text-xl items-center h-full cursor-pointer ${category === 'TOYS' ? 'bg-orange-400 text-black hover:bg-white hover:text-black' : 'hover:bg-white hover:text-black'}`} 
       onClick={() => setCategory('TOYS')}
     >
-      TOYS
+       {language === 'en' ? 'TOYS' : 'ĐỒ CHƠI'}  
     </a>
   </li>
   <li className="nav-item h-12">
     <a 
-      className={`nav-link flex items-center font-bold  text-xl h-full cursor-pointer ${category === 'ACCESSORIES' ? 'bg-blue-500 text-white hover:text-black' : 'hover:bg-white hover:text-black'}`} 
+      className={`nav-link flex items-center font-bold text-xl h-full cursor-pointer ${category === 'ACCESSORIES' ? 'bg-orange-400 text-black hover:bg-white hover:text-black' : 'hover:bg-white hover:text-black'}`} 
       onClick={() => setCategory('ACCESSORIES')}
     >
-      ACCESSORIES
+        {language === 'en' ? 'ACCESSORIES' : 'PHỤ KIỆN'} 
     </a>
   </li>
 </ul>
@@ -410,7 +412,16 @@ return (
           </nav>
         </div>
         <div className="col-md-10">
-          <h2 className="my-4 text-center text-3xl font-bold mt-6">{category}</h2>
+        <h2 className="my-4 text-center text-3xl font-bold mt-6">
+  {language === 'en' ? category : 
+    category === 'PATE' ? 'PATE' :
+    category === 'DRY FOOD' ? 'THỰC PHẨM KHÔ' :
+    category === 'TOYS' ? 'ĐỒ CHƠI' :
+    category === 'ACCESSORIES' ? 'PHỤ KIỆN' :
+    category // Dùng `category` như fallback nếu không khớp
+  }
+</h2>
+
 
           <Row>
             {filteredProducts.map((product) => (
@@ -435,7 +446,7 @@ return (
                         onClick={() => handleAddToCart(product)}
                         disabled={product.status === "Out Of Stock"}
                       >
-                        Add to cart
+                        {language === 'en' ? ' Add to cart' : 'Thêm vào giỏ hàng'}  
                       </Button>
                       <Button
                       className="text-xl font-bold"
@@ -443,7 +454,7 @@ return (
                         onClick={() => handleBuyNow(product)}
                         disabled={product.status === "Out Of Stock"}
                       >
-                        Buy Now
+                      {language === 'en' ? 'Buy Now' : 'Mua ngay'}     
                       </Button>
                     </div>
                   </Card.Body>
@@ -471,10 +482,10 @@ return (
   paymentSuccess ? (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
     <div className="bg-white p-4 rounded-lg h-auto w-full md:w-[900px]">
-      <h2 className="text-3xl font-bold mb-4 text-center text-black">Payment success!</h2>
-      <p className="text-lg mb-4 text-center text-black">Thank you for your payment. Your order has been processed.</p>
+      <h2 className="text-3xl font-bold mb-4 text-center text-black">{language === 'en' ? 'Payment success!' : 'Thanh toán thành công!'}</h2>
+      <p className="text-lg mb-4 text-center text-black">{language === 'en' ? 'Thank you for your payment. Your order has been processed.' : 'Cảm ơn bạn đã thanh toán. Đơn đặt hàng của bạn đã được xử lý.'}</p>
       <div className="flex justify-center gap-4">
-        <a href="/purchase" className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Return to the store</a>
+        <a href="/qaq" className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">{language === 'en' ? 'Return to the store' : 'Quay lại cửa hàng'}</a>
       </div>
     </div>
   </div>
@@ -491,7 +502,7 @@ return (
           </svg>
         </button>
         
-        <h2 className="text-center text-3xl font-bold mb-4 w-full text-black">Scan QR Code for Payment</h2>
+        <h2 className="text-center text-3xl font-bold mb-4 w-full text-black"> {language === 'en' ? 'Scan QR Code for Payment' : 'Quét mã QR để thanh toán'}</h2>
         <div className="flex flex-col md:flex-row w-full">
           {/* Left Column with Steps */}
           <div className="md:w-1/2 flex mr-28 mt-6 flex-col justify-between w-full">
@@ -506,10 +517,13 @@ return (
                   </svg>
                 </div>
                 <div className="flex-grow pl-4">
-                  <h2 className="title-font mb-1 text-sm font-medium tracking-wider text-black">STEP 1</h2>
+                  <h2 className="title-font mb-1 text-sm font-medium tracking-wider text-black">
+                    {language === 'en' ? 'STEP 1' : 'BƯỚC 1'}
+                  </h2>
                   <p className="font-laonoto leading-relaxed text-black">
-                    Make a payment by scanning the <br />
-                    <b>QR CODE</b> or transfer funds using the account number.
+                    {language === 'en'
+                      ? 'Make a payment by scanning the QR CODE or transfer funds using the account number.'
+                      : 'Thực hiện thanh toán bằng cách quét mã QR hoặc chuyển khoản sử dụng số tài khoản.'}
                   </p>
                 </div>
               </div>
@@ -523,9 +537,13 @@ return (
                   </svg>
                 </div>
                 <div className="flex-grow pl-4">
-                  <h2 className="title-font mb-1 text-sm font-medium tracking-wider text-black">STEP 2</h2>
+                  <h2 className="title-font mb-1 text-sm font-medium tracking-wider text-black">
+                    {language === 'en' ? 'STEP 2' : 'BƯỚC 2'}
+                  </h2>
                   <p className="font-laonoto leading-relaxed text-black">
-                    Notify us of your payment by uploading a <b>receipt image</b> or <b>proof of payment</b>.
+                    {language === 'en'
+                      ? 'Notify us of your payment by uploading a receipt image or proof of payment.'
+                      : 'Thông báo cho chúng tôi về việc thanh toán của bạn bằng cách tải lên hình ảnh biên lai hoặc chứng từ thanh toán.'}
                   </p>
                 </div>
               </div>
@@ -537,27 +555,33 @@ return (
                   </svg>
                 </div>
                 <div className="flex-grow pl-4">
-                  <h2 className="title-font mb-1 text-sm font-medium tracking-wider text-black">STEP 3</h2>
+                  <h2 className="title-font mb-1 text-sm font-medium tracking-wider text-black">
+                    {language === 'en' ? 'STEP 3' : 'BƯỚC 3'}
+                  </h2>
                   <p className="font-laonoto leading-relaxed text-black">
-                    Once you complete the payment, please wait for our staff to verify. You can check the payment status on the <span><b>Payments</b></span> page.
+                    {language === 'en'
+                      ? 'Once you complete the payment, please wait for our staff to verify. You can check the payment status on the Payments page.'
+                      : 'Khi bạn hoàn tất thanh toán, vui lòng đợi nhân viên của chúng tôi xác minh. Bạn có thể kiểm tra tình trạng thanh toán trên trang Thanh toán.'}
                   </p>
                 </div>
               </div>
             </div>
           </div>
+
+               
   
           {/* QR Code and File Upload Section */}
           <div className="md:w-1/2 flex flex-col items-center">
             <img className="mx-auto h-40 w-40 md:h-52 md:w-52 rounded-lg border p-2" src="./img/image.png" alt="QR Code for Payment" />
             <div className="mt-4 text-center">
               <p className="text-lg font-semibold text-black">Huỳnh Thị Tố Loan</p>
-              <p className="text-sm font-medium text-black">Bank: Viettinbank</p>
-              <p className="text-sm font-medium text-black">Number account: 1008 7686 3333</p>
+              <p className="text-sm font-medium text-black"> {language === 'en' ? 'Bank: Viettinbank' : 'Ngân hàng: Viettinbank'}</p>
+              <p className="text-sm font-medium text-black">{language === 'en' ? 'Number account: 1008 7686 3333' : 'Số tài khoản: 1008 7686 3333'}</p>
             </div>
   
             <div className="mt-8 w-full flex flex-col items-center">
               <button className="mt-4 rounded-md border bg-[#0033FF] hover:bg-[#0022CC] px-6 py-2 text-white outline-none" style={{ fontSize: '20px' }} onClick={handleSubmit}>
-                Submit payment receipt
+              {language === 'en' ? 'Submit payment receipt' : 'Gửi biên lai thanh toán'}
               </button>
             </div>
           </div>
@@ -566,10 +590,6 @@ return (
     </div>
   )
 )}
-
-
-
-
 
     <style jsx>{`
       .container-fluid {

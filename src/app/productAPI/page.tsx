@@ -404,7 +404,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import CloseIcon from '@mui/icons-material/Close';
 import { useRouter } from 'next/navigation';
-
+import { useLanguage } from '@/context/languageContext';
 
 
 export default function Product() {
@@ -421,7 +421,7 @@ export default function Product() {
   const [successMessage, setSuccessMessage] = useState('');
   const [confirmDeleteId, setConfirmDeleteId] = useState<string | null>(null);
   const [noResults, setNoResults] = useState(false);
-
+  const { language } = useLanguage(); 
   const addTitleRef = useRef<HTMLInputElement>(null);
   const updateTitleRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
@@ -554,7 +554,7 @@ export default function Product() {
 
   return (
     <Container fluid className="mx-auto  px-4 relative" style= {{marginTop:'70px', marginBottom:'50px'}}>
-      <h2 className="text-center text-3xl font-bold mb-4">Product List</h2>
+      <h2 className="text-center text-3xl font-bold mb-4">{language === 'en' ? 'List Your Favorite Pets' : 'Danh Sách Thú Cưng Yêu Thích'}</h2>
       <div className="flex justify-between items-center mb-4">
         {showAddForm && (
           <div className="fixed inset-0 flex items-center justify-center z-50">
@@ -566,11 +566,11 @@ export default function Product() {
               >
                 <CloseIcon />
               </button>
-              <h4 className=" text-black font-bold mb-4 text-2xl">Add pet</h4>
+              <h4 className=" text-black font-bold mb-4 text-2xl">{language === 'en' ? 'Add pet' : 'Thêm thú cưng'}</h4>
               <div className="flex flex-col gap-4">
                 <input
                   type="text"
-                  placeholder="Title"
+                  placeholder={language === 'en' ? 'Title' : 'Tiêu đề'}
                   value={newProduct.title}
                   onChange={(e) => setNewProduct({ ...newProduct, title: e.target.value })}
                   className="text-xl p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -578,7 +578,7 @@ export default function Product() {
                 />
                 <input
                   type="text"
-                  placeholder="Description"
+                  placeholder={language === 'en' ? 'Description' : 'Mô tả'}
                   value={newProduct.description}
                   onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })}
                   className="text-xl p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -604,7 +604,7 @@ export default function Product() {
                     className="bg-blue-500 text-xl  hover:bg-blue-600 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:bg-blue-500"
                     onClick={handleCreate}
                   >
-                    Add pet
+                  {language === 'en' ? 'Add pet' : 'Thêm thú cưng'}
                   </button>
                 </div>
               </div>
@@ -616,7 +616,7 @@ export default function Product() {
           className="bg-blue-500 text-xl hover:bg-blue-600 text-white font-bold px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
           onClick={() => setShowAddForm(true)}
         >
-          Add pet
+         {language === 'en' ? 'Add pet' : 'Thêm thú cưng'}
         </button>
       </div>
       {successMessage && (
@@ -638,11 +638,11 @@ export default function Product() {
                 >
                   <CloseIcon />
                 </button>
-                <h4 className="text-2xl  text-black font-bold mb-4">Update pet information</h4>
+                <h4 className="text-2xl  text-black font-bold mb-4">{language === 'en' ? 'Update pet information' : 'Cập nhật thông tin thú cưng'}</h4>
                 <div className="flex flex-col gap-4">
                   <input
                     type="text"
-                    placeholder="Title"
+                    placeholder={language === 'en' ? 'Title' : 'Tiêu đề'}
                     value={updateProductData.title}
                     onChange={(e) => setUpdateProductData({ ...updateProductData, title: e.target.value })}
                     className="text-xl p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -650,7 +650,7 @@ export default function Product() {
                   />
                   <input
                     type="text"
-                    placeholder="Description"
+                    placeholder={language === 'en' ? 'Description' : 'Mô tả'}
                     value={updateProductData.description}
                     onChange={(e) => setUpdateProductData({ ...updateProductData, description: e.target.value })}
                     className="text-xl p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -683,7 +683,7 @@ export default function Product() {
                       className="text-xl bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:bg-blue-500"
                       onClick={handleUpdate}
                     >
-                      Update pet 
+                  {language === 'en' ? 'Update Pet' : 'Cập nhật thú cưng'}
                     </button>
                   </div>
                 </div>
@@ -694,16 +694,16 @@ export default function Product() {
             <table className="w-full  text-black bg-white border border-gray-300">
               <thead>
                 <tr>
-                  <th className="py-2 px-11 text-2xl  border-b">Image</th>
-                  <th className="py-2 text-2xl px-4 border-b">Name pet</th>
-                  <th className="py-2 text-2xl px-4 border-b">Description</th>
-                  <th className="py-2 text-2xl px-4 border-b">Actions</th>
+                  <th className="py-2 px-11 text-2xl w-56  border-b">{language === 'en' ? 'Image' : 'Hình ảnh'}</th>
+                  <th className="py-2 text-2xl px-4 border-b">{language === 'en' ? 'Name pet' : 'Tên thú cưng'}</th>
+                  <th className="py-2 text-2xl px-4 border-b">{language === 'en' ? 'Description' : 'Mô tả'}</th>
+                  <th className="py-2 text-2xl w-56 px-4 border-b">{language === 'en' ? 'Actions' : 'Chức năng'}</th>
                 </tr>
               </thead>
               <tbody>
                 {currentProducts.map((product) => (
                   <tr key={product.id}>
-                    <td className="py-1 px-9 border-b">
+                    <td className="py-1 px-9  border-b">
                       {product.image && <img 
                         src={product.image} 
                         alt={product.title} 
@@ -738,14 +738,14 @@ export default function Product() {
                             >
                               <CloseIcon />
                             </button>
-                            <h4 className="text-2xl text-black font-bold mb-4">Confirm Delete</h4>
-                            <p className="mb-4  text-black text-xl">Are you sure you want to delete this product?</p>
+                            <h4 className="text-2xl text-black font-bold mb-4">  {language === 'en' ? 'Confirm Delete' : 'Form xác nhận xóa'}</h4>
+                            <p className="mb-4  text-black text-xl">{language === 'en' ? 'Are you sure you want to delete this product?' : 'Bạn có chắc chắn muốn xóa sản phẩm này không?'}</p>
                             <div className="flex justify-center gap-4">
                               <button
                                 className="text-xl bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-red-500"
                                 onClick={() => handleDelete(product.id)}
                               >
-                                Delete
+                                {language === 'en' ? 'Delete' : 'Xóa'}
                               </button>
                             </div>
                           </div>

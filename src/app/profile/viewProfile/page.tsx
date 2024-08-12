@@ -103,7 +103,7 @@ import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import Avatar from '@mui/material/Avatar';
 import { useRouter } from 'next/navigation';
 import { FormData } from '../../component/formData/page';
-
+import { useLanguage } from '@/context/languageContext';
 // Đặt giá trị mặc định cho onUpdateProfile là một hàm trống
 interface ViewProfileProps {
   formDataProp: FormData;
@@ -116,7 +116,7 @@ const ViewProfile: React.FC<ViewProfileProps> = ({ formDataProp, onUpdateProfile
   const [success, setSuccess] = useState('');
   const router = useRouter();
   const [user, setUser] = useState<FormData | null>(null);
-
+  const { language } = useLanguage(); 
   useEffect(() => {
     const storedFormData = localStorage.getItem('formData');
     const storedImage = localStorage.getItem('urlImage');
@@ -190,15 +190,25 @@ const ViewProfile: React.FC<ViewProfileProps> = ({ formDataProp, onUpdateProfile
     return `${day}/${month}/${year}`;
   };
 
+  const fullNameLabel = language === 'en' ? 'Full Name' : 'Tên của bạn';
+  const addressLabel = language === 'en' ? 'Address' : 'Địa chỉ';
+  const birthdayLabel = language === 'en' ? 'Birthday' : 'Ngày sinh';
+  const emailLabel = language === 'en' ? 'Email Address' : 'Địa chỉ Email';
+  const passwordLabel = language === 'en' ? 'Password' : 'Mật khẩu';
+  const phoneLabel = language === 'en' ? 'Phone Number' : 'Số điện thoại';
+  const descriptionLabel = language === 'en' ? 'Description' : 'Mô tả';
+  const saveButtonLabel = language === 'en' ? 'Save All' : 'Lưu tất cả';
+  const generalInformationTitle = language === 'en' ? 'General Information' : 'Thông tin chung';
+
   return (
-    <div className="flex flex-col lg:flex-row p-6 gap-6  text-black justify-center mt-11 mb-11 items-center">
+    <div className="flex flex-col lg:flex-row p-6 gap-6 text-black justify-center mt-11 mb-11 items-center">
       <div className="bg-white shadow-lg rounded-lg p-6" style={{ width: "50%" }}>
-        <h2 className="text-3xl text-center font-bold mb-4">General Information</h2>
+        <h2 className="text-3xl text-center font-bold mb-4">{generalInformationTitle}</h2>
         {error && <div className="bg-red-500 text-white p-2 rounded mb-4">{error}</div>}
         {success && <div className="bg-green-500 text-white p-2 rounded mb-4">{success}</div>}
         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-xl font-bold">Full Name</label>
+            <label className="block text-xl font-bold">{fullNameLabel}</label>
             <input
               type="text"
               id="name"
@@ -210,7 +220,7 @@ const ViewProfile: React.FC<ViewProfileProps> = ({ formDataProp, onUpdateProfile
             />
           </div>
           <div>
-            <label className="block text-xl font-bold">Address</label>
+            <label className="block text-xl font-bold">{addressLabel}</label>
             <input
               type="text"
               id="address"
@@ -222,7 +232,7 @@ const ViewProfile: React.FC<ViewProfileProps> = ({ formDataProp, onUpdateProfile
             />
           </div>
           <div>
-            <label className="block text-xl font-bold">Birthday</label>
+            <label className="block text-xl font-bold">{birthdayLabel}</label>
             <input
               type="date"
               id="dateOfBirth"
@@ -234,7 +244,7 @@ const ViewProfile: React.FC<ViewProfileProps> = ({ formDataProp, onUpdateProfile
             />
           </div>
           <div>
-            <label className="block text-xl font-bold">Email Address</label>
+            <label className="block text-xl font-bold">{emailLabel}</label>
             <input
               type="email"
               id="email"
@@ -246,7 +256,7 @@ const ViewProfile: React.FC<ViewProfileProps> = ({ formDataProp, onUpdateProfile
             />
           </div>
           <div>
-            <label htmlFor="password" className="text-xl font-bold">Password</label>
+            <label htmlFor="password" className="text-xl font-bold">{passwordLabel}</label>
             <input
               type="password"
               id="password"
@@ -258,7 +268,7 @@ const ViewProfile: React.FC<ViewProfileProps> = ({ formDataProp, onUpdateProfile
             />
           </div>
           <div>
-            <label className="block text-xl font-bold">Phone Number</label>
+            <label className="block text-xl font-bold">{phoneLabel}</label>
             <input
               type="tel"
               id="phone"
@@ -270,19 +280,19 @@ const ViewProfile: React.FC<ViewProfileProps> = ({ formDataProp, onUpdateProfile
             />
           </div>
           <div>
-  <label htmlFor="description" className="text-xl font-bold">Description</label>
-  <textarea
-    id="description"
-    name="description"
-    value={formData.description}
-    onChange={handleChange}
-    className="mt-1 p-2 border dark:bg-white border-gray-300 rounded-md text-xl w-full h-40 overflow-y-auto bg-white"
-    placeholder="Tell us something about yourself"
-  ></textarea>
-</div>
+            <label htmlFor="description" className="text-xl font-bold">{descriptionLabel}</label>
+            <textarea
+              id="description"
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+              className="mt-1 p-2 border dark:bg-white border-gray-300 rounded-md text-xl w-full h-40 overflow-y-auto bg-white"
+              placeholder="Tell us something about yourself"
+            ></textarea>
+          </div>
 
           <div className="flex flex-col">
-            <label htmlFor="urlImage" className="text-xl font-bold">Profile Image</label>
+            <label htmlFor="urlImage" className="text-xl font-bold">{language === 'en' ? 'Profile Image: ' : 'Ảnh đại diện:'}</label>
             <input
               type="file"
               id="urlImage"
@@ -307,7 +317,7 @@ const ViewProfile: React.FC<ViewProfileProps> = ({ formDataProp, onUpdateProfile
               type="submit"
               className="w-full text-xl bg-blue-500 text-white p-2 font-bold rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-              Save All
+              {saveButtonLabel}
             </button>
           </div>
         </form>
@@ -332,24 +342,24 @@ const ViewProfile: React.FC<ViewProfileProps> = ({ formDataProp, onUpdateProfile
         </div>
         <div className="flex justify-between">
           <div className="w-1/2">
-            <div className="text-left ">
-              <p className="text-xl text-black mb-3"><span className="font-bold">Email: </span>{user.email}</p>
+            <div className="text-left">
+              <p className="text-xl text-black mb-3"><span className="font-bold">{language === 'en' ? 'Email: ' : 'Email: '}</span>{user.email}</p>
             </div>
             <div className="text-left">
-              <p className="text-xl text-black mb-3"><span className="font-bold">Phone: </span>{user.phone}</p>
+              <p className="text-xl text-black mb-3"><span className="font-bold">{language === 'en' ? 'Phone: ' : 'Số điện thoại: '}</span>{user.phone}</p>
             </div>
           </div>
           <div className="w-1/2">
-    <div className="text-left">
-      <p className="text-xl text-black mb-3"><span className="font-bold">Birthday: </span>{formatDate(user.dateOfBirth)}</p>
-    </div>
-    <div className="text-left">
-      <p className="text-xl text-black"><span className="font-bold">Address: </span>{user.address}</p>
-    </div>
-  </div>
+            <div className="text-left">
+              <p className="text-xl text-black mb-3"><span className="font-bold">{language === 'en' ? 'Birthday: ' : 'Ngày sinh: '}</span>{formatDate(user.dateOfBirth)}</p>
+            </div>
+            <div className="text-left">
+              <p className="text-xl text-black"><span className="font-bold">{language === 'en' ? 'Address: ' : 'Địa chỉ: '}</span>{user.address}</p>
+            </div>
+          </div>
         </div>
         <div>
-          <p className="text-xl font-bold text-black">Description:</p>
+          <p className="text-xl font-bold text-black">{language === 'en' ? 'Description:' : 'Mô tả:'}</p>
           <p className="text-gray-400 text-xl text-black" style={{ height: '200px' }}>{user.description}</p>
         </div>
       </div>

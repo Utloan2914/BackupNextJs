@@ -209,9 +209,8 @@
 
 // export default Navbar;
 
-
 'use client';
-import React, {  createContext,useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Button from '@mui/material/Button';
 import Badge from '@mui/material/Badge';
@@ -294,54 +293,68 @@ const RightSection = styled('div')({
 const LanguageSelector = styled('select')({
   backgroundColor: 'transparent',
   color: 'white',
-  fontSize: '16px',
+  fontSize: '25px',
+  fontWeight: 'bold',
   border: 'none',
   outline: 'none',
 });
 
 
-interface NavbarProps {
-  language: string;
-  onLanguageChange: (newLanguage: string) => void;
-}
-
-const Navbar = ({  onLanguageChange }: NavbarProps) => {
+const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [userImage, setUserImage] = useState<string | null>(null);
   const [cartCount, setCartCount] = useState<number>(0);
   const [refreshCount, setRefreshCount] = useState<number>(0);
   const { language, setLanguage } = useLanguage(); 
+  const [loading, setLoading] = useState<boolean>(true); // Add a loading state
+
   useEffect(() => {
-    const fetchData = () => {
-      const formData = localStorage.getItem('formData');
-      if (formData) {
-        try {
-          const parsedData = JSON.parse(formData);
-          setIsLoggedIn(true);
-        } catch (error) {
-          console.error('Invalid JSON in localStorage for key "formData":', error);
+    const storedLanguage = localStorage.getItem('language') || 'en'; // Default to 'vi' if not found
+    setLanguage(storedLanguage);
+    setLoading(false); // Set loading to false after language is set
+  }, [setLanguage]);
+
+  useEffect(() => {
+    if (!loading) { // Only fetch data when loading is false
+      const fetchData = () => {
+        const formData = localStorage.getItem('formData');
+        if (formData) {
+          try {
+            const parsedData = JSON.parse(formData);
+            setIsLoggedIn(true);
+          } catch (error) {
+            console.error('Invalid JSON in localStorage for key "formData":', error);
+          }
         }
-      }
 
-      const storedImageUrl = localStorage.getItem('urlImage');
-      if (storedImageUrl) {
-        setUserImage(storedImageUrl);
-      }
-      const storedCart = localStorage.getItem('cart');
-      if (storedCart) {
-        setCartCount(JSON.parse(storedCart).length);
-      }
-      setTimeout(() => {
-        setRefreshCount(prevCount => prevCount + 1);
-      }, 500);
-    };
+        const storedImageUrl = localStorage.getItem('urlImage');
+        if (storedImageUrl) {
+          setUserImage(storedImageUrl);
+        }
+        const storedCart = localStorage.getItem('cart');
+        if (storedCart) {
+          setCartCount(JSON.parse(storedCart).length);
+        }
+        setTimeout(() => {
+          setRefreshCount(prevCount => prevCount + 1);
+        }, 500);
+      };
 
-    fetchData();
-  }, [refreshCount]);
+      fetchData();
+    }
+  }, [refreshCount, loading]);
 
   const handleLanguageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setLanguage(event.target.value);
   };
+
+  useEffect(() => {
+    if (!loading) { // Only set localStorage when loading is false
+      localStorage.setItem('language', language);
+    }
+  }, [language, loading]);
+
+  if (loading) return null; // Render nothing while loading
 
   return (
     <StyledNavbar>
@@ -364,7 +377,7 @@ const Navbar = ({  onLanguageChange }: NavbarProps) => {
             </Link>
             <Link href="/productAPI" passHref>
               <NavLinkButton>
-                {language === 'en' ? 'MANAGEMENT PET' : 'QUẢN LÝ THÚ CƯNG'}
+                {language === 'en' ? 'FAVORITE LOVE' : 'THÚ CƯNG YÊU THÍCH'}
               </NavLinkButton>
             </Link>
             <Link href="/purchase" passHref>
@@ -388,9 +401,9 @@ const Navbar = ({  onLanguageChange }: NavbarProps) => {
           <RightSection>
             <ModeToggle /> 
             {userImage && <BadgeAvatars imageUrl={userImage} />}
-            <LanguageSelector   className='bg-white text-black hover:bg-gray-200' value={language} onChange={handleLanguageChange}>
-              <option value="en">English</option>
-              <option value="vi">Tiếng Việt</option>
+            <LanguageSelector value={language} onChange={handleLanguageChange}>
+              <option className="text-black hover:text-white font-bold" value="en">English</option>
+              <option className="text-black hover:text-white font-bold" value="vi">Tiếng Việt</option>
             </LanguageSelector>
           </RightSection>
         </>
