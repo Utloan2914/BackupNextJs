@@ -170,7 +170,7 @@ const Register: React.FC = () => {
                     </div>
                     {errors.description && <div className="text-danger mb-2">{errors.description}</div>}
   
-                    <Button type="submit" size='lg'>
+                    <Button className="bg-blue-600 hover:bg-blue-900"type="submit" size='lg'>
                       {language === 'en' ? 'Register' : 'Đăng ký'}
                     </Button>
                   </Col>

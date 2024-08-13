@@ -325,19 +325,17 @@ const [paymentSuccess, setPaymentSuccess] = useState(false);
   const filteredProducts = products.filter(product => product.category === category);
 
   const handleAddToCart = (product: Product) => {
-    setCart(prevCart => [...prevCart, product]);
-    
     if (product.status === "Out Of Stock") {
       setToastMessage("Sản phẩm này đã hết hàng, vui lòng chọn sản phẩm khác");
       setShowToast(true);
       return;
     }
+    setCart(prevCart => [product, ...prevCart]);
     if (typeof setCartCount === 'function') {
       setCartCount(prevCount => prevCount + 1);
     } else {
       console.error('setCartCount is not a function');
     }
-    
   };
 
   const handleSubmit = () => {
@@ -406,9 +404,6 @@ return (
     </a>
   </li>
 </ul>
-
-
-
           </nav>
         </div>
         <div className="col-md-10">
@@ -421,8 +416,6 @@ return (
     category // Dùng `category` như fallback nếu không khớp
   }
 </h2>
-
-
           <Row>
             {filteredProducts.map((product) => (
               <Col key={product.id} md={3} className="mb-4 mt-14" style={{ height: 'auto' }}>

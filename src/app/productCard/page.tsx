@@ -84,7 +84,7 @@ const ProductCart: React.FC = () => {
       products = JSON.parse(productsString);
     }
 
-    setCartlocal([...products, product]);
+    setCartlocal([product, ...products]);
   };
 
   const handleQuantityChange = (id: number, change: number) => {
