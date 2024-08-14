@@ -1,3 +1,5 @@
+
+
 'use client';
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -57,14 +59,14 @@ function Login() {
             };  
             localStorage.setItem('loggedInUser', JSON.stringify(mockResponse));
             setSuccess(language === 'en' ? 'Login successful!' : 'Đăng nhập thành công!');
-            router.push("/home"); // Sử dụng router.push để chuyển trang
+            router.push("/home"); 
         } else {
             setError(language === 'en' ? 'Incorrect email or password.' : 'Email hoặc mật khẩu không chính xác.');
         }
     };
 
     return (
-        <Card fluid className='text-black ' style={{ borderRadius: '25px', maxWidth: '2000px', width:'40%' ,height: '410px', marginTop:'80px' , marginBottom:'80px' }}>
+        <Card fluid className='text-black' style={{ borderRadius: '25px', maxWidth: '2000px', width: '40%', height: '410px', marginTop: '80px', marginBottom: '80px' }}>
             <CardBody>
                 <Row>
                     <Col md='10' lg='6' className='order-2 order-lg-1 d-flex flex-column align-items-center'>
@@ -106,3 +108,4 @@ function Login() {
 }
 
 export default Login;
+

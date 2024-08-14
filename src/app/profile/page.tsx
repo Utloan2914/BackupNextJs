@@ -9,7 +9,7 @@ import { Menu, MenuItem, IconButton, ListItemIcon, ListItemText } from '@mui/mat
 import Link from 'next/link';
 import LogoutIcon from '@mui/icons-material/Logout';
 import PersonIcon from '@mui/icons-material/Person';
-
+import { useLanguage } from '@/context/languageContext';
 const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
     backgroundColor: '#44b700',
@@ -52,7 +52,7 @@ interface BadgeAvatarsProps {
 const BadgeAvatars: React.FC<BadgeAvatarsProps> = ({ imageUrl }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
-
+  const { language } = useLanguage();
   useEffect(() => {
     const storedImageUrl = localStorage.getItem('urlImage');
     if (storedImageUrl) {
@@ -77,7 +77,7 @@ const BadgeAvatars: React.FC<BadgeAvatarsProps> = ({ imageUrl }) => {
   const open = Boolean(anchorEl);
 
   return (
-    <Stack direction="row" spacing={2}>
+    <Stack direction="row" spacing={4}>
       <IconButton onClick={handleClick} size="small">
         <StyledBadge
           overlap="circular"
@@ -88,32 +88,43 @@ const BadgeAvatars: React.FC<BadgeAvatarsProps> = ({ imageUrl }) => {
         </StyledBadge>
       </IconButton>
       <Menu
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-        transformOrigin={{ vertical: 'top', horizontal: 'left' }}
-        PaperProps={{
-          style: {
-            width: '180px',
-          },
-        }}
-      >
+  anchorEl={anchorEl}
+  open={open}
+  onClose={handleClose}
+  anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+  transformOrigin={{ vertical: 'top', horizontal: 'left' }}
+  PaperProps={{
+    sx: {
+      width: '200px',
+      marginLeft: '50px',
+      boxShadow: 'none', 
+      
+    },
+  }}
+>
         <Link href="/viewProfile" passHref>
-          <MenuItem onClick={handleClose}>
+          <MenuItem  className="hover:bg-gray-200" onClick={handleClose}>
             <ListItemIcon>
               <PersonIcon fontSize="small" />
             </ListItemIcon>
-<ListItemText primaryTypographyProps={{ variant: 'body1', style: { fontSize: 20, color: 'black' } }} primary="View Profile" />
+            <ListItemText
+  primaryTypographyProps={{
+    sx: {
+      fontSize: 20,
+    },
+  }}
+>
+  {language === 'en' ? 'View Profile' : 'Xem thông tin'}
+</ListItemText>
           </MenuItem>
         </Link>
         
         <Link href="/login" passHref>
-          <MenuItem onClick={() => { handleLogout(); handleClose(); }}>
+          <MenuItem className="hover:bg-gray-200" onClick={() => { handleLogout(); handleClose(); }}>
             <ListItemIcon>
               <LogoutIcon fontSize="small" />
             </ListItemIcon>
-            <ListItemText primaryTypographyProps={{ style: { fontSize: 20 } }} primary="Logout" />
+            <ListItemText primaryTypographyProps={{ style: { fontSize: 20 } }}>{language === 'en' ? 'Logout' : 'Đăng xuất'}</ListItemText>
           </MenuItem>
         </Link>
         

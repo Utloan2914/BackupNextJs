@@ -4,10 +4,11 @@
 // import Link from 'next/link';
 // import Button from '@mui/material/Button';
 // import Badge from '@mui/material/Badge';
-// import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+// import { ShoppingCartIcon } from 'lucide-react';
 // import { styled } from '@mui/material/styles';
 // import BadgeAvatars from '@/app/profile/page';
 // import { ModeToggle } from '@/components/page';
+// import { useLanguage } from '@/context/languageContext';
 
 // const StyledNavbar = styled('div')({
 //   top: 0,
@@ -82,53 +83,68 @@
 // const LanguageSelector = styled('select')({
 //   backgroundColor: 'transparent',
 //   color: 'white',
-//   fontSize: '16px',
+//   fontSize: '25px',
+//   fontWeight: 'bold',
 //   border: 'none',
 //   outline: 'none',
 // });
 
-// interface NavbarProps {
-//   language: string;
-//   onLanguageChange: (newLanguage: string) => void;
-// }
 
-// const Navbar = ({ language, onLanguageChange }: NavbarProps) => {
+// const Navbar = () => {
 //   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 //   const [userImage, setUserImage] = useState<string | null>(null);
 //   const [cartCount, setCartCount] = useState<number>(0);
 //   const [refreshCount, setRefreshCount] = useState<number>(0);
+//   const { language, setLanguage } = useLanguage(); 
+//   const [loading, setLoading] = useState<boolean>(true);
 
 //   useEffect(() => {
-//     const fetchData = () => {
-//       const formData = localStorage.getItem('formData');
-//       if (formData) {
-//         try {
-//           const parsedData = JSON.parse(formData);
-//           setIsLoggedIn(true);
-//         } catch (error) {
-//           console.error('Invalid JSON in localStorage for key "formData":', error);
+//     const storedLanguage = localStorage.getItem('language') || 'en';
+//     setLanguage(storedLanguage);
+//     setLoading(false);
+//   }, [setLanguage]);
+
+//   useEffect(() => {
+//     if (!loading) {
+//       const fetchData = () => {
+//         const formData = localStorage.getItem('formData');
+//         if (formData) {
+//           try {
+//             const parsedData = JSON.parse(formData);
+//             setIsLoggedIn(true);
+//           } catch (error) {
+//             console.error('Invalid JSON in localStorage for key "formData":', error);
+//           }
 //         }
-//       }
 
-//       const storedImageUrl = localStorage.getItem('urlImage');
-//       if (storedImageUrl) {
-//         setUserImage(storedImageUrl);
-//       }
-//       const storedCart = localStorage.getItem('cart');
-//       if (storedCart) {
-//         setCartCount(JSON.parse(storedCart).length);
-//       }
-//       setTimeout(() => {
-//         setRefreshCount(prevCount => prevCount + 1);
-//       }, 500);
-//     };
+//         const storedImageUrl = localStorage.getItem('urlImage');
+//         if (storedImageUrl) {
+//           setUserImage(storedImageUrl);
+//         }
+//         const storedCart = localStorage.getItem('cart');
+//         if (storedCart) {
+//           setCartCount(JSON.parse(storedCart).length);
+//         }
+//         setTimeout(() => {
+//           setRefreshCount(prevCount => prevCount + 1);
+//         }, 500);
+//       };
 
-//     fetchData();
-//   }, [refreshCount]);
+//       fetchData();
+//     }
+//   }, [refreshCount, loading]);
 
 //   const handleLanguageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-//     onLanguageChange(event.target.value);
+//     setLanguage(event.target.value);
 //   };
+
+//   useEffect(() => {
+//     if (!loading) { 
+//       localStorage.setItem('language', language);
+//     }
+//   }, [language, loading]);
+
+//   if (loading) return null; 
 
 //   return (
 //     <StyledNavbar>
@@ -137,72 +153,69 @@
 //           <img
 //             src="./img/logo.png"
 //             alt="Pet Shop Logo"
-//             style={{ width: '50%', height: '80%', objectFit: 'cover' }} 
+//             style={{ width: '50%', height: '80%', objectFit: 'cover' }}
 //           />
 //         </Logo>
 //       </Link>
-//       {isLoggedIn ? (
-//         <>
-//           <NavbarLinks>
-//             <Link href="/home" passHref>
-//               <NavLinkButton>
-//                 {language === 'en' ? 'HOME' : 'TRANG CHỦ'}
-//               </NavLinkButton>
-//             </Link>
-//             <Link href="/productAPI" passHref>
-//               <NavLinkButton>
-//                 {language === 'en' ? 'MANAGEMENT PET' : 'QUẢN LÝ THÚ CƯNG'}
-//               </NavLinkButton>
-//             </Link>
-//             <Link href="/purchase" passHref>
-//               <NavLinkButton>
-//                 {language === 'en' ? 'PURCHASE' : 'MUA HÀNG'}
-//               </NavLinkButton>
-//             </Link>
-//             <Link href="/sendEmail" passHref>
-//               <NavLinkButton>
-//                 {language === 'en' ? 'CONTACT US' : 'LIÊN HỆ'}
-//               </NavLinkButton>
-//             </Link>
-//             <Link href="/productCard" passHref>
-//               <Button>
-//                 <Badge badgeContent={cartCount} color="primary">
-//                   <ShoppingCartIcon
-//                     sx={{
-//                       color: 'white',
-//                       transition: 'color 0.3s',
-//                       '&:hover': {
-//                         color: '#edb03f',
-//                       },
-//                     }}
-//                   />
-//                 </Badge>
-//               </Button>
-//             </Link>
-//           </NavbarLinks>
-//           <RightSection>
-//             <ModeToggle /> 
+//       <NavbarLinks>
+//         <Link href="/home" passHref>
+//           <NavLinkButton>
+//             {language === 'en' ? 'HOME' : 'TRANG CHỦ'}
+//           </NavLinkButton>
+//         </Link>
+//         <Link href="/productAPI" passHref>
+//           <NavLinkButton>
+//             {language === 'en' ? 'FAVORITE LOVE' : 'THÚ CƯNG YÊU THÍCH'}
+//           </NavLinkButton>
+//         </Link>
+//         <Link href="/purchase" passHref>
+//           <NavLinkButton>
+//             {language === 'en' ? 'PURCHASE' : 'MUA HÀNG'}
+//           </NavLinkButton>
+//         </Link>
+//         <Link href="/sendEmail" passHref>
+//           <NavLinkButton>
+//             {language === 'en' ? 'CONTACT US' : 'LIÊN HỆ'}
+//           </NavLinkButton>
+//         </Link>
+//         <Link href="/productCard" passHref>
+//           <Button>
+//             <Badge badgeContent={cartCount} color="primary">
+//               <ShoppingCartIcon className="text-white transition-colors duration-300 hover:text-yellow-400" />
+//             </Badge>
+//           </Button>
+//         </Link>
+//       </NavbarLinks>
+//       <RightSection>
+//         {isLoggedIn ? (
+//           <>
+          
 //             {userImage && <BadgeAvatars imageUrl={userImage} />}
-//             <LanguageSelector value={language} onChange={handleLanguageChange}>
-//               <option value="en">English</option>
-//               <option value="vi">Tiếng Việt</option>
-//             </LanguageSelector>
-//           </RightSection>
-//         </>
-//       ) : (
-//         <div>
-//           <Link href="/register" passHref>
-//             <NavLinkButton variant="contained">
-//               {language === 'en' ? 'SIGN UP' : 'ĐĂNG KÝ'}
-//             </NavLinkButton>
-//           </Link>
-//           <Link href="/login" passHref>
-//             <SignInButton variant="contained">
-//               {language === 'en' ? 'SIGN IN' : 'ĐĂNG NHẬP'}
-//             </SignInButton>
-//           </Link>
-//         </div>
-//       )}
+//           </>
+//         ) : (
+//           <>
+//             <Link href="/register" passHref>
+//               <NavLinkButton variant="contained">
+//                 {language === 'en' ? 'SIGN UP' : 'ĐĂNG KÝ'}
+//               </NavLinkButton>
+//             </Link>
+//             <Link href="/login" passHref>
+//               <SignInButton variant="contained">
+//                 {language === 'en' ? 'SIGN IN' : 'ĐĂNG NHẬP'}
+//               </SignInButton>
+//             </Link>
+//           </>
+//         )}
+//           <ModeToggle />
+//         <LanguageSelector value={language} onChange={handleLanguageChange}>
+//           <option className="text-black hover:text-white font-bold" value="en">
+//             English
+//           </option>
+//           <option className="text-black hover:text-white font-bold" value="vi">
+//             Tiếng Việt
+//           </option>
+//         </LanguageSelector>
+//       </RightSection>
 //     </StyledNavbar>
 //   );
 // };
@@ -261,7 +274,7 @@ const NavLinkButton = styled(Button)({
   },
 });
 
-const SignInButton = styled(Button)({
+const SignInUpButton = styled(Button)({
   backgroundColor: '#0033FF',
   textTransform: 'none',
   color: 'white',
@@ -306,16 +319,16 @@ const Navbar = () => {
   const [cartCount, setCartCount] = useState<number>(0);
   const [refreshCount, setRefreshCount] = useState<number>(0);
   const { language, setLanguage } = useLanguage(); 
-  const [loading, setLoading] = useState<boolean>(true); // Add a loading state
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    const storedLanguage = localStorage.getItem('language') || 'en'; // Default to 'vi' if not found
+    const storedLanguage = localStorage.getItem('language') || 'en';
     setLanguage(storedLanguage);
-    setLoading(false); // Set loading to false after language is set
+    setLoading(false);
   }, [setLanguage]);
 
   useEffect(() => {
-    if (!loading) { // Only fetch data when loading is false
+    if (!loading) {
       const fetchData = () => {
         const formData = localStorage.getItem('formData');
         if (formData) {
@@ -349,12 +362,12 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    if (!loading) { // Only set localStorage when loading is false
+    if (!loading) { 
       localStorage.setItem('language', language);
     }
   }, [language, loading]);
 
-  if (loading) return null; // Render nothing while loading
+  if (loading) return null; 
 
   return (
     <StyledNavbar>
@@ -363,64 +376,68 @@ const Navbar = () => {
           <img
             src="./img/logo.png"
             alt="Pet Shop Logo"
-            style={{ width: '50%', height: '80%', objectFit: 'cover' }} 
+            style={{ width: '50%', height: '80%', objectFit: 'cover' }}
           />
         </Logo>
       </Link>
-      {isLoggedIn ? (
-        <>
-          <NavbarLinks>
-            <Link href="/home" passHref>
-              <NavLinkButton>
-                {language === 'en' ? 'HOME' : 'TRANG CHỦ'}
-              </NavLinkButton>
-            </Link>
-            <Link href="/productAPI" passHref>
-              <NavLinkButton>
-                {language === 'en' ? 'FAVORITE LOVE' : 'THÚ CƯNG YÊU THÍCH'}
-              </NavLinkButton>
-            </Link>
-            <Link href="/purchase" passHref>
-              <NavLinkButton>
-                {language === 'en' ? 'PURCHASE' : 'MUA HÀNG'}
-              </NavLinkButton>
-            </Link>
-            <Link href="/sendEmail" passHref>
-              <NavLinkButton>
-                {language === 'en' ? 'CONTACT US' : 'LIÊN HỆ'}
-              </NavLinkButton>
-            </Link>
-            <Link href="/productCard" passHref>
-              <Button>
-                <Badge badgeContent={cartCount} color="primary">
-                <ShoppingCartIcon className="text-white transition-colors duration-300 hover:text-yellow-400" />
-                </Badge>
-              </Button>
-            </Link>
-          </NavbarLinks>
-          <RightSection>
-            <ModeToggle /> 
+      <NavbarLinks>
+        <Link href="/home" passHref>
+          <NavLinkButton>
+            {language === 'en' ? 'HOME' : 'TRANG CHỦ'}
+          </NavLinkButton>
+        </Link>
+        <Link href="/productAPI" passHref>
+          <NavLinkButton>
+            {language === 'en' ? 'FAVORITE LOVE' : 'THÚ CƯNG YÊU THÍCH'}
+          </NavLinkButton>
+        </Link>
+        <Link href="/purchase" passHref>
+          <NavLinkButton>
+            {language === 'en' ? 'PURCHASE' : 'MUA HÀNG'}
+          </NavLinkButton>
+        </Link>
+        <Link href="/sendEmail" passHref>
+          <NavLinkButton>
+            {language === 'en' ? 'CONTACT US' : 'LIÊN HỆ'}
+          </NavLinkButton>
+        </Link>
+        <Link href="/productCard" passHref>
+          <Button>
+            <Badge badgeContent={cartCount} color="primary">
+              <ShoppingCartIcon className="text-white transition-colors duration-300 hover:text-yellow-400" />
+            </Badge>
+          </Button>
+        </Link>
+      </NavbarLinks>
+      <RightSection>
+        {isLoggedIn ? (
+          <>
             {userImage && <BadgeAvatars imageUrl={userImage} />}
-            <LanguageSelector value={language} onChange={handleLanguageChange}>
-              <option className="text-black hover:text-white font-bold" value="en">English</option>
-              <option className="text-black hover:text-white font-bold" value="vi">Tiếng Việt</option>
-            </LanguageSelector>
-          </RightSection>
-        </>
-      ) : (
-        <div>
-          <Link href="/register" passHref>
-            <NavLinkButton variant="contained">
-              {language === 'en' ? 'SIGN UP' : 'ĐĂNG KÝ'}
-            </NavLinkButton>
-          </Link>
-          <Link href="/login" passHref>
-            <SignInButton variant="contained">
-              {language === 'en' ? 'SIGN IN' : 'ĐĂNG NHẬP'}
-            </SignInButton>
-          </Link>
-        </div>
-      )}
+          </>
+        ) : (
+          <>
+            <Link href="/register" passHref>
+              <SignInUpButton variant="contained">
+                {language === 'en' ? 'SIGN UP' : 'ĐĂNG KÝ'}
+              </SignInUpButton>
+            </Link>
+            <Link href="/login" passHref>
+              <SignInUpButton variant="contained">
+                {language === 'en' ? 'SIGN IN' : 'ĐĂNG NHẬP'}
+              </SignInUpButton>
+            </Link>
+          </>
+        )}
+          <ModeToggle />
+        <LanguageSelector value={language} onChange={handleLanguageChange}>
+          <option className="text-black hover:text-white font-bold" value="en">
+            English
+          </option>
+          <option className="text-black hover:text-white font-bold" value="vi">
+            Tiếng Việt
+          </option>
+        </LanguageSelector>
+      </RightSection>
     </StyledNavbar>
   );
 };

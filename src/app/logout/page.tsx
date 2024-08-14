@@ -9,11 +9,13 @@ const Logout= () => {
 
   const handleLogout = () => {
     localStorage.removeItem('formData'); 
-    window.location.href = "/"
+    localStorage.removeItem('cart');
+    router.push('/home')
   };
 
+  
   return (
-    <ListItem button onClick={handleLogout} sx={{ display: 'flex',width:'90px', mt: 2, color: 'black'}}>
+    <ListItem  onClick={handleLogout} sx={{ display: 'flex',width:'90px', mt: 2, color: 'black'}}>
       <ListItemIcon sx={{ minWidth: 35 }}>
         <ExitToAppIcon />
       </ListItemIcon>

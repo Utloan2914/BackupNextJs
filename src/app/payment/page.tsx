@@ -21,6 +21,7 @@ const PaymentInstructions = () => {
   const [error, setError] = useState<string | null>(null);
   const [cart, setCart] = useState<CartProduct[]>([]);
   const [isClient, setIsClient] = useState(false);
+  const router = useRouter();
   const [paymentSuccess, setPaymentSuccess] = useState(false);
   const [cartlocal, setCartlocal] = useState<Product[]>(() => {
     if (typeof window !== 'undefined' && window.localStorage) {
@@ -86,7 +87,9 @@ const PaymentInstructions = () => {
     setCart([]);
     setPaymentSuccess(true);
   };
-
+  const handleButtonClick = () => {
+    router.push('/productCard');
+  };
   return (
     <div className="mt-16">
       <h2 style={{ textAlign: "center" }} className="text-3xl font-bold mb-1">
@@ -138,6 +141,13 @@ const PaymentInstructions = () => {
                     <span>{formatCurrency(calculateSubtotal() + shippingEstimate)} VND</span>
                   </div>
                 </Card>
+                <button
+                  className="mt-4 rounded-md border bg-[#0033FF] hover:bg-[#0022CC] px-6 py-2 text-white outline-none"
+                  style={{ fontSize: '20px' }}
+                  onClick={handleButtonClick}
+                >
+                  {language === 'en' ? 'Return to the cart' : 'Quay về giỏ hàng'}
+                </button>
               </>
             )}
           </div>
