@@ -8,7 +8,6 @@ import Product from '../../productAPI/page';
 import PaymentInstructions from '@/app/payment/page';
 import Purchase from '@/app/purchasePetFood/page';
 import ProductCard from '@/app/productCard/page';
-import Test from '@/app/test/page';
 import Login from '../../login/page';
 import HomePage from '@/app/home/page'; 
 import SendEmail from '@/app/contactUs/page';
@@ -59,14 +58,13 @@ const Layout = ({ children }: LayoutProps) => {
             {pathname === '/productAPI' && <Product />}
             {pathname === '/login' && <Login />}
             {pathname === '/purchase' && <Purchase />}
-            {pathname === '/test' && <Test />}
             {pathname === '/register' && <Register />}
             {pathname === '/home' && <HomePage />}
             {pathname === '/sendEmail' && <SendEmail />}
             {pathname === '/productCard' && <ProductCard />}
             {pathname === '/payment' && <PaymentInstructions />}
             {pathname === '/' && <div className="w-full h-full">{children}</div>}
-            {!['/', '/viewProfile', '/editProfile', '/productAPI', '/login', '/register', '/home', '/sendEmail', '/test', '/service', '/purchase', '/productCard', '/payment'].includes(pathname) && <ErrorPage />}
+            {!['/', '/viewProfile', '/editProfile', '/productAPI', '/login', '/register', '/home', '/sendEmail', '/purchase', '/productCard', '/payment'].includes(pathname) && <ErrorPage />}
             
           </main>
         </Suspense>
