@@ -241,13 +241,13 @@ const ProductCart: React.FC = () => {
       </div>
       <Modal show={showLoginModal} onHide={() => setShowLoginModal(false)} centered>
       <Modal.Header closeButton className="bg-blue-600 text-white">
-          <Modal.Title className="text-xl font-semibold">
+          <Modal.Title className="text-xl font-bold">
             {language === 'en' ? 'Please log in to proceed' : 'Vui lòng đăng nhập để tiếp tục'}
           </Modal.Title>
          
         </Modal.Header>
         <Modal.Body className="text-center">
-          <p className="text-lg mb-4">
+          <p className="text-xl  text-black mb-4">
             {language === 'en' ? 'You need to sign in to your account or create a new one to continue.' : 'Bạn cần đăng nhập vào tài khoản của mình hoặc tạo một tài khoản mới để tiếp tục.'}
           </p>
           <div className="flex justify-center gap-4">

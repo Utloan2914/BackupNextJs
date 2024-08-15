@@ -1,41 +1,60 @@
-'use client'
+'use client';
 
-import * as React from "react";
-import { Moon, Sun } from "lucide-react";
-import { useTheme } from "next-themes";
-
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import * as React from 'react';
+import { useTheme } from 'next-themes';
+import { Moon, Sun } from 'lucide-react';
 
 export function ModeToggle() {
   const { theme, setTheme } = useTheme();
 
-  const handleThemeChange = (newTheme: React.SetStateAction<string>) => {
-    setTheme(newTheme);
+  const handleThemeChange = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark');
   };
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="sun" size="icon">
-          <Sun className={`h-[1.2rem] w-[1.2rem] rotate-0 scale-100 text-white transition-all ${theme === 'dark' ? 'dark:-rotate-90 dark:scale-0' : ''}`} />
-          <Moon className={`absolute h-[1.2rem] w-[1.2rem] rotate-90 text-white scale-0 transition-all ${theme === 'dark' ? 'dark:rotate-0 dark:scale-100 ' : ''}`} />
-          <span className="sr-only">Toggle theme</span>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="z-50">
-        <DropdownMenuItem onClick={() => handleThemeChange("light")}>
-          Light
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => handleThemeChange("dark")}>
-          Dark
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <div>
+      <input
+        type="checkbox"
+        id="theme-toggle"
+        className="checkbox"
+        checked={theme === 'dark'}
+        onChange={handleThemeChange}
+        style={{ display: 'none' }}
+      />
+      <label
+        htmlFor="theme-toggle"
+        className="checkbox-label"
+        style={{
+          backgroundColor: '#111',
+          width: '80px',
+          height: '40px',
+          borderRadius: '50px',
+          position: 'relative',
+          padding: '7px',
+          cursor: 'pointer',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          
+        }}
+      >
+        <Sun className="fa-sun" style={{ color: '#f39c12', fontSize: '24px' }} />
+        <div
+          className="ball"
+          style={{
+            backgroundColor: '#fff',
+            width: '28px',
+            height: '28px',
+            position: 'absolute',
+            left: '8px',
+            top: '7px',
+            borderRadius: '50%',
+            transition: 'transform 0.2s linear',
+            transform: theme === 'dark' ? 'translateX(35px)' : 'none',
+          }}
+        />
+        <Moon className="fa-moon" style={{ color: '#f1c40f', fontSize: '24px' }} />
+      </label>
+    </div>
   );
 }
