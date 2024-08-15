@@ -1,3 +1,4 @@
+'use client';
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Button from '@mui/material/Button';
@@ -6,6 +7,7 @@ import { ShoppingCartIcon } from 'lucide-react';
 import { styled } from '@mui/material/styles';
 import BadgeAvatars from '@/app/profile/page';
 import { ModeToggle } from '@/components/page';
+import { useLanguage } from '@/context/languageContext';
 
 const StyledNavbar = styled('div')({
   top: 0,
@@ -86,23 +88,20 @@ const LanguageSelector = styled('select')({
   outline: 'none',
 });
 
-interface NavbarProps {
-  language: string;
-  onLanguageChange: (newLanguage: string) => void;
-}
 
-const Navbar: React.FC<NavbarProps> = ({ language, onLanguageChange }) => {
+const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [userImage, setUserImage] = useState<string | null>(null);
   const [cartCount, setCartCount] = useState<number>(0);
   const [refreshCount, setRefreshCount] = useState<number>(0);
+  const { language, setLanguage } = useLanguage(); 
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const storedLanguage = localStorage.getItem('language') || 'en';
-    onLanguageChange(storedLanguage);
+    setLanguage(storedLanguage);
     setLoading(false);
-  }, [onLanguageChange]);
+  }, [setLanguage]);
 
   useEffect(() => {
     if (!loading) {
@@ -126,7 +125,7 @@ const Navbar: React.FC<NavbarProps> = ({ language, onLanguageChange }) => {
           setCartCount(JSON.parse(storedCart).length);
         }
         setTimeout(() => {
-          setRefreshCount((prevCount) => prevCount + 1);
+          setRefreshCount(prevCount => prevCount + 1);
         }, 500);
       };
 
@@ -135,16 +134,16 @@ const Navbar: React.FC<NavbarProps> = ({ language, onLanguageChange }) => {
   }, [refreshCount, loading]);
 
   const handleLanguageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    onLanguageChange(event.target.value);
+    setLanguage(event.target.value);
   };
 
   useEffect(() => {
-    if (!loading) {
+    if (!loading) { 
       localStorage.setItem('language', language);
     }
   }, [language, loading]);
 
-  if (loading) return null;
+  if (loading) return null; 
 
   return (
     <StyledNavbar>
@@ -159,16 +158,24 @@ const Navbar: React.FC<NavbarProps> = ({ language, onLanguageChange }) => {
       </Link>
       <NavbarLinks>
         <Link href="/home" passHref>
-          <NavLinkButton>{language === 'en' ? 'HOME' : 'TRANG CHỦ'}</NavLinkButton>
+          <NavLinkButton>
+            {language === 'en' ? 'HOME' : 'TRANG CHỦ'}
+          </NavLinkButton>
         </Link>
         <Link href="/productAPI" passHref>
-          <NavLinkButton>{language === 'en' ? 'FAVORITE LOVE' : 'THÚ CƯNG YÊU THÍCH'}</NavLinkButton>
+          <NavLinkButton>
+            {language === 'en' ? 'FAVORITE LOVE' : 'THÚ CƯNG YÊU THÍCH'}
+          </NavLinkButton>
         </Link>
         <Link href="/purchase" passHref>
-          <NavLinkButton>{language === 'en' ? 'PURCHASE' : 'MUA HÀNG'}</NavLinkButton>
+          <NavLinkButton>
+            {language === 'en' ? 'PURCHASE' : 'MUA HÀNG'}
+          </NavLinkButton>
         </Link>
         <Link href="/sendEmail" passHref>
-          <NavLinkButton>{language === 'en' ? 'CONTACT US' : 'LIÊN HỆ'}</NavLinkButton>
+          <NavLinkButton>
+            {language === 'en' ? 'CONTACT US' : 'LIÊN HỆ'}
+          </NavLinkButton>
         </Link>
         <Link href="/productCard" passHref>
           <Button>
@@ -197,7 +204,7 @@ const Navbar: React.FC<NavbarProps> = ({ language, onLanguageChange }) => {
             </Link>
           </>
         )}
-        <ModeToggle />
+          <ModeToggle />
         <LanguageSelector value={language} onChange={handleLanguageChange}>
           <option className="text-black hover:text-white font-bold" value="en">
             English

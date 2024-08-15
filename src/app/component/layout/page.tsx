@@ -1,5 +1,5 @@
 'use client';
-import React, {Suspense, ReactNode, useState } from 'react';
+import React, {  createContext, useContext, Suspense, ReactNode, useState } from 'react';
 
 import Navbar from '@/app/component/navbar/page';
 import Footer from '../footer/page';
@@ -49,7 +49,7 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <LanguageProvider>
     <div className="min-h-screen flex flex-col">
-      <Navbar language={language} onLanguageChange={handleLanguageChange} />
+      <Navbar />
       <div className="flex-grow">
         <Suspense fallback={<div className="flex justify-center items-center h-screen">Loading...</div>}>
           <main className="flex flex-col items-center justify-center">
