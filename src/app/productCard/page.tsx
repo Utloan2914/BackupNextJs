@@ -13,6 +13,18 @@ interface Product {
   imgSrc: string;
   category: string;
 }
+interface Order {
+  id: number;
+  userEmail: string;
+  date: string;
+  products: {
+    title: string;
+    price: string;
+    quantity: number;
+    imgSrc: string;
+  }[];
+  total: number;
+}
 
 interface CartProduct extends Product {
   quantity: number;
@@ -98,15 +110,47 @@ const ProductCart: React.FC = () => {
 
   const handleCheckout = () => {
     const loggedInUser = localStorage.getItem('loggedInUser');
+  
     if (!loggedInUser) {
       setShowLoginModal(true);
       return;
     }
+  
+    if (cart.length === 0) {
+      alert(language === 'en' ? 'Your cart is empty.' : 'Giỏ hàng của bạn đang trống.');
+      return;
+    }
+  
     const totalAmount = calculateSubtotal() + shippingEstimate;
-    // Save checkout data
-    localStorage.setItem('checkoutData', JSON.stringify(cart));
-    router.push('/payment');
+  
+    const newOrder: Order = {
+      id: Date.now(),  
+      userEmail: loggedInUser,
+      date: new Date().toLocaleString(),
+      products: cart.map(product => ({
+        title: product.title,
+        price: product.price,
+        quantity: product.quantity,
+        imgSrc: product.imgSrc,
+      })),
+      total: totalAmount,
+    };
+  
+    try {
+      const storedOrders = localStorage.getItem('orderHistory');
+      const orders: Order[] = storedOrders ? JSON.parse(storedOrders) : [];
+      orders.push(newOrder);
+      localStorage.setItem('orderHistory', JSON.stringify(orders));
+    
+      localStorage.setItem('checkoutData', JSON.stringify(cart));
+      router.push('/payment');
+    } catch (error) {
+      console.error('Failed to process the checkout:', error);
+      alert(language === 'en' ? 'Checkout failed. Please try again.' : 'Thanh toán không thành công. Vui lòng thử lại.');
+    }
   };
+  
+  
 
   const consolidateCart = (products: Product[]): CartProduct[] => {
     const consolidated: CartProduct[] = [];

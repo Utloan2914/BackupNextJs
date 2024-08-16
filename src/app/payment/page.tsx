@@ -269,9 +269,12 @@ const PaymentInstructions = () => {
             <div className="bg-white p-4 rounded-lg h-auto w-full md:w-[900px]">
               <h2 className="text-3xl font-bold mb-4 text-center text-black">{language === 'en' ? 'Payment success!' : 'Thanh toán thành công!'}</h2>
               <p className="text-lg mb-4 text-center text-black">{language === 'en' ? 'Thank you for your payment. Your order has been processed.' : 'Cảm ơn bạn đã thanh toán. Đơn hàng của bạn đã được xử lý.'}</p>
-              <div className="flex justify-center gap-4">
+              <div className="flex justify-center gap-[10px]">
                 <a href="/purchase" className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
                   {language === 'en' ? 'Return to the store' : 'Quay lại cửa hàng'}
+                </a>
+                <a href="/orderHistory" className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                  {language === 'en' ? 'Order history' : 'Lịch sử mua hàng'}
                 </a>
               </div>
             </div>

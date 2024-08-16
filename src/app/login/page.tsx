@@ -1,5 +1,3 @@
-
-
 'use client';
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -9,7 +7,7 @@ import { useRouter } from 'next/navigation';
 import { useLanguage } from "@/context/languageContext";
 
 function Login() {
-    const { language } = useLanguage(); // Lấy ngôn ngữ từ ngữ cảnh
+    const { language } = useLanguage(); 
     const [formData, setFormData] = useState({
         email: '',
         password: '',

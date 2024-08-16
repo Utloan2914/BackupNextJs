@@ -9,6 +9,7 @@ import PaymentInstructions from '@/app/payment/page';
 import Purchase from '@/app/purchasePetFood/page';
 import ProductCard from '@/app/productCard/page';
 import Login from '../../login/page';
+import OrderHistory from '@/app/orderHistory/page';
 import HomePage from '@/app/home/page'; 
 import SendEmail from '@/app/contactUs/page';
 import Register from '../../register/page';
@@ -57,6 +58,7 @@ const Layout = ({ children }: LayoutProps) => {
             {pathname === '/editProfile' && isAuthenticated && <EditProfile formDataProp={formData} onUpdateProfile={handleUpdateProfile} />}
             {pathname === '/productAPI' && <Product />}
             {pathname === '/login' && <Login />}
+            {pathname === '/orderHistory' && <OrderHistory />}
             {pathname === '/purchase' && <Purchase />}
             {pathname === '/register' && <Register />}
             {pathname === '/home' && <HomePage />}
@@ -64,7 +66,7 @@ const Layout = ({ children }: LayoutProps) => {
             {pathname === '/productCard' && <ProductCard />}
             {pathname === '/payment' && <PaymentInstructions />}
             {pathname === '/' && <div className="w-full h-full">{children}</div>}
-            {!['/', '/viewProfile', '/editProfile', '/productAPI', '/login', '/register', '/home', '/sendEmail', '/purchase', '/productCard', '/payment'].includes(pathname) && <ErrorPage />}
+            {!['/', '/viewProfile', '/editProfile', '/productAPI', '/login', '/register', '/home', '/sendEmail', '/purchase', '/productCard', '/payment', '/orderHistory'].includes(pathname) && <ErrorPage />}
             
           </main>
         </Suspense>
