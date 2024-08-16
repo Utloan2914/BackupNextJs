@@ -17,6 +17,11 @@ const OrderHistory: React.FC = () => {
   const router = useRouter();
   const [orders, setOrders] = useState<Order[]>([]);
   const [userEmail, setUserEmail] = useState<string | null>(null);
+  
+  const formatCurrency = (amount: number): string => {
+    const formattedAmount = amount.toLocaleString('en-US', { minimumFractionDigits: 3, maximumFractionDigits: 3 });
+    return formattedAmount.replace(/,/g, '.') + ' VND';
+  };
 
   useEffect(() => {
     const loggedInUserEmail = localStorage.getItem('loggedInUser');
@@ -35,45 +40,42 @@ const OrderHistory: React.FC = () => {
   }, [router]);
 
   return (
-    <div className="container mt-5 mb-5 w-auto">
-      <h2 className="text-center text-3xl font-bold mb-4">
+    <div className="w-full p-6">
+      <h2 className="text-center text-3xl font-bold mb-6">
         {language === 'en' ? 'Order History' : 'Lịch sử mua hàng'}
       </h2>
       {orders.length === 0 ? (
-        <p className="text-center">
+        <p className="text-center text-lg">
           {language === 'en' ? 'You have not placed any orders yet.' : 'Bạn chưa có đơn hàng nào.'}
         </p>
       ) : (
-        <ListGroup>
+        <div className="flex flex-wrap justify-center gap-6">
           {orders.map(order => (
-            <ListGroupItem key={order.id}>
-              <div>
-                <Card.Body>
-                  <Card.Title>
-                    {language === 'en' ? 'Order Date:' : 'Ngày đặt hàng:'} {order.date}
-                  </Card.Title>
-                  <Card.Text>
-                    {language === 'en' ? 'Total Amount:' : 'Tổng số tiền:'} {order.total} VND
-                  </Card.Text>
-                  <ListGroup className="mt-3">
-                    {order.products.map((product, index) => (
-                      <ListGroupItem key={index}>
-                        <div className="d-flex align-items-center">
-                          <img src={product.imgSrc} alt={product.title} style={{ width: '50px', height: '50px', objectFit: 'cover' }} />
-                          <div className="ml-3 w-96">
-                            <h5 className="mb-0">{product.title}</h5>
-                            <p className="mb-0">{language === 'en' ? 'Quantity:' : 'Số lượng:'} {product.quantity}</p>
-                          </div>
-                          <p className="ml-28">{product.price}</p>
-                        </div>
-                      </ListGroupItem>
-                    ))}
-                  </ListGroup>
-                </Card.Body>
-              </div>
-            </ListGroupItem>
+            <div key={order.id} className="bg-white shadow-md rounded-lg overflow-hidden w-full sm:w-11/12 md:w-9/12 lg:w-3/4 xl:w-1/2">
+              <Card.Body className="p-4">
+                <Card.Title className="text-xl text-black font-bold mb-2">
+                  {language === 'en' ? 'Order Date:' : 'Ngày đặt hàng:'} {order.date}
+                </Card.Title>
+                <Card.Text className="text-black mb-2">
+                  {language === 'en' ? 'Total Amount:' : 'Tổng số tiền:'} {formatCurrency(order.total)}
+                </Card.Text>
+
+                <ListGroup className="list-group-flush">
+                  {order.products.map((product, index) => (
+                    <ListGroupItem key={index} className="d-flex align-items-center py-3 border-b">
+                      <img src={product.imgSrc} alt={product.title} className="w-16 h-16 object-cover" />
+                      <div className="ml-4 flex-1">
+                        <h5 className="text-lg text-black font-semibold">{product.title}</h5>
+                        <p className="text-sm text-black">{language === 'en' ? 'Quantity:' : 'Số lượng:'} {product.quantity}</p>
+                      </div>
+                      <p className="text-lg text-black font-bold ml-4">{formatCurrency(parseFloat(product.price))}</p>
+                    </ListGroupItem>
+                  ))}
+                </ListGroup>
+              </Card.Body>
+            </div>
           ))}
-        </ListGroup>
+        </div>
       )}
     </div>
   );
